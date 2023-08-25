@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .join import likes, follows
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -11,8 +12,37 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    nickname = db.Column(db.String(40))
+    bio = db.Column(db.Text(500))
+    profile_pic = db.Column(db.String(255), nullable=False)
+    banner_pic = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    # Relationships
+    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
+    comments = db.relationship("Note", back_populates="user")
+    likes = db.relationship(
+        "Post",
+        secondary="user_likes",
+        back_populates="likes"
+    )
+
+    followers = db.relationship(
+        "User",
+        secondary=follows,
+        primaryjoin=follows.columns.follower == id,
+        secondaryjoin=follows.columns.followed == id,
+        backref=db.backref("following")
+    )
+
+    # following = db.relationship(
+    #     "User",
+    #     secondary=follows,
+    #     primaryjoin=follows.columns.followed == id,
+    #     secondaryjoin=follows.columns.follower == id,
+    #     backref=db.backref("followers")
+    # )
 
     @property
     def password(self):
@@ -25,9 +55,25 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
-        }
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'username': self.username,
+    #         'nickname': self.nickname,
+    #         'bio': self.bio,
+    #         'profilePic': self.profile_pic,
+    #         'bannerPic': self.banner_pic,
+    #         'email': self.email,
+    #         # 'likes': len(self.user_likes),
+    #         'posts': [post.to_dict_no_user() for post in self.posts]
+    #     }
+
+    # def to_dict_no_post(self):
+    #     return {
+    #         "id": self.id,
+    #         "username": self.username,
+    #         "nickname": self.nickname,
+    #         "bio": self.bio,
+    #         "email": self.email,
+    #         "profilePic": self.profile_pic
+    #     }
