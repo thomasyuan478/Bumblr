@@ -10,11 +10,11 @@ def fake_posts(post_num, user_num, tag_num):
   posts = []
   for i in range(1, post_num + 1):
     user_id = randint(1, user_num)
-    paragraph = f"<p>{faker.text()}"
+    paragraph = f"<p>{faker.text()}</p>"
     width = randint(3, 5) * 100
     length = randint(3, 5) * 100
     link = f"https://picsum.photos/{width}/{length}.jpg?random={i}>"
-    image = f"<img src={link} width={width} length={length} />"
+    image = f"<img src='{link}' width='{width}px' length='{length}px' />"
     content = f"{paragraph}{image}"
     existing_tags = set()
     tags = []
