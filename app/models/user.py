@@ -33,16 +33,16 @@ class User(db.Model, UserMixin):
         secondary=follows,
         primaryjoin=follows.columns.follower == id,
         secondaryjoin=follows.columns.followed == id,
-        backref=db.backref("following")
+        back_populates="following"
     )
 
-    # following = db.relationship(
-    #     "User",
-    #     secondary=follows,
-    #     primaryjoin=follows.columns.followed == id,
-    #     secondaryjoin=follows.columns.follower == id,
-    #     backref=db.backref("followers")
-    # )
+    following = db.relationship(
+        "User",
+        secondary=follows,
+        primaryjoin=follows.columns.followed == id,
+        secondaryjoin=follows.columns.follower == id,
+        back_populates="followers"
+    )
 
     @property
     def password(self):

@@ -10,32 +10,32 @@ def fake_users(user_num):
   existing_name = set()
   users = []
   profile_pics = [
-    "/images/avatar/avatar1",
-    "/images/avatar/avatar2",
-    "/images/avatar/avatar3",
-    "/images/avatar/avatar4",
-    "/images/avatar/avatar5",
-    "/images/avatar/avatar6",
-    "/images/avatar/avatar7",
-    "/images/avatar/avatar8",
-    "/images/avatar/avatar9",
-    "/images/avatar/avatar10"
+    "/images/avatar/avatar1.png",
+    "/images/avatar/avatar2.png",
+    "/images/avatar/avatar3.png",
+    "/images/avatar/avatar4.png",
+    "/images/avatar/avatar5.png",
+    "/images/avatar/avatar6.png",
+    "/images/avatar/avatar7.png",
+    "/images/avatar/avatar8.png",
+    "/images/avatar/avatar9.png",
+    "/images/avatar/avatar10.png"
   ]
   banner_pics = [
-    "/images/banner/background1",
-    "/images/banner/background2",
-    "/images/banner/background3",
-    "/images/banner/background4",
-    "/images/banner/background5",
-    "/images/banner/background6",
-    "/images/banner/background7",
-    "/images/banner/background8",
-    "/images/banner/background9",
-    "/images/banner/background10",
-    "/images/banner/background11",
-    "/images/banner/background12",
-    "/images/banner/background13",
-    "/images/banner/background14"
+    "/images/banner/background1.png",
+    "/images/banner/background2.png",
+    "/images/banner/background3.png",
+    "/images/banner/background4.png",
+    "/images/banner/background5.png",
+    "/images/banner/background6.png",
+    "/images/banner/background7.png",
+    "/images/banner/background8.png",
+    "/images/banner/background9.png",
+    "/images/banner/background10.png",
+    "/images/banner/background11.png",
+    "/images/banner/background12.png",
+    "/images/banner/background13.png",
+    "/images/banner/background14.png"
   ]
   for i in range(1, user_num + 1):
     name = faker.name()
@@ -58,28 +58,9 @@ def fake_users(user_num):
     ))
   return users
 
-# def fake_follows(users):
-#   user_num = len(users)
-#   for user in users:
-#     follower_num = randint(1, user_num // 2)
-#     followers = []
-#     existing_followers = set()
-#     for i in range(1, follower_num + 1):
-#       follower = choice(users)
-#       while (follower.id in existing_followers) or follower.id == user.id:
-#         follower = choice(users)
-#       existing_followers.add(follower.id)
-#       followers.append(follower)
-#     user.followers = followers
-#   return users
-
-
 users = fake_users(10)
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    # users = fake_follows(users)
-    # follows = fake_follows(users)
-
     _ = [db.session.add(user) for user in users]
     db.session.commit()
 
