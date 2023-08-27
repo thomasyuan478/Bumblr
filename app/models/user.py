@@ -55,25 +55,76 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    # def to_dict(self):
-    #     return {
-    #         'id': self.id,
-    #         'username': self.username,
-    #         'nickname': self.nickname,
-    #         'bio': self.bio,
-    #         'profilePic': self.profile_pic,
-    #         'bannerPic': self.banner_pic,
-    #         'email': self.email,
-    #         # 'likes': len(self.user_likes),
-    #         'posts': [post.to_dict_no_user() for post in self.posts]
-    #     }
+    def to_dict_current(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'nickname': self.nickname,
+            'bio': self.bio,
+            'profilePic': self.profile_pic,
+            'bannerPic': self.banner_pic,
+            'email': self.email,
+            'likes': [like.to_dict_likes() for like in self.likes],
+            'posts': [post.post_to_dict_notes() for post in self.posts],
+            'userFollowers': [user.to_dict_no_post() for user in self.following],
+            "userFollowing": [user.to_dict_no_post() for user in self.followers]
+        }
 
-    # def to_dict_no_post(self):
-    #     return {
-    #         "id": self.id,
-    #         "username": self.username,
-    #         "nickname": self.nickname,
-    #         "bio": self.bio,
-    #         "email": self.email,
-    #         "profilePic": self.profile_pic
-    #     }
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'nickname': self.nickname,
+            'bio': self.bio,
+            'profilePic': self.profile_pic,
+            'bannerPic': self.banner_pic,
+            'email': self.email,
+            # 'likes': [like.to_dict_likes() for like in self.likes],
+            'posts': [post.post_to_dict_notes() for post in self.posts],
+            # 'followers':
+        }
+
+    def to_dict_general(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'nickname': self.nickname,
+            'bio': self.bio,
+            'profilePic': self.profile_pic,
+            'bannerPic': self.banner_pic,
+            'posts': [post.post_to_dict_notes() for post in self.posts],
+        }
+
+    def to_dict_no_post(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "nickname": self.nickname,
+            "bio": self.bio,
+            "email": self.email,
+            "profilePic": self.profile_pic
+        }
+
+    def to_dict_likes(self):
+        return {
+            "postId": self.id
+        }
+
+    def to_dict_user_likes(self):
+        return {
+            "userId": self.id
+        }
+
+    def to_dict_followers(self):
+        # print('followers', self.followers)
+        # print('following', self.following)
+        return {
+            "id": self.id,
+            "userFollowers": [user.to_dict_no_post() for user in self.following]
+        }
+
+    def to_dict_following(self):
+        return {
+            "id": self.id,
+            "userFollowing": [user.to_dict_no_post() for user in self.followers]
+        }
