@@ -6,37 +6,38 @@ from datetime import datetime
 
 faker = Faker()
 
+profile_pics = [
+  "/images/avatar/avatar1.png",
+  "/images/avatar/avatar2.png",
+  "/images/avatar/avatar3.png",
+  "/images/avatar/avatar4.png",
+  "/images/avatar/avatar5.png",
+  "/images/avatar/avatar6.png",
+  "/images/avatar/avatar7.png",
+  "/images/avatar/avatar8.png",
+  "/images/avatar/avatar9.png",
+  "/images/avatar/avatar10.png"
+]
+banner_pics = [
+  "/images/banner/background1.png",
+  "/images/banner/background2.png",
+  "/images/banner/background3.png",
+  "/images/banner/background4.png",
+  "/images/banner/background5.png",
+  "/images/banner/background6.png",
+  "/images/banner/background7.png",
+  "/images/banner/background8.png",
+  "/images/banner/background9.png",
+  "/images/banner/background10.png",
+  "/images/banner/background11.png",
+  "/images/banner/background12.png",
+  "/images/banner/background13.png",
+  "/images/banner/background14.png"
+]
+
 def fake_users(user_num):
   existing_name = set()
   users = []
-  profile_pics = [
-    "/images/avatar/avatar1.png",
-    "/images/avatar/avatar2.png",
-    "/images/avatar/avatar3.png",
-    "/images/avatar/avatar4.png",
-    "/images/avatar/avatar5.png",
-    "/images/avatar/avatar6.png",
-    "/images/avatar/avatar7.png",
-    "/images/avatar/avatar8.png",
-    "/images/avatar/avatar9.png",
-    "/images/avatar/avatar10.png"
-  ]
-  banner_pics = [
-    "/images/banner/background1.png",
-    "/images/banner/background2.png",
-    "/images/banner/background3.png",
-    "/images/banner/background4.png",
-    "/images/banner/background5.png",
-    "/images/banner/background6.png",
-    "/images/banner/background7.png",
-    "/images/banner/background8.png",
-    "/images/banner/background9.png",
-    "/images/banner/background10.png",
-    "/images/banner/background11.png",
-    "/images/banner/background12.png",
-    "/images/banner/background13.png",
-    "/images/banner/background14.png"
-  ]
   for i in range(1, user_num + 1):
     name = faker.name()
     while name in existing_name:

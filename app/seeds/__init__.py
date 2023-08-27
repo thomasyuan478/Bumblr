@@ -1,5 +1,5 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users
+from .users import seed_users, undo_users, profile_pics, banner_pics
 from .posts import seed_posts, undo_posts
 from .notes import seed_notes, undo_notes
 from .likes import seed_likes, undo_likes

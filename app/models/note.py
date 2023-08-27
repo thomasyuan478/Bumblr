@@ -15,3 +15,12 @@ class Note(db.Model):
   # Relationships
   user = db.relationship("User", back_populates="comments")
   post = db.relationship("Post", back_populates="comments")
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'userId': self.user_id,
+      'postId': self.post_id,
+      'comment': self.comment,
+      'createdAt': self.created_at
+    }
