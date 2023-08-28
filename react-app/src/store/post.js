@@ -86,7 +86,7 @@ const postsReducer = (state = initialState, action) => {
       return newState;
     }
     case GET_POSTS: {
-      const postsArray = action.posts;
+      const postsArray = action.posts.posts;
       let newState = { ...state };
       postsArray.forEach((post) => (newState.posts[post.id] = post));
       return newState;

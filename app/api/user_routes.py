@@ -5,7 +5,7 @@ from app.models import User, Post, Note
 user_routes = Blueprint('users', __name__)
 
 
-@user_routes.route('/')
+@user_routes.route('')
 @login_required
 def users():
     """
@@ -14,13 +14,13 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
-@user_routes.route('/current/test')
+@user_routes.route('/details/<int:id>')
 @login_required
-def current_user_data_test():
+def current_user_data_test(id):
     """
     Query for current users posts, likes, following, followers
     """
-    user = User.query.get(1)
+    user = User.query.get(id)
     return user.to_dict_current()
 
 # @user_routes.route('/current/test')
@@ -53,7 +53,6 @@ def current_user_data():
 #   return {'notes': [note.to_dict() for note in notes]}
 
 @user_routes.route('/<int:id>')
-@login_required
 def user(id):
     """
     Query for a user by id and returns that user in a dictionary
