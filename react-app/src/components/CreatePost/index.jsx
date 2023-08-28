@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import "./index.css";
 
 export function Post() {
     const sessionUser = useSelector((state) => state.session.user);
 
-    if(type = text) {
+    if('type = text') {
     return (
         <div>
         <div className="create-text-post-profile-pic">
@@ -43,7 +44,7 @@ export function Post() {
     )
     }
 
-    if(type = image) {
+    if('type = image') {
     return (
         <div>
         <div className="create-image-post-profile-pic">
@@ -89,7 +90,7 @@ export function Post() {
     )
 }
 
-if(type = quote) {
+if('type = quote') {
     return (
         <div>
         <div className="create-quote-post-profile-pic">
@@ -129,7 +130,7 @@ if(type = quote) {
     )
 }
 
-if(type = link) {
+if('type = link') {
     return (
         <div>
         <div className="create-link-post-profile-pic">

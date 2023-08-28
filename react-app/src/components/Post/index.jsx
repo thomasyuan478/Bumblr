@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import "./index.css";
 
@@ -9,7 +10,7 @@ export function Post() {
     const isOwner = sessionUser?.id === post.ownerId;
     const isFollowing = re?.find((ele) => ele.User?.id === sessionUser?.id);
 
-    if(type = text) {
+    if('type = text') {
     return (
         <div>
         <div className="post-text-profile-pic">
@@ -70,7 +71,7 @@ export function Post() {
 }
 
 
-if(type = image) {
+if('type = image') {
     return (
         <div>
         <div className="post-image-profile-pic">
@@ -133,7 +134,7 @@ if(type = image) {
 }
 
 
-if(type = quote) {
+if('type = quote') {
     return (
         <div>
         <div className="post-quote-profile-pic">
@@ -197,7 +198,7 @@ if(type = quote) {
 }
 
 
-if(type = link) {
+if('type = link') {
     return (
         <div>
         <div className="post-link-profile-pic">
