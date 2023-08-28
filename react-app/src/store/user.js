@@ -35,8 +35,8 @@ export const getUsersThunk = () => async (dispatch) => {
   }
 };
 
-export const getCurrentUserThunk = () => async (dispatch) => {
-  const response = await fetch("/api/users/current");
+export const getCurrentUserDetailsThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/users/details/${id}`);
 
   if (response.ok) {
     const user = await response.json();
@@ -51,7 +51,7 @@ export const updateCurrentUserThunk = (user, userId) => async (dispatch) => {
   });
   if (response.ok) {
     const user = await response.json();
-    dispatch(updatePost(user, userId));
+    dispatch(updateUser(user, userId));
     return response;
   }
 };
@@ -64,7 +64,7 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS: {
-      const users = action.users;
+      const users = action.users.users;
       let newState = { ...state };
       users.forEach((user) => (newState.users[user.id] = user));
       return newState;

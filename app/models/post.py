@@ -38,7 +38,7 @@ class Post(db.Model):
       "content": self.content,
       "tags": self.tags,
       "createdAt": self.created_at,
-      # "user": self.user.to_dict_no_post(),
+      "user": self.user.to_dict_no_post(),
       "comments": [comment.to_dict() for comment in self.comments],
       "likes": [like.to_dict_user_likes() for like in self.likes]
     }
