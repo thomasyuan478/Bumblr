@@ -29,8 +29,7 @@
     flex-direction: column;
     display: flex;
     border-radius: 20px;
-    height: 30px;
-    text-decoration: underline;
+    height: 26px;
     border: solid 3px rgb(150, 125, 255);
     background-color: rgb(150, 125, 255);
     color: rgb(75, 62, 168);
