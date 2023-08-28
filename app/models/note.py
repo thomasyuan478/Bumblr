@@ -10,7 +10,7 @@ class Note(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
   post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')))
   comment = db.Column(db.String(255), nullable=False)
-  created_at = db.Column(db.DateTime(), nullable=False)
+  created_at = db.Column(db.TIMESTAMP(), nullable=False)
 
   # Relationships
   user = db.relationship("User", back_populates="comments")
