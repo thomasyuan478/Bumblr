@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     nickname = db.Column(db.String(40))
-    bio = db.Column(db.Text(500))
+    bio = db.Column(db.Text())
     profile_pic = db.Column(db.String(255), nullable=False)
     banner_pic = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
@@ -102,7 +102,8 @@ class User(db.Model, UserMixin):
             "nickname": self.nickname,
             "bio": self.bio,
             "email": self.email,
-            "profilePic": self.profile_pic
+            "profilePic": self.profile_pic,
+            "bannerPic": self.banner_pic
         }
 
     def to_dict_likes(self):
