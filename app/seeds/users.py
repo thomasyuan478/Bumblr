@@ -37,7 +37,14 @@ banner_pics = [
 
 def fake_users(user_num):
   existing_name = set()
-  users = []
+  demo_user = User(
+    username="Demo-lition",
+    email="Demo@aa.io",
+    profile_pic = "/images/avatar/avatar7.png",
+    banner_pic = "/images/banner/background14.png",
+    password = "password"
+  )
+  users = [demo_user]
   for i in range(1, user_num + 1):
     name = faker.name()
     while name in existing_name:
