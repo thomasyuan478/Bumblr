@@ -23,33 +23,47 @@ function LoginFormPage() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
+      <section id="loginpage-container">
+        <h1 id="logo-login-page">bumblr</h1>
+        <form onSubmit={handleSubmit} id="login-container">
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <label className="login-page-labels">
+            <input
+              id="login-page-email-input"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <label className="login-page-labels">
+            <input
+              id="login-page-password-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Password"
+            />
+          </label>
+          <div id="login-terms">
+            <p>
+              By clicking log in, or continuing with the other options below, you agree to Bumblr’s
+              <br></br>
+              Terms of Service and have read the Privacy Policy
+            </p>
+          </div>
+          <button id="login-page-button" type="submit">Log In</button>
+          <div id="login-signup">
+            <span>New to Bumblr? <a href="/signup">Sign up!</a></span>
+          </div>
+        </form>
+      </section>
     </>
   );
 }
