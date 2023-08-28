@@ -31,16 +31,18 @@ function SignupFormModal() {
 
 	return (
 		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
+		<div className="signup-modal">
+		<h1 style={{color: 'white'}}>bumblr</h1>
+			<form className='signup-modal-form' onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
 				<label>
-					Email
 					<input
+						className="signup-modal-username"
+						placeHolder=' Email'
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -48,8 +50,9 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Username
 					<input
+						className="signup-modal-username"
+						placeHolder=' Username'
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
@@ -57,8 +60,9 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Password
 					<input
+						className="signup-modal-password"
+						placeHolder=' Password'
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -66,16 +70,18 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Confirm Password
 					<input
+						className="signup-modal-confirm-password"
+						placeHolder=' Confirm Password'
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button type="submit" className="signup-modal-button">Sign Up</button>
 			</form>
+			</div>
 		</>
 	);
 }
