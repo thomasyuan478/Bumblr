@@ -7,6 +7,8 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import { getUsersThunk, getCurrentUserDetailsThunk } from "./store/user";
 import { getPostsThunk } from "./store/post";
+import ProtectedRoute from "./components/auth/ProtectedRoute"
+import {PostEditorContainer} from "./components/PostEditor"
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +40,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/posts/new">
+            <PostEditorContainer />
           </Route>
         </Switch>
       )}
