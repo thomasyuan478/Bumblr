@@ -6,7 +6,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import { getUsersThunk, getCurrentUserDetailsThunk } from "./store/user";
-import { getPostsThunk } from "./store/post";
+import { getPostsThunk, updatePostThunk } from "./store/post";
+import { PostTest } from "./components/PostTest";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,9 +29,29 @@ function App() {
     dispatch(getPostsThunk());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   dispatch(updatePostThunk({}, 1));
+  // }, [dispatch]);
+
+  const click = (e) => {
+    dispatch(updatePostThunk({}, 1));
+  };
+
+  const postsObj = useSelector((state) => state.posts.posts);
+  const postsKey = Object.keys(postsObj);
+  console.log(postsKey, postsKey.length);
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <button onClick={click}> New BUTTON</button>
+      {postsKey.map((key) => (
+        <PostTest
+          obj={postsObj[key]}
+          id={postsObj[key].id}
+          key={postsObj[key].id}
+        />
+      ))}
       {isLoaded && (
         <Switch>
           <Route path="/login">

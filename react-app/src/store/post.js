@@ -28,10 +28,10 @@ export function updatePost(post, postId) {
   };
 }
 
-export function deletePost(post) {
+export function deletePost(postId) {
   return {
     type: DELETE_POST,
-    post,
+    postId,
   };
 }
 
@@ -66,6 +66,17 @@ export const updatePostThunk = (post, postId) => async (dispatch) => {
   }
 };
 
+export const deleteCommentThunk = (commentId, postId) => async (dispatch) => {
+  const response = await fetch(`/api/comments/${commentId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const resPost = await response.json();
+    dispatch(updatePost(resPost, postId));
+    return response;
+  }
+};
+
 export const deletePostThunk = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "DELETE",
@@ -93,12 +104,12 @@ const postsReducer = (state = initialState, action) => {
     }
     case UPDATE_POST: {
       const newState = { ...state };
-      newState.posts[action.postId] = action.post;
+      newState.posts[action.postId] = action.post.post;
       return newState;
     }
     case DELETE_POST: {
       const newState = { ...state };
-      newState.posts[action.postId] = {};
+      delete newState.posts[action.postId];
       return newState;
     }
     default:
