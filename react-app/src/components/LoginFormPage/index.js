@@ -22,13 +22,13 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <section id="loginpage-container">
+    <div id="whole-login-page">
+      <div id="loginpage-container">
         <h1 id="logo-login-page">bumblr</h1>
         <form onSubmit={handleSubmit} id="login-container">
-          <ul>
+          <ul className="errors-list">
             {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
+              <li className="errors" key={idx}>{error}</li>
             ))}
           </ul>
           <label className="login-page-labels">
@@ -57,14 +57,12 @@ function LoginFormPage() {
           </div>
           <div id="login-terms">
             <p>
-              If you don't have an account for Bumblr, but still want to see our site,
-              <br></br>
-              click the "Log In" button on the top right and click "Demo User". Have fun!
+              If you don't have an account for Bumblr, but still want to see our site, click the "Log In" button on the top right and click "Demo User". Have fun!
             </p>
           </div>
         </form>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }
 

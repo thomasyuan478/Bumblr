@@ -1,3 +1,12 @@
+/* #whole-login-page {
+  width: 100%;
+  height: 100%;
+  background-image: url("https://s3.amazonaws.com/thumbnails.thecrimson.com/photos/2022/03/07/203213_1354812.png.1500x1000_q95_crop-smart_upscale.png");
+  background-size: fit;
+  position: absolute;
+  opacity: 0.75;
+} */
+
 #loginpage-container {
   text-align: center;
   border-radius: 10px;
@@ -43,7 +52,8 @@
 }
 
 #login-terms {
-  width: 100%;
+  width: 400px;
+  text-align: center;
 }
 
 #login-page-button {
@@ -75,3 +85,15 @@
 /* #login-form-container {
 
 } */
+
+.errors-list {
+  width: 400px;
+  list-style-type: none;
+  padding-left: 0px;
+  text-align: center;
+}
+
+.errors {
+  color: white;
+  /* text-align: center; */
+}
