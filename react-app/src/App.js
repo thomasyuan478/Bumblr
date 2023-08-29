@@ -12,6 +12,7 @@ import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
 import { getNotesThunk } from "./store/note";
+import { LeftSideNavigation } from './components/LeftSideNavigation'
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/">
+            <LeftSideNavigation />
           </Route>
         </Switch>
       )}
