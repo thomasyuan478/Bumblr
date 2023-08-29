@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
+import { getNotesThunk } from "./store/note";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
   // }, [user]);
 
   // useEffect(() => {
-  //   dispatch(getUsersThunk());
+  //   dispatch(getNotesThunk());
   // }, [dispatch]);
 
   // TEST FEED OBJECT ***********
