@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
+import validator from "validator";
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -17,26 +18,45 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, password));
-        if (data) {
-          setErrors(data)
-        }
-    } else {
-        setErrors(['Confirm Password field must be the same as the Password field']);
+    let errorsArray = [];
+    if (password !== confirmPassword) {
+      errorsArray.push(['Confirm Password field must be the same as the Password field']);
     }
-  };
+    if (!validator.isEmail(email)) {
+      errorsArray.push('Invalid email')
+    }
+    if(!errorsArray.length) {
+        await dispatch(
+          signUp(
+          username,
+          email,
+          password,
+        )
+      )
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            setErrors(data.errors);
+          }
+        });
+    } else {
+      setErrors(errorsArray)
+    }
+    }
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="signup-entire-page">
+    <div className="signup-page">
+      <h1 className="signup-page-title">Bumblr</h1>
+      <form className='signup-page-form' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
-          Email
           <input
+            className="signup-page-email"
+            placeholder='Email'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -44,8 +64,9 @@ function SignupFormPage() {
           />
         </label>
         <label>
-          Username
           <input
+            className="signup-page-username"
+            placeholder='Username'
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -53,8 +74,9 @@ function SignupFormPage() {
           />
         </label>
         <label>
-          Password
           <input
+            className="signup-page-password"
+            placeholder='Password'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -62,18 +84,21 @@ function SignupFormPage() {
           />
         </label>
         <label>
-          Confirm Password
           <input
+            className="signup-page-confirm-password"
+            placeholder='Confirm Password'
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className='signup-page-button' type="submit">Sign Up</button>
       </form>
+      </div>
+      </div>
     </>
   );
-}
+  }
 
 export default SignupFormPage;

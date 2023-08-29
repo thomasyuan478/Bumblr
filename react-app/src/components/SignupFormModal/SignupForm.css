@@ -1,65 +1,64 @@
 .signup-modal {
-    width: 370px;
-    height: 440px;
-    display: flex;
-    background-color: rgb(124, 92, 255);
-    align-items: center;
-    flex-direction: column;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  width: 370px;
+  height: 440px;
+  display: flex;
+  background-color: rgb(124, 92, 255);
+  align-items: center;
+  flex-direction: column;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .signup-modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; 
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .signup-modal-button {
-    width: 310px;
-    height: 50px;
-    border-radius: 20px;
-    background-color: rgb(150, 125, 255);
-    border: solid 3px rgb(150, 125, 255);
-    color: rgb(75, 62, 168);
-    margin-top: 11px;
+  width: 310px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: rgb(150, 125, 255);
+  border: solid 3px rgb(150, 125, 255);
+  color: rgb(75, 62, 168);
+  margin-top: 11px;
 }
 
 .signup-modal-username {
-    width: 95%;
-    border-radius: 10px;
-    height: 34px;
-    border: solid 3px rgb(150, 125, 255);
-    background-color: rgb(150, 125, 255);
-    
+  width: 95%;
+  border-radius: 10px;
+  height: 34px;
+  border: solid 3px rgb(150, 125, 255);
+  background-color: rgb(150, 125, 255);
 }
 
 .signup-modal-password {
-    width: 95%;
-    border-radius: 10px;
-    height: 34px;
-    border: solid 3px rgb(150, 125, 255);
-    background-color: rgb(150, 125, 255);
+  width: 95%;
+  border-radius: 10px;
+  height: 34px;
+  border: solid 3px rgb(150, 125, 255);
+  background-color: rgb(150, 125, 255);
 }
 
 .signup-modal-confirm-password {
-    width: 95%;
-    border-radius: 10px;
-    height: 34px;
-    border: solid 3px rgb(150, 125, 255);
-    background-color: rgb(150, 125, 255);
+  width: 95%;
+  border-radius: 10px;
+  height: 34px;
+  border: solid 3px rgb(150, 125, 255);
+  background-color: rgb(150, 125, 255);
 }
 
 input.signup-modal-username::placeholder {
-    color: rgb(188, 172, 255);
-    opacity: 1;
+  color: rgb(188, 172, 255);
+  opacity: 1;
 }
 
 input.signup-modal-password::placeholder {
-    color: rgb(188, 172, 255);
-    opacity: 1;
+  color: rgb(188, 172, 255);
+  opacity: 1;
 }
 
 input.signup-modal-confirm-password::placeholder {
-    color: rgb(188, 172, 255);
-    opacity: 1;
+  color: rgb(188, 172, 255);
+  opacity: 1;
 }
