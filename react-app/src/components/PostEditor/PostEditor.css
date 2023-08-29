@@ -18,7 +18,7 @@ code {
   right: 0px;
   background-color: white;
   gap: 20px;
-  z-index: 1000;
+  z-index: 1000 !important;
   width: 600px;
   justify-content: right;
   padding-right: 20px;
@@ -287,8 +287,7 @@ h6.ck-placeholder::before {
   width: fit-content;
   position: relative;
   border-radius: 10px;
-  border: 1px solid black;
-  height: fit-content
+  height: fit-content;
 }
 
 .post_editor_container-avatar {
@@ -303,4 +302,12 @@ h6.ck-placeholder::before {
   padding: 20px;
   display: block;
   font-weight: bold;
+}
+
+.post_editor_container h1 {
+  margin-top: 10px !important;
+}
+
+.post_editor-submit_button button:disabled {
+  cursor: default;
 }

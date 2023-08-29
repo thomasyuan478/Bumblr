@@ -1,0 +1,10 @@
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import SubmitField, StringField
+from wtforms.validators import DataRequired
+from ..api.aws_helper import ALLOWED_EXTENSIONS
+
+class ImageForm(FlaskForm):
+    image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    temp_url = StringField("Temporary URL", validators=[DataRequired()])
+    submit = SubmitField("Create Post")

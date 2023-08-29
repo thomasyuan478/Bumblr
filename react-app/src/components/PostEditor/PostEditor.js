@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import parse from "html-react-parser";
+import { useNonClosingModal } from '../../context/NonClosingModal';
 
 export const PostEditor = ({ type }) => {
     function CustomUploadAdapterPlugin(editor) {
@@ -76,6 +77,7 @@ export const PostEditor = ({ type }) => {
     const imageRef = React.useRef(null);
     const [validationErrors, setValidationErrors] = useState({});
     const [urlErrors, setUrlErrors] = useState({})
+    const { closeModal } = useNonClosingModal()
 
     const handleTitle = () => {
         if (content.includes("<h1>") && content.includes("</h1>") && showTitle) {
@@ -482,10 +484,14 @@ export const PostEditor = ({ type }) => {
                 </button>
             </div>
             <div className='post_editor-submit_button'>
-                <button>
+                <button
+                    onClick={closeModal}
+                >
                     Close
                 </button>
-                <button>
+                <button
+                    disabled={Object.values(validationErrors).length || !contentEdited}
+                >
                     Post
                 </button>
             </div>

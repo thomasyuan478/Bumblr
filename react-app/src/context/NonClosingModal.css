@@ -1,0 +1,30 @@
+#non-closing-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1001;
+}
+
+#non-closing-modal_background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#non-closing-modal_content {
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  height: fit-content;
+}
