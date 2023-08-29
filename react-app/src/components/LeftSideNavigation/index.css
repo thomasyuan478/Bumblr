@@ -1,35 +1,48 @@
-.left-size-nav-home {
+.left-side-nav-home {
     display: flex;
-    justify-content: center;
+    margin-left: 200px;
     align-items: center;
     width: 240px;
     height: 40px;
+    gap: 8px;
 }
 
-.left-size-nav-home:hover {
+.left-side-nav-home:hover {
     background-color: rgb(185, 178, 178);
 }
 
-.left-size-nav-account {
+.left-side-nav-account {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-left: 200px;
     align-items: center;
     width: 240px;
     height: 40px;
+    gap: 8px;
 }
 
-.left-size-nav-account:hover {
+.left-side-nav-account:hover {
     background-color: rgb(185, 178, 178);
 }
 
-.left-size-nav-coming-soon {
+.left-side-nav-coming-soon {
     display: flex;
-    justify-content: center;
+    margin-left: 200px;
     align-items: center;
     width: 240px;
     height: 40px;
+    gap: 8px;
 }
 
-.left-size-nav-coming-soon:hover {
+.left-side-nav-coming-soon:hover {
     background-color: rgb(185, 178, 178);
 }
+
+.left-side-nav-account-arrow-seperator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+
