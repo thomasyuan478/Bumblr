@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef, startTransition } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import parse from "html-react-parser";
 import { useNonClosingModal } from '../../context/NonClosingModal';
+import { postPostThunk } from '../../store/post';
+import { useDispatch } from 'react-redux';
 
 export const PostEditor = ({ type, user, post }) => {
     function CustomUploadAdapterPlugin(editor) {
@@ -58,6 +60,7 @@ export const PostEditor = ({ type, user, post }) => {
         mediaEmbed: mediaConfig
     }
 
+    const dispatch = useDispatch();
     const [showTitle, setShowTitle] = useState(type === "text" ? true : false)
     const [showImage, setShowImage] = useState(type === "image" ? true : false)
     const [showImageInput, setShowImageInput] = useState(false)
@@ -134,14 +137,22 @@ export const PostEditor = ({ type, user, post }) => {
                     method: "POST",
                     body: formData
                 })
-                const resData = await res.json()
                 if (res.ok) {
+                    const resData = await res.json()
                     const url = resData.url
                     html = html.replace(temp_url, url)
-                } else if (resData.errors) {
+                } else if (res.status < 500) {
+                    const resData = await res.json()
+                    if (resData.errors) {
+                        setServerErrors((prev) => {
+                            prev.aws = resData.errors
+                            return { ...prev }
+                        })
+                    }
+                } else {
                     setServerErrors((prev) => {
-                        prev.aws = resData.errors
-                        return {...prev}
+                        prev.aws = "An error occurred. Please try again."
+                        return { ...prev }
                     })
                 }
                 i = endIdx
@@ -152,10 +163,17 @@ export const PostEditor = ({ type, user, post }) => {
         const new_post = {
             user_id: user.id,
             content: html,
-            tags: tags.join(", "),
-            created_at: new Date(Date.now())
+            tags: tags.join(", ")
         }
-        console.log(new_post)
+        const data = await dispatch(postPostThunk(new_post))
+        if (data) {
+            setServerErrors((prev) => {
+                prev.server = data
+                return { ...prev }
+            })
+        } else {
+            closeModal()
+        }
     }
 
     useEffect(() => {
@@ -338,6 +356,7 @@ export const PostEditor = ({ type, user, post }) => {
                                     file: images
                                 })
                             }}
+                            onClick={(e) => e.target.value = null}
                         />
                         <label htmlFor="images">
                             <button
@@ -498,8 +517,8 @@ export const PostEditor = ({ type, user, post }) => {
                     value={newTag}
                     onChange={(e) => {
                         setNewTag(e.target.value)
-                        e.target.style.width = "0px"
-                        e.target.style.width = `${e.target.scrollWidth - 30}px`
+                        e.target.style.width = "30px"
+                        e.target.style.width = `${e.target.scrollWidth}px`
                     }}
                     onBlur={(e) => {
                         if (newTag) {
@@ -509,12 +528,12 @@ export const PostEditor = ({ type, user, post }) => {
                                 return [...prev]
                             })
                             setNewTag("")
-                            e.target.style.width = "0px"
+                            e.target.style.width = "30px"
                         } else {
                             setShowTagInput(false)
                         }
                     }}
-                    style={{ width: "0px" }}
+                    style={{ width: "30px" }}
                 />
                 <button
                     className='post_editor-tag_button'
