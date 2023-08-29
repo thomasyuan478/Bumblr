@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { logout } from "../../store/session";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import home from "../../nav-icons/home.png";
 import settings from "../../nav-icons/settings.png";
@@ -13,13 +14,14 @@ import video from "../../nav-icons/video.png";
 import star from "../../nav-icons/star.png";
 import mail from "../../nav-icons/mail.png";
 import account from "../../nav-icons/account.png";
-import arrow from "../../nav-icons/arrow.png";
 import "./index.css";
 
 export function LeftSideNavigation() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.session.user);
   const [isOpen, setIsOpen] = useState(false);
+  const [isArrowDirection, setIsArrowDirection] = useState('down');
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -28,15 +30,19 @@ export function LeftSideNavigation() {
   };
 
   const accountDropdown = () => {
-    setIsOpen(!isOpen)
+    setIsOpen(!isOpen);
+    setIsArrowDirection(isArrowDirection === 'down' ? 'up' : 'down');
   }
 
   return (
     <div className="entire-page">
       <div className="feed-page">
-        <div>hello</div>
+        <div></div>
       </div>
       <div className="left-side-nav-page">
+        <div className="left-side-nav-title">
+            <h1 className="left-side-nav-title-hover">Bumblr</h1>
+        </div>
         <div className="left-side-nav-home" onClick={() => history.push("/")}>
           <img src={home} alt="" /> Home
         </div>
@@ -74,14 +80,23 @@ export function LeftSideNavigation() {
           <div className="left-side-nav-account-arrow-seperator">
             <img src={account} alt="" /> <p>Account</p>
           </div>
-          <img src={arrow} alt="" className="left-side-nav-arrow-img"/>
+          <i className={`nav-account-arrow ${isArrowDirection}`}/>
         </div>
         {isOpen && (
         <div className='left-side-nav-drop-down'>
+            <hr />
+            <div>
             <p>Likes</p>
             <p>Following</p>
             <p>Followers</p>
             <p onClick={handleLogout}>Logout</p>
+            </div>
+            <hr />
+            <div className="left-side-nav-account-user" style={{display: 'flex', gap: '6px'}}>
+            <img className="left-side-nav-current-user-pfp" src={user.profilePic} alt="avatar" />
+            <div style={{fontSize: '25px', paddingTop: '0'}}>{user.username}</div>
+            <div style={{fontSize: '25px', paddingTop: '0'}}>{user.nickname}</div>
+            </div>
         </div>)}
         <div
           className="left-side-nav-coming-soon"
