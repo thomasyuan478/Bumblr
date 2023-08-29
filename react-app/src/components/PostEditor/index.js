@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import { PostEditor } from "./PostEditor"
 import { useSelector } from "react-redux";
 import "./PostEditor.css"
+import { useEffect } from "react";
 
 export function PostEditorContainer({ type, post }) {
   const user = useSelector((state) => state.session.user);
@@ -9,7 +10,7 @@ export function PostEditorContainer({ type, post }) {
 
   if (!user) {
     return history.replace("/error/401");
-  } else if (user.id !== post.user.id) {
+  } else if (post && user.id !== post.user.id) {
     return history.replace("/error/403")
   }
 

@@ -175,6 +175,14 @@ export const PostEditor = ({ type, user, post }) => {
         }
     }
 
+    const handleHeight = () => {
+        const modal = document.querySelector("#non-closing-modal_content")
+        console.log(modal.offsetHeight, window.innerHeight)
+        if (modal.offsetHeight >= window.innerHeight) {
+            modal.style.top = "0px"
+        }
+    }
+
     useEffect(() => {
         if (content) {
             let domList = parse(content);
@@ -257,6 +265,7 @@ export const PostEditor = ({ type, user, post }) => {
                         }}
                         onChange={(event, editor) => {
                             setContent(editor.getData());
+                            handleHeight();
                         }}
                         onBlur={(event, editor) => {
                             setContentEdited(true)
@@ -274,6 +283,7 @@ export const PostEditor = ({ type, user, post }) => {
                         }}
                         onChange={(event, editor) => {
                             setContent(editor.getData());
+                            handleHeight();
                         }}
                         onBlur={(event, editor) => {
                             setContentEdited(true)
