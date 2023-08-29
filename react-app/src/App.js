@@ -10,6 +10,7 @@ import { getPostsThunk } from "./store/post";
 import ProtectedRoute from "./components/auth/ProtectedRoute"
 import {PostEditorContainer} from "./components/PostEditor"
 import { NewPost } from "./components/NewPost";
+import { LeftSideNavigation } from './components/LeftSideNavigation'
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/">
+            <LeftSideNavigation />
           </Route>
         </Switch>
       )}
