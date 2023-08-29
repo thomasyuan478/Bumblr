@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import User, Post, Note
 from app import db
+from app.forms import PostForm
+from datetime import datetime
 
 import random
 
@@ -27,6 +29,25 @@ test = [
   "<p> Wow This is an ugly site <p>",
   "<p> Dreamworks entertianment peresnts. <p>",
 ]
+
+@post_routes.route("/new", methods=["POST"])
+@login_required
+def create_post():
+  form = PostForm()
+
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    post = Post(
+      user_id = form.data["user_id"],
+      content = form.data["content"],
+      tags = form.data["tags"],
+      created_at = datetime.today()
+    )
+    db.session.add(post)
+    db.session.commit()
+    return {'post': post.post_to_dict_notes()}
+  return {"errors": form.errors}, 401
 
 @post_routes.route("/<int:id>", methods=["PUT"])
 def update_post_pathway(id):

@@ -32,4 +32,3 @@ class PostForm(FlaskForm):
   user_id = IntegerField("user id", validators=[DataRequired()])
   content = StringField("content", validators=[DataRequired(), not_empty])
   tags = StringField("tags")
-  created_at = DateTimeField("created at", format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])

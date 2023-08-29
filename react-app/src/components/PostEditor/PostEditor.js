@@ -152,8 +152,7 @@ export const PostEditor = ({ type, user, post }) => {
         const new_post = {
             user_id: user.id,
             content: html,
-            tags: tags.join(", "),
-            created_at: new Date(Date.now())
+            tags: tags.join(", ")
         }
         console.log(new_post)
     }
@@ -338,6 +337,7 @@ export const PostEditor = ({ type, user, post }) => {
                                     file: images
                                 })
                             }}
+                            onClick={(e) => e.target.value = null}
                         />
                         <label htmlFor="images">
                             <button
@@ -498,8 +498,8 @@ export const PostEditor = ({ type, user, post }) => {
                     value={newTag}
                     onChange={(e) => {
                         setNewTag(e.target.value)
-                        e.target.style.width = "0px"
-                        e.target.style.width = `${e.target.scrollWidth - 30}px`
+                        e.target.style.width = "30px"
+                        e.target.style.width = `${e.target.scrollWidth}px`
                     }}
                     onBlur={(e) => {
                         if (newTag) {
@@ -509,12 +509,12 @@ export const PostEditor = ({ type, user, post }) => {
                                 return [...prev]
                             })
                             setNewTag("")
-                            e.target.style.width = "0px"
+                            e.target.style.width = "30px"
                         } else {
                             setShowTagInput(false)
                         }
                     }}
-                    style={{ width: "0px" }}
+                    style={{ width: "30px" }}
                 />
                 <button
                     className='post_editor-tag_button'
