@@ -4,6 +4,7 @@ const GET_POSTS = "GET /api/posts";
 // const POST_DETAIL = "GET /api/posts/:postId"
 const UPDATE_POST = "PUT /api/posts/:postId";
 const DELETE_POST = "DELETE /api/posts/:postId";
+// const DELETE_COMMENT = "DELETE comment";
 
 //Action Creators
 export function createPost(post) {
@@ -34,6 +35,14 @@ export function deletePost(postId) {
     postId,
   };
 }
+
+// export function deleteNote(commentId, postId) {
+//   return {
+//     type: DELETE_COMMENT,
+//     commentId,
+//     postId,
+//   };
+// }
 
 //thunk Action Creator
 export const postPostThunk = (post) => async (dispatch) => {
@@ -66,6 +75,10 @@ export const updatePostThunk = (post, postId) => async (dispatch) => {
   }
 };
 
+// export const deletePostNoteThunk = (noteId, postId) => async (dispatch) => {
+//   dispatch(deleteNote(noteId, postId));
+// };
+
 export const deletePostThunk = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "DELETE",
@@ -96,6 +109,16 @@ const postsReducer = (state = initialState, action) => {
       newState.posts[action.postId] = action.post.post;
       return newState;
     }
+    //this is an attempt to delete comment from posts without a secondary request
+    // case DELETE_COMMENT: {
+    //   const newState = { ...state };
+    //   let commentsArray = newState.posts.posts[action.postId].comments;
+    //   let updatedComments = commentsArray.filter(
+    //     (comment) => comment.id !== action.commentId
+    //   );
+    //   newState.posts.posts[action.postId].comments = updatedComments;
+    //   return newState;
+    // }
     case DELETE_POST: {
       const newState = { ...state };
       delete newState.posts[action.postId];
