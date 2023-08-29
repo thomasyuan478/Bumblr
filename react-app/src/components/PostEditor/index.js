@@ -9,7 +9,10 @@ export function PostEditorContainer({ type, post }) {
 
   if (!user) {
     return history.replace("/error/401");
+  } else if (user.id !== post.user.id) {
+    return history.replace("/error/403")
   }
+
   return (
     <div className="post_editor_container">
       <span className="post_editor_container-username">{user.username}</span>

@@ -49,7 +49,6 @@ export const PostEditor = ({ type, user, post }) => {
         placeholder: "Put your content here",
         heading: headings,
         mediaEmbed: mediaConfig
-
     }
 
     const normalConfiguration = {
@@ -70,9 +69,9 @@ export const PostEditor = ({ type, user, post }) => {
     const [videoUrl, setVideoUrl] = useState("")
     const [showLink, setShowLink] = useState(type === "link" ? true : false)
     const [link, setLink] = useState("")
-    const [content, setContent] = useState(type === "quote" ? "<h6><br></h6>" : "<p><br></p>")
-    const [contentEdited, setContentEdited] = useState(false)
-    const [tags, setTags] = useState([])
+    const [content, setContent] = useState(type === "edit" && post.content ? post.content : (type === "quote" ? "<h6><br></h6>" : "<p><br></p>"))
+    const [contentEdited, setContentEdited] = useState(type === "edit" ? true : false)
+    const [tags, setTags] = useState(type === "quote" && post ? post.tags.split(", ") : [])
     const [showTagInput, setShowTagInput] = useState(false)
     const [newTag, setNewTag] = useState("")
     const [editorObj, setEditorObj] = useState("")
