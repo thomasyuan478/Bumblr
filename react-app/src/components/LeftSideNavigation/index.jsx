@@ -1,10 +1,9 @@
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { logout } from "../../store/session";
+import { useDispatch } from "react-redux";
+
 import home from "../../nav-icons/home.png";
-import menu from "../../nav-icons/menu.png";
-import add from "../../nav-icons/add.png";
-import delete1 from "../../nav-icons/delete.png";
-import login from "../../nav-icons/login.png";
-import logout from "../../nav-icons/logout.png";
 import settings from "../../nav-icons/settings.png";
 import bolt from "../../nav-icons/bolt.png";
 import chat from "../../nav-icons/chat.png";
@@ -17,8 +16,21 @@ import account from "../../nav-icons/account.png";
 import arrow from "../../nav-icons/arrow.png";
 import "./index.css";
 
-function LeftSideNavigation() {
-  let history = useHistory();
+export function LeftSideNavigation() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    setIsOpen(!isOpen);
+  };
+
+  const accountDropdown = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div className="entire-page">
       <div className="feed-page">
@@ -58,16 +70,19 @@ function LeftSideNavigation() {
         >
           <img src={mail} alt="" /> <p>Inbox</p>
         </div>
-        <div className="left-side-nav-account" onClick="">
+        <div className="left-side-nav-account" onClick={accountDropdown}>
           <div className="left-side-nav-account-arrow-seperator">
             <img src={account} alt="" /> <p>Account</p>
           </div>
-          <img src={arrow} alt="" />
+          <img src={arrow} alt="" className="left-side-nav-arrow-img"/>
         </div>
-        {/* 
-        <div style={{marginLeft: '200px'}}><p>likes, following, logout</p></div> 
-        what needs to be displayed under account
-        */}
+        {isOpen && (
+        <div className='left-side-nav-drop-down'>
+            <p>Likes</p>
+            <p>Following</p>
+            <p>Followers</p>
+            <p onClick={handleLogout}>Logout</p>
+        </div>)}
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
@@ -87,21 +102,6 @@ function LeftSideNavigation() {
           <img src={star} alt="" /> <p>Go Ad-Free</p>
         </div>
         <hr />
-        <div>
-          <img src={menu} alt="" /> Menu
-        </div>
-        <div>
-          <img src={add} alt="" /> Add
-        </div>
-        <div>
-          <img src={delete1} alt="" /> Delete
-        </div>
-        <div>
-          <img src={login} alt="" /> Login
-        </div>
-        <div>
-          <img src={logout} alt="" /> Logout
-        </div>
       </div>
     </div>
   );

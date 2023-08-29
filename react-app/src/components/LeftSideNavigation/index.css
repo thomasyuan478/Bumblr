@@ -21,6 +21,16 @@
     gap: 8px;
 }
 
+.left-side-nav-drop-down {
+    margin-left: 210px;
+    width: 240px;
+    height: 130px;
+}
+
+.left-side-nav-arrow-img {
+    transform: rotate(180deg)
+}
+
 .left-side-nav-account:hover {
     background-color: rgb(185, 178, 178);
 }
