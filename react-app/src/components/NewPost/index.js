@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import "./NewPost.css"
-import { useModal } from "../../context/Modal";
+import { useNonClosingModal } from "../../context/NonClosingModal";
 import { PostEditorContainer } from "../PostEditor";
 
 export function NewPost() {
   const user = useSelector((state) => state.session.user);
-  const { setModalContent } = useModal();
+  const { setModalContent } = useNonClosingModal()
 
   if (!user) {
     return null

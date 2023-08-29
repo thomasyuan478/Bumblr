@@ -43,9 +43,6 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/posts/new">
-            <PostEditorContainer />
-          </Route>
         </Switch>
       )}
     </>
