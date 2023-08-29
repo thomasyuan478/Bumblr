@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import search from "../../nav-icons/search.png";
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -20,11 +21,12 @@ function Navigation({ isLoaded }) {
 						<>
 							<NavLink exact to="/">b</NavLink>
 							<div id='navigation-search'>
+								<img src={search} alt="" />
 								<input
 									type='text'
 									placeholder='Search Bumblr'
 									disabled={true}
-								></input>
+								/>
 							</div>
 						</>
 					}

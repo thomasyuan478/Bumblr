@@ -41,8 +41,6 @@ function App() {
   // const postsObj = postsBigObj.posts;
   // **********************************
 
-  {
-  }
   return (
     <>
       <Navigation isLoaded={isLoaded} />
