@@ -2,19 +2,20 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { deleteCommentThunk, deletePostThunk } from "../../store/post";
+import { deletePostThunk } from "../../store/post";
 
 export const PostTest = ({ obj, id }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const state = useSelector((state) => state.posts.posts[id]);
-  const commentObjs = useSelector((state) => state.posts.posts[id].comments);
+  let commentObjs;
+  if (state) commentObjs = state.comments;
 
   const deleteButton = (e) => {
-    // dispatch(deletePostThunk(state.id));
-    commentObjs.forEach((obj) => console.log(obj.comment));
-    console.log(commentObjs);
+    dispatch(deletePostThunk(state.id));
+    // commentObjs.forEach((obj) => console.log(obj.comment));
+    // console.log(commentObjs);
   };
 
   if (!state) return null;
@@ -32,7 +33,7 @@ export const PostTest = ({ obj, id }) => {
                 {obj.comment}
                 <button
                   onClick={(e) => {
-                    dispatch(deleteCommentThunk(obj.id, state.id));
+                    console.log(obj.id, state.id);
                   }}
                 >
                   {obj.id}

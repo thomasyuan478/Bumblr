@@ -66,17 +66,6 @@ export const updatePostThunk = (post, postId) => async (dispatch) => {
   }
 };
 
-export const deleteCommentThunk = (commentId, postId) => async (dispatch) => {
-  const response = await fetch(`/api/comments/${commentId}`, {
-    method: "DELETE",
-  });
-  if (response.ok) {
-    const resPost = await response.json();
-    dispatch(updatePost(resPost, postId));
-    return response;
-  }
-};
-
 export const deletePostThunk = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "DELETE",

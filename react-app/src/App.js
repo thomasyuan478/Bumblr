@@ -12,18 +12,21 @@ import { PostTest } from "./components/PostTest";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   const user = useSelector((state) => state.session.user);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (user) dispatch(getCurrentUserDetailsThunk(user.id));
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) dispatch(getCurrentUserDetailsThunk(user.id));
+  // }, [user]);
 
-  useEffect(() => {
-    dispatch(getUsersThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUsersThunk());
+  // }, [dispatch]);
+
+  const postsBigObj = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(getPostsThunk());
@@ -37,14 +40,14 @@ function App() {
     dispatch(updatePostThunk({}, 1));
   };
 
-  const postsObj = useSelector((state) => state.posts.posts);
-  const postsKey = Object.keys(postsObj);
-  console.log(postsKey, postsKey.length);
+  const postsKey = Object.keys(postsBigObj.posts);
+  const postsObj = postsBigObj.posts;
+  console.log(postsObj, postsKey.length);
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <button onClick={click}> New BUTTON</button>
+      <button onClick={click}> New BUTTON!</button>
       {postsKey.map((key) => (
         <PostTest
           obj={postsObj[key]}
