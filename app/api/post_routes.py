@@ -9,7 +9,7 @@ def index():
   posts = Post.query.all()
   return {'posts': [post.post_to_dict_notes() for post in posts]}
 
-@post_routes.route("/comments")
-def comments():
-  posts = Post.query.all()
-  return {'posts': [post.post_to_dict_notes() for post in posts]}
+# @post_routes.route("/comments")
+# def comments():
+#   posts = Post.query.all()
+#   return {'posts': [post.post_to_dict_notes() for post in posts]}

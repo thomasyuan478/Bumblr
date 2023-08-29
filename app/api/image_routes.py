@@ -15,7 +15,6 @@ def upload_image():
     if form.validate_on_submit():
 
         image = form.data["image"]
-        temp_url = form.data["temp_url"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
 
@@ -26,7 +25,7 @@ def upload_image():
             return {"errors": upload}
 
         url = upload["url"]
-        return {"temp_url": temp_url, "url": url}
+        return {"url": url}
 
     if form.errors:
         return {"errors": form.errors}
