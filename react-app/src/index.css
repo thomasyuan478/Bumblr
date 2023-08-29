@@ -1,9 +1,15 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Arimo', sans-serif;
+}
+
 body {
   margin: 0;
   font-family: 'Arimo', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Arimo', sans-serif !important;
+  background-color: rgba(0, 25, 53, 1);
 }
 
 code {
