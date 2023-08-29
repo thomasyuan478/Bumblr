@@ -6,5 +6,4 @@ from ..api.aws_helper import ALLOWED_EXTENSIONS
 
 class ImageForm(FlaskForm):
     image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
-    temp_url = StringField("Temporary URL", validators=[DataRequired()])
     submit = SubmitField("Create Post")

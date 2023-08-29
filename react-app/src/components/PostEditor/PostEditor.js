@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, startTransition } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import parse from "html-react-parser";
 import { useNonClosingModal } from '../../context/NonClosingModal';
 
-export const PostEditor = ({ type }) => {
+export const PostEditor = ({ type, user, post }) => {
     function CustomUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
             return new CustomUploadAdapter(loader)
@@ -76,6 +76,7 @@ export const PostEditor = ({ type }) => {
     const [isEmpty, setIsEmpty] = useState(true)
     const imageRef = React.useRef(null);
     const [validationErrors, setValidationErrors] = useState({});
+    const [serverErrors, setServerErrors] = useState({})
     const [urlErrors, setUrlErrors] = useState({})
     const { closeModal } = useNonClosingModal()
 
@@ -113,7 +114,48 @@ export const PostEditor = ({ type }) => {
 
     const getDomain = (url) => {
         const link = new URL(url)
-        return link.hostname
+        return link.hostname.split(".")
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let html = content
+        for (let i = 0; i < content.length; i += 1) {
+            let startIdx = content.indexOf("<img", i)
+            let endIdx = content.indexOf(">", startIdx)
+            if (startIdx !== -1 && endIdx !== -1) {
+                const imageNode = content.slice(startIdx, endIdx + 1)
+                const src = imageNode.split(" ")[1]
+                const temp_url = src.split("\"")[1]
+                const image = images[temp_url]
+                const formData = new FormData()
+                formData.append("image", image)
+                const res = await fetch("api/images/new", {
+                    method: "POST",
+                    body: formData
+                })
+                const resData = await res.json()
+                if (res.ok) {
+                    const url = resData.url
+                    html = html.replace(temp_url, url)
+                } else if (resData.errors) {
+                    setServerErrors((prev) => {
+                        prev.aws = resData.errors
+                        return {...prev}
+                    })
+                }
+                i = endIdx
+            } else {
+                break
+            }
+        }
+        const new_post = {
+            user_id: user.id,
+            content: html,
+            tags: tags.join(", "),
+            created_at: new Date(Date.now())
+        }
+        console.log(new_post)
     }
 
     useEffect(() => {
@@ -369,7 +411,7 @@ export const PostEditor = ({ type }) => {
                             onClick={(e) => {
                                 if (isValidUrl(videoUrl)) {
                                     const domain = getDomain(videoUrl)
-                                    if (domain[0] !== "vimeo" || domain[1] !== "dailymotion" || domain[1] !== "spotify" || domain[1] !== "youtube") {
+                                    if (domain[0] !== "vimeo" && domain[1] !== "dailymotion" && domain[1] !== "spotify" && domain[1] !== "youtube") {
                                         setUrlErrors({ videoUrl: "Only medias from Dailymostion, Youtube, Spotify, and Vimeo are supported" })
                                     } else {
                                         editorObj.execute("mediaEmbed", videoUrl);
@@ -490,7 +532,8 @@ export const PostEditor = ({ type }) => {
                     Close
                 </button>
                 <button
-                    disabled={Object.values(validationErrors).length || !contentEdited}
+                    disabled={Object.values(validationErrors).length || (!contentEdited && isEmpty)}
+                    onClick={handleSubmit}
                 >
                     Post
                 </button>

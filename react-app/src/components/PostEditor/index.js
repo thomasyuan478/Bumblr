@@ -3,7 +3,7 @@ import { PostEditor } from "./PostEditor"
 import { useSelector } from "react-redux";
 import "./PostEditor.css"
 
-export function PostEditorContainer({ type }) {
+export function PostEditorContainer({ type, post }) {
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
 
@@ -13,7 +13,7 @@ export function PostEditorContainer({ type }) {
   return (
     <div className="post_editor_container">
       <span className="post_editor_container-username">{user.username}</span>
-      <PostEditor type={type} />
+      <PostEditor type={type} user={user} post={post}/>
       <img className="post_editor_container-avatar" src={user.profilePic} alt="avatar" />
     </div>
   )
