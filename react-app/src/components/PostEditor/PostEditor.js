@@ -114,7 +114,7 @@ export const PostEditor = ({ type, user, post }) => {
 
     const getDomain = (url) => {
         const link = new URL(url)
-        return link.hostname
+        return link.hostname.split(".")
     }
 
     const handleSubmit = async (e) => {
@@ -411,7 +411,7 @@ export const PostEditor = ({ type, user, post }) => {
                             onClick={(e) => {
                                 if (isValidUrl(videoUrl)) {
                                     const domain = getDomain(videoUrl)
-                                    if (domain[0] !== "vimeo" || domain[1] !== "dailymotion" || domain[1] !== "spotify" || domain[1] !== "youtube") {
+                                    if (domain[0] !== "vimeo" && domain[1] !== "dailymotion" && domain[1] !== "spotify" && domain[1] !== "youtube") {
                                         setUrlErrors({ videoUrl: "Only medias from Dailymostion, Youtube, Spotify, and Vimeo are supported" })
                                     } else {
                                         editorObj.execute("mediaEmbed", videoUrl);
