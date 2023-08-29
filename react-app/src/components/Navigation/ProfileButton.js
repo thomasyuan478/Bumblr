@@ -39,14 +39,19 @@ function ProfileButton({ user }) {
 
   return (
     <div>
-      <p ref={ulRef}>
+      <p className="login-signup-buttons-container" ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
+            {/* <li>{user.username}</li>
+            <li>{user.email}</li> */}
+            <div id='user-nav-search-container'>
+              <input
+                type='text'
+                placeholder='Search Bumblr'
+                disabled={true}
+              ></input>
               <button onClick={handleLogout}>Log Out</button>
-            </li>
+            </div>
           </>
         ) : (
           <>

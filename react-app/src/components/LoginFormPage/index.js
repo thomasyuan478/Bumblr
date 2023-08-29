@@ -51,16 +51,16 @@ function LoginFormPage() {
               placeholder="Password"
             />
           </label>
-          <div id="login-terms">
-            <p>
-              By clicking log in, or continuing with the other options below, you agree to Bumblr’s
-              <br></br>
-              Terms of Service and have read the Privacy Policy
-            </p>
-          </div>
           <button id="login-page-button" type="submit">Log In</button>
           <div id="login-signup">
             <span>New to Bumblr? <a href="/signup">Sign up!</a></span>
+          </div>
+          <div id="login-terms">
+            <p>
+              If you don't have an account for Bumblr, but still want to see our site,
+              <br></br>
+              click the "Log In" button on the top right and click "Demo User". Have fun!
+            </p>
           </div>
         </form>
       </section>
