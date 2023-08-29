@@ -26,35 +26,30 @@ function App() {
   //   dispatch(getUsersThunk());
   // }, [dispatch]);
 
-  const postsBigObj = useSelector((state) => state.posts);
-
-  useEffect(() => {
-    dispatch(getPostsThunk());
-  }, [dispatch]);
-
+  // TEST FEED OBJECT ***********
   // useEffect(() => {
-  //   dispatch(updatePostThunk({}, 1));
+  //   dispatch(getPostsThunk());
   // }, [dispatch]);
 
-  const click = (e) => {
-    dispatch(updatePostThunk({}, 1));
-  };
+  // const postsBigObj = useSelector((state) => state.posts);
 
-  const postsKey = Object.keys(postsBigObj.posts);
-  const postsObj = postsBigObj.posts;
-  console.log(postsObj, postsKey.length);
+  // const postsKey = Object.keys(postsBigObj.posts);
+  // const postsObj = postsBigObj.posts;
+  // **********************************
 
+  {
+  }
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <button onClick={click}> New BUTTON!</button>
-      {postsKey.map((key) => (
+      {/* Comment this in for a test feed */}
+      {/* {postsKey.map((key) => (
         <PostTest
           obj={postsObj[key]}
           id={postsObj[key].id}
           key={postsObj[key].id}
         />
-      ))}
+      ))} */}
       {isLoaded && (
         <Switch>
           <Route path="/login">
