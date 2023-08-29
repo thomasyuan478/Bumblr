@@ -57,6 +57,7 @@
   vertical-align: baseline;
   border: none;
   margin: 0;
+  cursor: pointer;
 }
 
 #login-terms > p {
