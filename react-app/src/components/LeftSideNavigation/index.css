@@ -1,0 +1,35 @@
+.left-size-nav-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 40px;
+}
+
+.left-size-nav-home:hover {
+    background-color: rgb(185, 178, 178);
+}
+
+.left-size-nav-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 40px;
+}
+
+.left-size-nav-account:hover {
+    background-color: rgb(185, 178, 178);
+}
+
+.left-size-nav-coming-soon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 40px;
+}
+
+.left-size-nav-coming-soon:hover {
+    background-color: rgb(185, 178, 178);
+}
