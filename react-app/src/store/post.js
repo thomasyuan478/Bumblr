@@ -28,10 +28,10 @@ export function updatePost(post, postId) {
   };
 }
 
-export function deletePost(post) {
+export function deletePost(postId) {
   return {
     type: DELETE_POST,
-    post,
+    postId,
   };
 }
 
@@ -93,12 +93,12 @@ const postsReducer = (state = initialState, action) => {
     }
     case UPDATE_POST: {
       const newState = { ...state };
-      newState.posts[action.postId] = action.post;
+      newState.posts[action.postId] = action.post.post;
       return newState;
     }
     case DELETE_POST: {
       const newState = { ...state };
-      newState.posts[action.postId] = {};
+      delete newState.posts[action.postId];
       return newState;
     }
     default:
