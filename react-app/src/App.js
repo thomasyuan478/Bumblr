@@ -31,14 +31,14 @@ function App() {
   // }, [dispatch]);
 
   // TEST FEED OBJECT ***********
-  useEffect(() => {
-    dispatch(getPostsThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getPostsThunk());
+  // }, [dispatch]);
 
-  const postsBigObj = useSelector((state) => state.posts);
+  // const postsBigObj = useSelector((state) => state.posts);
 
-  const postsKey = Object.keys(postsBigObj.posts);
-  const postsObj = postsBigObj.posts;
+  // const postsKey = Object.keys(postsBigObj.posts);
+  // const postsObj = postsBigObj.posts;
   // **********************************
 
   {
@@ -48,13 +48,13 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <NewPost />
       {/* Comment this in for a test feed */}
-      {postsKey.map((key) => (
+      {/* {postsKey.map((key) => (
         <PostTest
           obj={postsObj[key]}
           id={postsObj[key].id}
           key={postsObj[key].id}
         />
-      ))}
+      ))} */}
       {isLoaded && (
         <Switch>
           <Route path="/login">
