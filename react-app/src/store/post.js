@@ -37,11 +37,26 @@ export function deletePost(postId) {
 
 //thunk Action Creator
 export const postPostThunk = (post) => async (dispatch) => {
-  const response = await fetch("/api/posts", {
+  const response = await fetch("/api/posts/new", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(post),
   });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(createPost(data.post));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+
+
 };
 
 export const getPostsThunk = () => async (dispatch) => {
