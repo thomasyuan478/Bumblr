@@ -1,11 +1,17 @@
 .signup-modal {
-  width: 370px;
-  height: 440px;
+  width: 600px;
+  height: 750px;
+  border-radius: 20px;
   display: flex;
   background-color: rgb(124, 92, 255);
   align-items: center;
   flex-direction: column;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.signup-modal-gif {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .signup-modal-form {
@@ -20,16 +26,16 @@
   border-radius: 20px;
   background-color: rgb(150, 125, 255);
   border: solid 3px rgb(150, 125, 255);
-  color: rgb(75, 62, 168);
+  color: rgb(188, 172, 255);
   margin-top: 11px;
+  cursor: pointer;
 }
-
 .signup-modal-username {
   width: 95%;
   border-radius: 10px;
   height: 34px;
   border: solid 3px rgb(150, 125, 255);
-  background-color: rgb(150, 125, 255);
+  background-color: white;
 }
 
 .signup-modal-password {
@@ -37,7 +43,7 @@
   border-radius: 10px;
   height: 34px;
   border: solid 3px rgb(150, 125, 255);
-  background-color: rgb(150, 125, 255);
+  background-color: white;
 }
 
 .signup-modal-confirm-password {
@@ -45,7 +51,7 @@
   border-radius: 10px;
   height: 34px;
   border: solid 3px rgb(150, 125, 255);
-  background-color: rgb(150, 125, 255);
+  background-color: white;
 }
 
 input.signup-modal-username::placeholder {
