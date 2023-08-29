@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User, Post, Note
 from app import db
 from app.forms import PostForm
@@ -50,17 +50,35 @@ def create_post():
   return {"errors": form.errors}, 401
 
 @post_routes.route("/<int:id>", methods=["PUT"])
+@login_required
 def update_post_pathway(id):
+  form = PostForm()
+
+  form['csrf_token'].data = request.cookies['csrf_token']
+
   post = Post.query.get(id)
-  print(post)
-  post.content = random.choice(test)
-  post.tags = "Hello, Goodbye, Curious"
-  db.session.commit()
-  return {'post': post.post_to_dict_notes()}
+  if not post:
+    return {"errors": "post is not found"}, 404
+
+  if current_user.id != post.user_id:
+    return {"errors": "you are not authorized to edit this post"}, 403
+
+  if form.validate_on_submit():
+    post.content = form.data["content"]
+    post.tags = form.data["tags"]
+    db.session.commit()
+    return {'post': post.post_to_dict_notes()}
+  return {"errors": form.errors}, 401
 
 @post_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
 def delete_post(id):
   post = Post.query.get(id)
+  if not post:
+    return {"errors": "post is not found"}, 404
+
+  if current_user.id != post.user_id:
+    return {"errors": "you are not authorized to edit this post"}, 403
   db.session.delete(post)
   db.session.commit()
   return {"message": "post deleted"}
