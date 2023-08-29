@@ -1,6 +1,6 @@
 .left-side-nav-home {
     display: flex;
-    margin-left: 200px;
+    margin-left: 14%;
     align-items: center;
     width: 240px;
     height: 40px;
@@ -8,34 +8,79 @@
 }
 
 .left-side-nav-home:hover {
-    background-color: rgb(185, 178, 178);
+    background-color: rgb(222, 222, 222);
 }
+
+.left-side-nav-title-hover {
+    display: inline-block;
+    font-size: 40px;
+    margin-left: 16%;
+}
+
+.left-side-nav-title-hover:hover {
+    display: inline-block;
+    font-size: 40px;
+    animation: colorChange 3s infinite;
+    margin-left: 16%;
+}
+
+@keyframes colorChange {
+    0% {
+        color: rgb(255, 0, 0);
+    }
+    20% {
+        color:rgb(255,165,0);
+    }
+    40% {
+        color:rgb(255, 255, 0);
+    }
+    60% {
+        color:rgb(0, 128, 0);
+    }
+    80% {
+        color:rgb(0,0,255);
+    }
+    100% {
+        color:#606;
+    }
+  }
 
 .left-side-nav-account {
     display: flex;
     justify-content: space-between;
-    margin-left: 200px;
+    margin-left: 14%;
     align-items: center;
     width: 240px;
     height: 40px;
     gap: 8px;
 }
 
+.left-side-nav-drop-down {
+    margin-left: 210px;
+    width: 240px;
+    height: 240px;
+}
+
 .left-side-nav-account:hover {
-    background-color: rgb(185, 178, 178);
+    background-color: rgb(222, 222, 222);
 }
 
 .left-side-nav-coming-soon {
     display: flex;
-    margin-left: 200px;
+    margin-left: 14%;
     align-items: center;
     width: 240px;
     height: 40px;
     gap: 8px;
 }
 
+.left-side-nav-current-user-pfp {
+    width: 60px;
+
+}
+
 .left-side-nav-coming-soon:hover {
-    background-color: rgb(185, 178, 178);
+    background-color: rgb(222, 222, 222);
 }
 
 .left-side-nav-account-arrow-seperator {
@@ -45,4 +90,26 @@
     gap: 8px;
 }
 
+.nav-account-arrow{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 4px;
+    vertical-align: middle;
+    transition: 0.5s ease;
+  }
+  
+  .up {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid black;
+    transform: rotate(180deg);
+  }
+  
+  .down {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid black;
+    transform: rotate(180deg);
+  }
 
