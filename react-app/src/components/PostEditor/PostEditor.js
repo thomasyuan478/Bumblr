@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef, startTransition } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import parse from "html-react-parser";
 import { useNonClosingModal } from '../../context/NonClosingModal';
+import { postPostThunk } from '../../store/post';
+import { useDispatch } from 'react-redux';
 
 export const PostEditor = ({ type, user, post }) => {
     function CustomUploadAdapterPlugin(editor) {
@@ -58,6 +60,7 @@ export const PostEditor = ({ type, user, post }) => {
         mediaEmbed: mediaConfig
     }
 
+    const dispatch = useDispatch();
     const [showTitle, setShowTitle] = useState(type === "text" ? true : false)
     const [showImage, setShowImage] = useState(type === "image" ? true : false)
     const [showImageInput, setShowImageInput] = useState(false)
@@ -134,14 +137,22 @@ export const PostEditor = ({ type, user, post }) => {
                     method: "POST",
                     body: formData
                 })
-                const resData = await res.json()
                 if (res.ok) {
+                    const resData = await res.json()
                     const url = resData.url
                     html = html.replace(temp_url, url)
-                } else if (resData.errors) {
+                } else if (res.status < 500) {
+                    const resData = await res.json()
+                    if (resData.errors) {
+                        setServerErrors((prev) => {
+                            prev.aws = resData.errors
+                            return { ...prev }
+                        })
+                    }
+                } else {
                     setServerErrors((prev) => {
-                        prev.aws = resData.errors
-                        return {...prev}
+                        prev.aws = "An error occurred. Please try again."
+                        return { ...prev }
                     })
                 }
                 i = endIdx
@@ -154,7 +165,15 @@ export const PostEditor = ({ type, user, post }) => {
             content: html,
             tags: tags.join(", ")
         }
-        console.log(new_post)
+        const data = await dispatch(postPostThunk(new_post))
+        if (data) {
+            setServerErrors((prev) => {
+                prev.server = data
+                return { ...prev }
+            })
+        } else {
+            closeModal()
+        }
     }
 
     useEffect(() => {
