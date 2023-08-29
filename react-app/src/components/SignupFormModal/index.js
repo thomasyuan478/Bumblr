@@ -30,9 +30,11 @@ function SignupFormModal() {
 	};
 
 	return (
-		<>
+		<div style={{backgroundColor: 'rgb(76, 76, 76)'}}>
 		<div className="signup-modal">
-		<h1 style={{color: 'white'}}>bumblr</h1>
+		<img className="signup-modal-gif" src="https://assets.tumblr.com/pop/src/assets/images/login-wall/art_v2-3f0f7a0b.gif" alt="" />
+		<h1 style={{color: 'white', fontSize: '43px', fontFamily: 'trebuchet ms'}}>bumblr</h1>
+		<p style={{color: 'white'}}>Welcome to your corner of the internet. You'll never be bored again.</p>
 			<form className='signup-modal-form' onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
@@ -82,7 +84,7 @@ function SignupFormModal() {
 				<button type="submit" className="signup-modal-button">Sign Up</button>
 			</form>
 			</div>
-		</>
+		</div>
 	);
 }
 
