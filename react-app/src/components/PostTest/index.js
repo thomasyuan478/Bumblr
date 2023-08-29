@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { deletePostThunk, updatePostThunk } from "../../store/post";
+import { deleteNoteThunk } from "../../store/note";
 
 export const PostTest = ({ obj, id }) => {
   const dispatch = useDispatch();
@@ -38,10 +39,10 @@ export const PostTest = ({ obj, id }) => {
                 {obj.comment}
                 <button
                   onClick={(e) => {
-                    console.log(obj.id, state.id);
+                    dispatch(deleteNoteThunk(obj.id, state.id));
                   }}
                 >
-                  {obj.id}
+                  Delete {obj.id}
                 </button>
               </li>
             ))}

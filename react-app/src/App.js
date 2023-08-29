@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
+import { getNotesThunk } from "./store/note";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,18 +27,18 @@ function App() {
   // }, [user]);
 
   // useEffect(() => {
-  //   dispatch(getUsersThunk());
+  //   dispatch(getNotesThunk());
   // }, [dispatch]);
 
   // TEST FEED OBJECT ***********
-  // useEffect(() => {
-  //   dispatch(getPostsThunk());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPostsThunk());
+  }, [dispatch]);
 
-  // const postsBigObj = useSelector((state) => state.posts);
+  const postsBigObj = useSelector((state) => state.posts);
 
-  // const postsKey = Object.keys(postsBigObj.posts);
-  // const postsObj = postsBigObj.posts;
+  const postsKey = Object.keys(postsBigObj.posts);
+  const postsObj = postsBigObj.posts;
   // **********************************
 
   {
@@ -47,13 +48,13 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <NewPost />
       {/* Comment this in for a test feed */}
-      {/* {postsKey.map((key) => (
+      {postsKey.map((key) => (
         <PostTest
           obj={postsObj[key]}
           id={postsObj[key].id}
           key={postsObj[key].id}
         />
-      ))} */}
+      ))}
       {isLoaded && (
         <Switch>
           <Route path="/login">
