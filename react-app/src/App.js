@@ -9,6 +9,7 @@ import { getUsersThunk, getCurrentUserDetailsThunk } from "./store/user";
 import { getPostsThunk } from "./store/post";
 import ProtectedRoute from "./components/auth/ProtectedRoute"
 import {PostEditorContainer} from "./components/PostEditor"
+import { NewPost } from "./components/NewPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <NewPost />
       {isLoaded && (
         <Switch>
           <Route path="/login">

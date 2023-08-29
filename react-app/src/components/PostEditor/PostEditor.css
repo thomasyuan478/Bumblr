@@ -287,7 +287,6 @@ h6.ck-placeholder::before {
   width: fit-content;
   position: relative;
   border-radius: 10px;
-  border: 1px solid black;
   height: fit-content
 }
 
@@ -303,4 +302,8 @@ h6.ck-placeholder::before {
   padding: 20px;
   display: block;
   font-weight: bold;
+}
+
+.post_editor_container h1 {
+  margin-top: 10px !important;
 }
