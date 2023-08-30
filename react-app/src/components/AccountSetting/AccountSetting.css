@@ -1,0 +1,397 @@
+.account-setting-container {
+  background-color: white;
+  width: 620px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.account-setting-container_background {
+  height: 350px;
+  width: 100%;
+}
+
+.account-setting-container_background img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.account-setting-container_head {
+  position: absolute;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  align-items: center;
+  font-size: 16px;
+}
+
+.account-setting-container-profile_pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 280px;
+  background-color: white;
+  margin: auto;
+  overflow: hidden;
+}
+
+.account-setting-container_profile-pic {
+  width: 90px;
+  border-radius: 100px;
+}
+
+.account-setting-container-profile_pic canvas {
+  border-radius: 100px;
+}
+
+#account-setting-container-banner_upload_button {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  width: 35px;
+  height: 35px;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#account-setting-container-profile_pic_upload_button {
+  position: absolute;
+  right: 30px;
+  top: 35px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  width: 35px;
+  height: 35px;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.account-setting-container-profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  width: 100%;
+  padding: 40px 30px 20px 30px;
+  height: fit-content;
+}
+
+.account-setting-container-profile input {
+  text-align: center;
+  width: 100%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.07);
+  height: 40px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.account-setting-container-profile input:focus,
+.account-setting-container-profile textarea:focus {
+  outline: none;
+}
+
+.account-setting-container-profile textarea {
+  text-align: center;
+  width: 100%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.07);
+  height: fit-content;
+  font-size: 14px;
+  font-weight: normal;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.account-setting-container-profile text
+
+.account-setting-container-profile span {
+  text-align: center;
+}
+
+.account-setting-container-profile span:nth-child(1) {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.account-setting-container-profile span:nth-child(2) {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.account-setting-container-username {
+  color: white;
+  font-family: 'Arimo', sans-serif !important;
+  font-weight: bold;
+}
+
+.account-setting-container-edit_button {
+  background-color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family: 'Arimo', sans-serif !important;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.account-setting-container-edit_buttons {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 10px;
+  opacity: 0.5;
+}
+
+.account-setting-container_background:hover ~ .account-setting-container_head .account-setting-container-edit_buttons {
+  opacity: 1;
+}
+
+.account-setting-container_head:hover .account-setting-container-edit_buttons {
+  opacity: 1;
+}
+
+.account-setting-container_background:hover ~ label #account-setting-container-banner_upload_button {
+  opacity: 1;
+}
+
+.account-setting-container_head:hover ~ label #account-setting-container-banner_upload_button {
+  opacity: 1;
+}
+
+.account-setting-container_head:hover input {
+  opacity: 1;
+}
+
+#account-setting-container-banner_upload_button:hover {
+  opacity: 1;
+}
+
+.account-setting-container_head input {
+  width: 100px;
+  position: relative;
+  right: -10px;
+  opacity: 0.5;
+}
+
+.account-setting-container_background:hover ~ .account-setting-container_head input {
+  opacity: 1;
+}
+
+.account-setting-container-profile_pic:hover #account-setting-container-profile_pic_upload_button {
+  opacity: 1;
+}
+
+.account-setting-container_profile-pic-slider {
+  width: 80px !important;
+  height: 20px !important;
+  justify-self: center;
+}
+
+.account-setting-container-profile button {
+  height: 35px;
+  width: 110px;
+  background-color: white;
+  border-radius: 50px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.account-setting-container-profile i {
+  font-size: 18px;
+}
+
+.account-setting-container_username {
+  display: grid;
+  grid-template-columns: 25% 55% 20%;
+  width: 95%;
+  padding: 30px 20px 30px 20px;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.account-setting-container_username > button {
+  background-color: rgba(0, 0, 0, 0.07);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  justify-self: flex-end;
+  cursor: pointer;
+}
+
+.account-setting-container_username input {
+  min-width: 200px;
+  width: fit-content;
+  height: 30px;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+.account-setting-container_username span {
+  font-size: 14px;
+}
+
+.account-setting-container_username div {
+  display: flex;
+  gap: 5px
+}
+
+.account-setting-container_username div button:nth-child(1) {
+  border: none;
+  background-color: #001935;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-setting-container_username div button:nth-child(2) {
+  background-color: #00b8ff;
+  border: none;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-setting-container_email {
+  display: grid;
+  grid-template-columns: 25% 55% 20%;
+  width: 95%;
+  padding: 30px 20px 30px 20px;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.account-setting-container_email > button {
+  background-color: rgba(0, 0, 0, 0.07);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  justify-self: flex-end;
+  cursor: pointer;
+}
+
+.account-setting-container_email input {
+  min-width: 200px;
+  width: fit-content;
+  height: 30px;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+.account-setting-container_email span {
+  font-size: 14px;
+}
+
+.account-setting-container_email div {
+  display: flex;
+  gap: 5px
+}
+
+.account-setting-container_email div button:nth-child(1) {
+  border: none;
+  background-color: #001935;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-setting-container_email div button:nth-child(2) {
+  background-color: #00b8ff;
+  border: none;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-setting-container_password {
+  display: grid;
+  grid-template-columns: 25% 55% 20%;
+  width: 95%;
+  padding: 30px 20px 30px 20px;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.account-setting-container_password > button {
+  background-color: rgba(0, 0, 0, 0.07);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  justify-self: flex-end;
+  cursor: pointer;
+}
+
+.account-setting-container_password span {
+  font-size: 14px;
+}
+
+.account-setting-container_account {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  width: 95%;
+  padding: 30px 20px 30px 20px;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.account-setting-container_account span {
+  font-size: 14px;
+}
+
+.account-setting-container_account button {
+  background-color: rgb(245, 81, 81);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px
+}
+
+div.account-setting-container_submit {
+  padding-top: 30px;
+}
+
+button.account-setting-container_submit {
+  background-color: #00b8ff;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
