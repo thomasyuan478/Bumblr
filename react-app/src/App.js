@@ -5,30 +5,43 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import { getUsersThunk, getCurrentUserDetailsThunk } from "./store/user";
+import {
+  getUsersThunk,
+  getCurrentUserDetailsThunk,
+  clearSingleUserThunk,
+} from "./store/user";
 import { getPostsThunk, updatePostThunk } from "./store/post";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
 import { getNotesThunk } from "./store/note";
-import { MainPageNavigation } from './components/MainPageNavigation'
-import { LeftSideNavigation } from './components/LeftSideNavigation'
+import { MainPageNavigation } from "./components/MainPageNavigation";
+import { LeftSideNavigation } from "./components/LeftSideNavigation";
 import { AccountSetting } from "./components/AccountSetting";
+import { TestUsers } from "./components/TestUsers";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   const user = useSelector((state) => state.session.user);
-  const post = useSelector((state) => state.posts)
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (user) dispatch(getCurrentUserDetailsThunk(user.id));
-  // }, [user]);
+  useEffect(() => {
+    if (user) dispatch(getCurrentUserDetailsThunk(user.id));
+    // if (!user) dispatch(clearSingleUserThunk());
+  }, [user]);
+
+  useEffect(() => {
+    dispatch(getUsersThunk());
+  }, [dispatch]);
+
+  const usersBigObj = useSelector((state) => state.users);
+  const usersKey = Object.keys(usersBigObj.users);
+  const usersObj = usersBigObj.users;
 
   // useEffect(() => {
   //   dispatch(getNotesThunk());
@@ -50,13 +63,22 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <NewPost />
       {/* Comment this in for a test feed */}
-      {/* {postsKey.map((key) => (
-        <PostTest
-          obj={postsObj[key]}
-          id={postsObj[key].id}
-          key={postsObj[key].id}
-        />
-      ))} */}
+      <div className="card_container">
+        {/* {postsKey.map((key) => (
+          <PostTest
+            obj={postsObj[key]}
+            id={postsObj[key].id}
+            key={postsObj[key].id}
+          />
+        ))} */}
+        {usersKey.map((key) => (
+          <TestUsers
+            obj={usersObj[key]}
+            id={usersObj[key].id}
+            key={usersObj[key].id}
+          />
+        ))}
+      </div>
       {isLoaded && (
         <Switch>
           <Route path="/test">
