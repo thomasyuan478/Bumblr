@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { deletePostThunk, getPostsThunk, updatePostThunk } from "../../store/post";
 import { deleteNoteThunk } from "../../store/note";
 import PostCard from "../PostsCard";
+import CommentBox from "../CommentBox";
 
 // { obj, id }
 export const PostTest = () => {
@@ -44,6 +45,7 @@ export const PostTest = () => {
 
   return (
     <>
+    <CommentBox />
       <div className='post-card-container'>
         {postsKey.map(key => (
           <PostCard

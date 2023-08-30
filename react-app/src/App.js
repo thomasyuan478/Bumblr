@@ -66,7 +66,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/">
+          <Route path="/testnavigation">
             <MainPageNavigation />
           </Route>
         </Switch>
