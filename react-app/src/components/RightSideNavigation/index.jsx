@@ -42,7 +42,7 @@ export function RightSideNavigation() {
           <img style={{filter: 'brightness(0) invert(1)'}} src={home} alt="" /> Home
         </div>
         <div
-          className="right-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"n
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={explore} alt="" /> Explore
