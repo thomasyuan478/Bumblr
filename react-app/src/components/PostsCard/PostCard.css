@@ -53,7 +53,7 @@
 .settings-dropdown {
   display: flex;
   list-style-type: none;
-  position: absolute;
+  position: static;
   right: 80px;
   background-color: rgb(24 51 82);
   flex-direction: column;
@@ -98,8 +98,12 @@
   font-size: 1.1rem;
 }
 
-.post-content>img {
+.post-content img {
   width: 560px;
+}
+
+.post-content a {
+  color: white;
 }
 
 .notes-container {
@@ -136,4 +140,13 @@
 .comments-favorite-icons-container {
   display: flex;
   column-gap: 10px;
+}
+
+figure.image {
+  margin: 10px 0px;
+
+}
+
+figure.image img {
+  width: 100%;
 }
