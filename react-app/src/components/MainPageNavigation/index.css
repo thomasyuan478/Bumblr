@@ -1,0 +1,33 @@
+.main-entire-page {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+.left-side-nav,
+.feed-page,
+.right-side-nav {
+    box-sizing: border-box;
+    border-top: grey 1px solid;
+}
+
+.left-side-nav {
+    color: white;
+    max-width: 260px;
+    min-width: 250px;
+    flex: 1;
+}
+
+.feed-page {
+    color: white;
+    max-width: 900px;
+    flex: 2;
+    border-left: grey 1px solid;
+    border-right: grey 1px solid;
+}
+
+.right-side-nav {
+    color: white;
+    flex: 1;
+}

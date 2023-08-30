@@ -16,7 +16,7 @@ import mail from "../../nav-icons/mail.png";
 import account from "../../nav-icons/account.png";
 import "./index.css";
 
-export function LeftSideNavigation() {
+export function RightSideNavigation() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -37,45 +37,42 @@ export function LeftSideNavigation() {
   return (
     <div>
       {user && (
-      <div className="left-side-nav">
-        <div className="left-side-nav-title">
-            <h1 className="left-side-nav-title-hover">Bumblr</h1>
-        </div>
-        <div className="left-side-nav-home" onClick={() => history.push("/")}>
+      <div>
+        <div className="right-side-nav-home" onClick={() => history.push("/")}>
           <img style={{filter: 'brightness(0) invert(1)'}} src={home} alt="" /> Home
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={explore} alt="" /> Explore
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={video} alt="" /> <p>Live</p>
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={bolt} alt="" /> <p>Activity</p>
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={chat} alt="" /> <p>Messages</p>
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={mail} alt="" /> <p>Inbox</p>
         </div>
-        <div className="left-side-nav-account" onClick={accountDropdown}>
-          <div className="left-side-nav-account-arrow-seperator">
+        <div className="right-side-nav-account" onClick={accountDropdown}>
+          <div className="right-side-nav-account-arrow-seperator">
             <img style={{filter: 'brightness(0) invert(1)'}} src={account} alt="" /> <p>Account</p>
           </div>
           <i className={`nav-account-arrow ${isArrowDirection}`}/>
@@ -90,26 +87,26 @@ export function LeftSideNavigation() {
             <p style={{color: 'white'}} onClick={handleLogout}>Logout</p>
             </div>
             <hr />
-            <div className="left-side-nav-account-user" style={{display: 'flex', gap: '6px'}}>
-            <img className="left-side-nav-current-user-pfp" src={user.profilePic} alt="avatar" />
+            <div className="right-side-nav-account-user" style={{display: 'flex', gap: '6px'}}>
+            <img className="right-side-nav-current-user-pfp" src={user.profilePic} alt="avatar" />
             <div style={{fontSize: '25px', paddingTop: '0', color: 'white'}}>{user.username}</div>
             <div style={{fontSize: '25px', paddingTop: '0', color: 'white'}}>{user.nickname}</div>
             </div>
         </div>)}
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={settings} alt="" /> <p>Settings</p>
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={store} alt="" /> <p>BumblrMart</p>
         </div>
         <div
-          className="left-side-nav-coming-soon"
+          className="right-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={star} alt="" /> <p>Go Ad-Free</p>
@@ -119,4 +116,4 @@ export function LeftSideNavigation() {
   );
 }
 
-export default LeftSideNavigation;
+export default RightSideNavigation;

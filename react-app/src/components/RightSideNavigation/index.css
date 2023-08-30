@@ -1,18 +1,18 @@
-.left-side-nav-title-hover {
+.right-side-nav-title-hover {
     display: inline-block;
     font-size: 40px;
     margin-left: 16%;
     color: white;
 }
 
-.left-side-nav-title-hover:hover {
+.right-side-nav-title-hover:hover {
     display: inline-block;
     font-size: 40px;
     animation: colorChange 3s infinite;
     margin-left: 16%;
 }
 
-.left-side-nav-home {
+.right-side-nav-home {
     display: flex;
     margin-left: 5%;
     align-items: center;
@@ -22,7 +22,7 @@
     color: white;
 }
 
-.left-side-nav-home:hover {
+.right-side-nav-home:hover {
     background-color: rgb(222, 222, 222);
 }
 
@@ -47,7 +47,7 @@
     }
   }
 
-.left-side-nav-account {
+.right-side-nav-account {
     display: flex;
     justify-content: space-between;
     margin-left: 5%;
@@ -58,17 +58,17 @@
     color: white;
 }
 
-.left-side-nav-drop-down {
+.right-side-nav-drop-down {
     margin-left: 5%;
     width: 240px;
     height: 240px;
 }
 
-.left-side-nav-account:hover {
+.right-side-nav-account:hover {
     background-color: rgb(222, 222, 222);
 }
 
-.left-side-nav-coming-soon {
+.right-side-nav-coming-soon {
     display: flex;
     margin-left: 5%;
     align-items: center;
@@ -78,16 +78,16 @@
     color: white;
 }
 
-.left-side-nav-current-user-pfp {
+.right-side-nav-current-user-pfp {
     width: 60px;
 
 }
 
-.left-side-nav-coming-soon:hover {
+.right-side-nav-coming-soon:hover {
     background-color: rgb(222, 222, 222);
 }
 
-.left-side-nav-account-arrow-seperator {
+.right-side-nav-account-arrow-seperator {
     display: flex;
     justify-content: space-between;
     align-items: center;
