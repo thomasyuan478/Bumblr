@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import parse from "html-react-parser";
 import "./PostCard.css"
+import CommentBox from '../CommentBox';
 
 const PostCard = ({ obj, id }) => {
   console.log('obj here ------', obj)
@@ -107,7 +108,10 @@ const PostCard = ({ obj, id }) => {
             </div>
           </div>
           <div className='notes-comments-container'>
-            {/* Will go to another component to render */}
+            <CommentBox
+            obj={obj}
+            key={id}
+            />
           </div>
         </div>
       </div>
