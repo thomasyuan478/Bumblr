@@ -1,0 +1,90 @@
+.post-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  /* border-top: 1px solid #908e8e; */
+  padding-top: 10px;
+  row-gap: 20px;
+  color: white;
+}
+
+.postcards {
+  width: 600px;
+  padding: 15px 20px;
+  background-color: rgb(24 51 82);
+  border-radius: 10px;
+}
+
+.user-profile-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+}
+
+.user-header-details-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-header-details {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.posts-follow-button {
+  border: none;
+  background-color: rgb(24 51 82);
+  color: #74ff1b;
+  cursor: pointer;
+}
+
+.post-settings-button {
+  border: none;
+  background-color: rgb(24 51 82);
+  color: white;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.post-content>p {
+  font-size: 1.1rem;
+}
+
+.post-content>img {
+  width: 560px;
+}
+
+.notes-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.notes-button {
+  font-size: 1rem;
+  border-radius: 18px;
+  padding: 6px 16px;
+  background-color: rgb(24 51 82);
+  color: white;
+  border-color: white;
+  cursor: pointer;
+}
+
+.posts-likes-button,
+.posts-comments-button {
+  border: none;
+  background-color: rgb(24 51 82);
+  color: white;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.comments-favorite-icons-container {
+  display: flex;
+  column-gap: 10px;
+}
