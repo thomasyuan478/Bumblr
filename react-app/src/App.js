@@ -13,6 +13,8 @@ import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
 import { getNotesThunk } from "./store/note";
 import { MainPageNavigation } from './components/MainPageNavigation'
+import { LeftSideNavigation } from './components/LeftSideNavigation'
+import { AccountSetting } from "./components/AccountSetting";
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +59,9 @@ function App() {
       ))} */}
       {isLoaded && (
         <Switch>
+          <Route path="/test">
+            <AccountSetting />
+          </Route>
           <Route exact path="/">
             <PostTest />
           </Route>

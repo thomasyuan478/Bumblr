@@ -47,7 +47,7 @@ def create_post():
     db.session.add(post)
     db.session.commit()
     return {'post': post.post_to_dict_notes()}
-  return {"errors": form.errors}, 401
+  return {"errors": form.errors}, 400
 
 @post_routes.route("/<int:id>", methods=["PUT"])
 @login_required
@@ -68,7 +68,7 @@ def update_post_pathway(id):
     post.tags = form.data["tags"]
     db.session.commit()
     return {'post': post.post_to_dict_notes()}
-  return {"errors": form.errors}, 401
+  return {"errors": form.errors}, 400
 
 @post_routes.route("/<int:id>", methods=["DELETE"])
 @login_required

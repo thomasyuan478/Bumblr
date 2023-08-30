@@ -177,7 +177,6 @@ export const PostEditor = ({ type, user, post }) => {
 
     const handleHeight = () => {
         const modal = document.querySelector("#non-closing-modal_content")
-        console.log(modal.offsetHeight, window.innerHeight)
         if (modal.offsetHeight >= window.innerHeight) {
             modal.style.top = "0px"
         }
