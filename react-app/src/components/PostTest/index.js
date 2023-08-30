@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { deletePostThunk, updatePostThunk } from "../../store/post";
 import { deleteNoteThunk } from "../../store/note";
+import parse from "html-react-parser";
+import "./PostTest.css";
 
 export const PostTest = ({ obj, id }) => {
   const dispatch = useDispatch();
@@ -27,9 +29,9 @@ export const PostTest = ({ obj, id }) => {
 
   return (
     <>
-      <div>
-        <div> {state.id} </div>
-        <div>{state.content}</div>
+      <div className="post_card">
+        <div> {state.user.username} </div>
+        <div>{parse(state.content)}</div>
         <button onClick={deleteButton}>Delete</button>
         <button onClick={click}> Simulate Update</button>
         <div>
