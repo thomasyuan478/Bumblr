@@ -50,12 +50,12 @@ export function LeftSideNavigation() {
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={explore} alt="" /> Explore
         </div>
-        <div
+        {/* <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={video} alt="" /> <p>Live</p>
-        </div>
+        </div> */}
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
@@ -102,7 +102,7 @@ export function LeftSideNavigation() {
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={settings} alt="" /> <p>Settings</p>
         </div>
-        <div
+        {/* <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
@@ -113,7 +113,7 @@ export function LeftSideNavigation() {
           onClick={() => alert("Feature coming soon!")}
         >
           <img style={{filter: 'brightness(0) invert(1)'}} src={star} alt="" /> <p>Go Ad-Free</p>
-        </div>
+        </div> */}
       </div>)}
     </div>
   );

@@ -1,119 +1,19 @@
-.right-side-nav-title-hover {
-    display: inline-block;
-    font-size: 40px;
-    margin-left: 16%;
-    color: white;
+.author-names-div {
+    gap: 10px;
 }
 
-.right-side-nav-title-hover:hover {
-    display: inline-block;
-    font-size: 40px;
-    animation: colorChange 3s infinite;
-    margin-left: 16%;
+.Andrew {
+    gap: 5px;
 }
 
-.right-side-nav-home {
-    display: flex;
-    margin-left: 5%;
-    align-items: center;
-    width: 240px;
-    height: 40px;
-    gap: 8px;
-    color: white;
+.Jeffery {
+    gap: 5px;
 }
 
-.right-side-nav-home:hover {
-    background-color: rgb(222, 222, 222);
+.Thomas {
+    gap: 5px;
 }
 
-@keyframes colorChange {
-    0% {
-        color: rgb(255, 0, 0);
-    }
-    20% {
-        color:rgb(255,165,0);
-    }
-    40% {
-        color:rgb(255, 255, 0);
-    }
-    60% {
-        color:rgb(0, 128, 0);
-    }
-    80% {
-        color:rgb(0,0,255);
-    }
-    100% {
-        color:#606;
-    }
-  }
-
-.right-side-nav-account {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 5%;
-    align-items: center;
-    width: 240px;
-    height: 40px;
-    gap: 8px;
-    color: white;
+.Tyler {
+    gap: 5px;
 }
-
-.right-side-nav-drop-down {
-    margin-left: 5%;
-    width: 240px;
-    height: 240px;
-}
-
-.right-side-nav-account:hover {
-    background-color: rgb(222, 222, 222);
-}
-
-.right-side-nav-coming-soon {
-    display: flex;
-    margin-left: 5%;
-    align-items: center;
-    width: 240px;
-    height: 40px;
-    gap: 8px;
-    color: white;
-}
-
-.right-side-nav-current-user-pfp {
-    width: 60px;
-
-}
-
-.right-side-nav-coming-soon:hover {
-    background-color: rgb(222, 222, 222);
-}
-
-.right-side-nav-account-arrow-seperator {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-account-arrow{
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 4px;
-    vertical-align: middle;
-    transition: 0.5s ease;
-  }
-  
-  .up {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid white;
-    transform: rotate(180deg);
-  }
-  
-  .down {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid white;
-    transform: rotate(180deg);
-  }
-
