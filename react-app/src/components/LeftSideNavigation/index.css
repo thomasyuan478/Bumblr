@@ -5,6 +5,7 @@
     width: 240px;
     height: 40px;
     gap: 8px;
+    color: white;
 }
 
 .left-side-nav-home:hover {
@@ -15,6 +16,7 @@
     display: inline-block;
     font-size: 40px;
     margin-left: 16%;
+    color: white;
 }
 
 .left-side-nav-title-hover:hover {
@@ -53,6 +55,7 @@
     width: 240px;
     height: 40px;
     gap: 8px;
+    color: white;
 }
 
 .left-side-nav-drop-down {
@@ -72,6 +75,7 @@
     width: 240px;
     height: 40px;
     gap: 8px;
+    color: white;
 }
 
 .left-side-nav-current-user-pfp {
@@ -102,14 +106,14 @@
   .up {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-bottom: 6px solid black;
+    border-bottom: 6px solid white;
     transform: rotate(180deg);
   }
   
   .down {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid black;
+    border-top: 6px solid white;
     transform: rotate(180deg);
   }
 
