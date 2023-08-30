@@ -21,9 +21,9 @@ export const PostTest = () => {
   const postsObj = postsBigObj.posts;
 
   const allPosts = useSelector(state => state.posts.posts)
-  console.log('all posts here', allPosts)
+  // console.log('all posts here', allPosts)
   const posts = Object.values(allPosts)
-  console.log('all posts keys array', posts)
+  // console.log('all posts keys array', posts)
 
   // const state = useSelector((state) => state.posts.posts[id]);
   // const posts = Object.values(state)
