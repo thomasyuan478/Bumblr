@@ -39,85 +39,87 @@ export function LeftSideNavigation() {
       <div className="feed-page">
         <div></div>
       </div>
+      {user && (
       <div className="left-side-nav-page">
         <div className="left-side-nav-title">
             <h1 className="left-side-nav-title-hover">Bumblr</h1>
         </div>
         <div className="left-side-nav-home" onClick={() => history.push("/")}>
-          <img src={home} alt="" /> Home
+          <img style={{filter: 'brightness(0) invert(1)'}} src={home} alt="" /> Home
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={explore} alt="" /> Explore
+          <img style={{filter: 'brightness(0) invert(1)'}} src={explore} alt="" /> Explore
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={video} alt="" /> <p>Live</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} src={video} alt="" /> <p>Live</p>
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={bolt} alt="" /> <p>Activity</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} src={bolt} alt="" /> <p>Activity</p>
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={chat} alt="" /> <p>Messages</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} src={chat} alt="" /> <p>Messages</p>
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={mail} alt="" /> <p>Inbox</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} style={{filter: 'brightness(0) invert(1)'}} src={mail} alt="" /> <p>Inbox</p>
         </div>
         <div className="left-side-nav-account" onClick={accountDropdown}>
           <div className="left-side-nav-account-arrow-seperator">
-            <img src={account} alt="" /> <p>Account</p>
+            <img style={{filter: 'brightness(0) invert(1)'}} src={account} alt="" /> <p>Account</p>
           </div>
           <i className={`nav-account-arrow ${isArrowDirection}`}/>
+          <p>{console.log(user)}</p>
         </div>
         {isOpen && (
         <div className='left-side-nav-drop-down'>
             <hr />
             <div>
-            <p>Likes</p>
-            <p>Following</p>
-            <p>Followers</p>
-            <p onClick={handleLogout}>Logout</p>
+            <p style={{color: 'white'}}>Likes</p>
+            <p style={{color: 'white'}}>Following</p>
+            <p style={{color: 'white'}}>Followers</p>
+            <p style={{color: 'white'}} onClick={handleLogout}>Logout</p>
             </div>
             <hr />
             <div className="left-side-nav-account-user" style={{display: 'flex', gap: '6px'}}>
             <img className="left-side-nav-current-user-pfp" src={user.profilePic} alt="avatar" />
-            <div style={{fontSize: '25px', paddingTop: '0'}}>{user.username}</div>
-            <div style={{fontSize: '25px', paddingTop: '0'}}>{user.nickname}</div>
+            <div style={{fontSize: '25px', paddingTop: '0', color: 'white'}}>{user.username}</div>
+            <div style={{fontSize: '25px', paddingTop: '0', color: 'white'}}>{user.nickname}</div>
             </div>
         </div>)}
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={settings} alt="" /> <p>Settings</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} src={settings} alt="" /> <p>Settings</p>
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={store} alt="" /> <p>BumblrMart</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} src={store} alt="" /> <p>BumblrMart</p>
         </div>
         <div
           className="left-side-nav-coming-soon"
           onClick={() => alert("Feature coming soon!")}
         >
-          <img src={star} alt="" /> <p>Go Ad-Free</p>
+          <img style={{filter: 'brightness(0) invert(1)'}} src={star} alt="" /> <p>Go Ad-Free</p>
         </div>
         <hr />
-      </div>
+      </div>)}
     </div>
   );
 }
