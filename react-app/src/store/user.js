@@ -2,6 +2,9 @@
 const GET_USERS = "GET /users";
 const GET_CURRENT = "GET /users/current";
 const UPDATE_CURRENT = "PUT /users/current";
+const CLEAR_USER = "CLEAR";
+const ADD_FOLLOWING = "POST /users/:userId/following";
+const REMOVE_FOLLOWING = "DELETE /users/:userId/following";
 
 //ACTION CREATOR
 export function loadUsers(users) {
@@ -18,6 +21,12 @@ export function loadSingleUser(user) {
   };
 }
 
+export function clearSingleUser() {
+  return {
+    type: CLEAR_USER,
+  };
+}
+
 export function updateUser(user, userId) {
   return {
     type: UPDATE_CURRENT,
@@ -25,7 +34,58 @@ export function updateUser(user, userId) {
     userId,
   };
 }
+
+export function addFollowing(currentUser, targetUser) {
+  return {
+    type: ADD_FOLLOWING,
+    currentUser,
+    targetUser,
+  };
+}
+
+export function removeFollowing(currentUser, targetUser) {
+  return {
+    type: REMOVE_FOLLOWING,
+    currentUser,
+    targetUser,
+  };
+}
 //ACTION THUNK
+export const clearSingleUserThunk = () => async (dispatch) => {
+  dispatch(clearSingleUser());
+};
+
+export const addFollowingThunk =
+  (currentUser, targetUser) => async (dispatch) => {
+    delete targetUser.posts;
+    const response = await fetch(
+      `/api/users/${currentUser.id}/following/${targetUser.id}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          currentUser,
+          targetUser,
+        }),
+      }
+    );
+    console.log(response);
+    if (response.ok) {
+      dispatch(addFollowing(currentUser, targetUser));
+    }
+  };
+
+export const removeFollowingThunk =
+  (currentUser, targetUser) => async (dispatch) => {
+    delete targetUser.posts;
+    const response = await fetch(
+      `/api/users/${currentUser.id}/following/${targetUser.id}`,
+      { method: "DELETE" }
+    );
+    if (response.ok) {
+      dispatch(removeFollowing(currentUser, targetUser));
+    }
+  };
+
 export const getUsersThunk = () => async (dispatch) => {
   const response = await fetch("/api/users");
 
@@ -74,9 +134,28 @@ const usersReducer = (state = initialState, action) => {
       newState.singleUser = action.user;
       return newState;
     }
+    case CLEAR_USER: {
+      const newState = { ...state };
+      newState.singleUser = {};
+      return newState;
+    }
     case UPDATE_CURRENT: {
       const newState = { ...state };
       newState.singleUser = action.user;
+      return newState;
+    }
+    case ADD_FOLLOWING: {
+      let newState = { ...state };
+      newState.singleUser.userFollowing.push(action.targetUser);
+      return newState;
+    }
+    case REMOVE_FOLLOWING: {
+      let newState = { ...state };
+      let followers = newState.singleUser.userFollowing;
+      let newFollowers = followers.filter(
+        (follower) => follower.id != action.targetUser.id
+      );
+      newState.singleUser.userFollowing = newFollowers;
       return newState;
     }
     default:
