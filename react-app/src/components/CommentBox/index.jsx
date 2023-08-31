@@ -150,7 +150,7 @@ function CommentBox({ obj, id }) {
                                 <li key={ele.id}>
                                 <p style={{fontWeight: 'bolder'}}>{commentOwners[ele.userId]?.username}</p>
                                 <p>{ele.comment}</p>
-                                {ele.userId === user.id && (<button onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>)}
+                                {user && ele.userId === user.id && (<button onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>)}
                                 </li>
                                 </div>
                                 </div>
