@@ -5,6 +5,7 @@ import { FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { addFollowingThunk } from "../../store/user";
 import { removeFollowingThunk } from "../../store/user";
+import { deleteNoteThunk } from "../../store/note";
 import './index.css'
 
 function CommentBox({ obj, id }) {
@@ -125,6 +126,7 @@ function CommentBox({ obj, id }) {
                                 <li key={ele.id}>
                                 <p style={{fontWeight: 'bolder'}}>{commentOwners[ele.userId]?.username}</p>
                                 <p>{ele.comment}</p>
+                                {ele.userId === user.id && (<button onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>)}
                                 </li>
                                 </div>
                                 </div>
