@@ -123,7 +123,7 @@ export const deleteLikeThunk = (postId, userId) => async (dispatch) => {
   });
   if (response.ok) {
     const resPost = await response.json();
-    dispatch(updatePost(resPost, postId));
+    dispatch(updatePost(resPost.post, postId));
   }
 };
 
@@ -134,7 +134,7 @@ export const addLikeThunk = (postId, userId) => async (dispatch) => {
   });
   if (response.ok) {
     const resPost = await response.json();
-    dispatch(updatePost(resPost, postId));
+    dispatch(updatePost(resPost.post, postId));
   }
 };
 
