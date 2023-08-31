@@ -145,6 +145,7 @@ const PostCard = ({ obj, id }) => {
           <div className='notes-comments-container'>
             <CommentBox
             obj={obj}
+            id={id}
             key={id}
             />
           </div>
