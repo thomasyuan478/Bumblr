@@ -45,7 +45,6 @@ export const PostTest = () => {
 
   return (
     <>
-    <CommentBox />
       <div className='post-card-container'>
         {postsKey.map(key => (
           <PostCard

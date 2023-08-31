@@ -4,10 +4,14 @@ import { FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import './index.css'
 
-function CommentBox() {
+function CommentBox({ obj, id }) {
+    const commentOwners = useSelector((state) => state.users.users)
+    console.log('commentowners', commentOwners)
     const user = useSelector((state) => state.session.user);
     const [isCommentsOpen, setIsCommentsOpen] = useState(true);
     const [isLikesOpen, setIsLikesOpen] = useState(false);
+    console.log('comments array', obj)
+
 
     const commentsBoxDisplay = () => {
         if(isCommentsOpen === true) {
@@ -44,9 +48,9 @@ function CommentBox() {
                 </div>
             </div>
             {isCommentsOpen && (
-            <div className="comments-new-post" style={{border: 'red 3px solid'}}>
+            <div className="comments-new-post">
                 <div className="comments-submit-container">
-                    <img className="left-side-nav-current-user-pfp-comments" src={user.profilePic} alt="avatar" />
+                    <img className="left-side-nav-current-user-pfp-comments" src={user?.profilePic} alt="avatar" />
                     <div className="comments-box-and-submit">
                         <div className="comment-input-box-parent-div">
                             <textarea onChange={(e) => {
@@ -63,14 +67,20 @@ function CommentBox() {
                     </div>
                 </div>
                 <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
-                    <div>
-                        all the posted comments
+                    <div className="comments-list">
+                    {obj.comments.map(ele => (
+                                <div className="comments-list-div">
+                                <img className="comments-list-pfp" src={commentOwners[ele.userId].profilePic} alt="avatar" />
+                                <li key={ele.id}>{ele.comment}</li>
+                                </div>
+                            )
+                        )}
                     </div>
                 </div>
             </div>)}
             {isLikesOpen && (
                 <div>
-                    hello this
+                    Hello this is likes
                 </div>
             )}
         </div>

@@ -12,8 +12,8 @@ import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
 import { getNotesThunk } from "./store/note";
-import { MainPageNavigation } from './components/MainPageNavigation'
-import { LeftSideNavigation } from './components/LeftSideNavigation'
+import { MainPageNavigation } from "./components/MainPageNavigation";
+import { LeftSideNavigation } from "./components/LeftSideNavigation";
 import { AccountSetting } from "./components/AccountSetting";
 
 function App() {
@@ -21,7 +21,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const user = useSelector((state) => state.session.user);
-  const post = useSelector((state) => state.posts)
+  const post = useSelector((state) => state.posts);
+  
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -44,6 +45,10 @@ function App() {
   // const postsKey = Object.keys(postsBigObj.posts);
   // const postsObj = postsBigObj.posts;
   // **********************************
+
+  useEffect(() => {
+    dispatch(getUsersThunk());
+  }, [dispatch]);
 
   return (
     <>

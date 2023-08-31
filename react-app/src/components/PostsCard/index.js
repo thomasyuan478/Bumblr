@@ -6,7 +6,7 @@ import "./PostCard.css"
 import CommentBox from '../CommentBox';
 
 const PostCard = ({ obj, id }) => {
-  console.log('obj here ------', obj)
+  // console.log('obj here ------', obj)
 
   // console.log('tags here -----', obj.tags)
   // const addHashTag = (str) => {
@@ -17,7 +17,7 @@ const PostCard = ({ obj, id }) => {
   //   else return
   // }
   const sessionUser = useSelector(state => state.session.user)
-  console.log('session use rhere-----', sessionUser)
+  // console.log('session use rhere-----', sessionUser)
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const openMenu = () => {
@@ -110,6 +110,7 @@ const PostCard = ({ obj, id }) => {
           <div className='notes-comments-container'>
             <CommentBox
             obj={obj}
+            id={id}
             key={id}
             />
           </div>
