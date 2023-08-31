@@ -7,6 +7,15 @@ from app import db
 
 user_routes = Blueprint('users', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 @user_routes.route('')
 # @login_required
@@ -113,7 +122,7 @@ def update_user_profile(id):
 
         db.session.commit()
         return {"user": user.to_dict_no_post()}
-    return {"errors": form.errors}, 400
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 @user_routes.route('/<int:id>/password', methods=["PUT"])
 @login_required
@@ -138,7 +147,7 @@ def update_user_password(id):
         db.session.commit()
         logout_user()
         return {"message": "Password changed. You are being logged out"}
-    return {"errors": form.errors}, 401
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
 # @user_routes.route('/<int:id>/follows', methods=["PUT"])

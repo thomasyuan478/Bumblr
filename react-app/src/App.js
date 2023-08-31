@@ -14,13 +14,14 @@ import {
 // import ProtectedRoute from "./components/auth/ProtectedRoute";
 // import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
-import { PostTest } from "./components/PostTest";
-// import { getNotesThunk } from "./store/note";
+import { PostTest } from "./components/LikesTest";
+import { getNotesThunk } from "./store/note";
 import { MainPageNavigation } from "./components/MainPageNavigation";
 // import { LeftSideNavigation } from "./components/LeftSideNavigation";
 import { AccountSetting } from "./components/AccountSetting";
-// import { TestUsers } from "./components/TestUsers";
-// import RightSideNavigation from "./components/RightSideNavigation";
+import { TestUsers } from "./components/TestUsers";
+import { LikesTest } from "./components/LikesTest";
+import { getInitialStateThunk } from "./store/user";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,14 +34,18 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (user) dispatch(getCurrentUserDetailsThunk(user.id));
-    // if (!user) dispatch(clearSingleUserThunk());
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) dispatch(getCurrentUserDetailsThunk(user.id));
+  //   // if (!user) dispatch(clearSingleUserThunk());
+  // }, [user]);
 
   useEffect(() => {
-    dispatch(getUsersThunk());
-  }, [dispatch]);
+    if (isLoaded) dispatch(getInitialStateThunk(user?.id));
+  }, [dispatch, user, isLoaded]);
+
+  // useEffect(() => {
+  //   dispatch(getUsersThunk());
+  // }, [dispatch]);
 
   const usersBigObj = useSelector((state) => state.users);
   const usersKey = Object.keys(usersBigObj.users);
@@ -55,10 +60,10 @@ function App() {
   //   dispatch(getPostsThunk());
   // }, [dispatch]);
 
-  // const postsBigObj = useSelector((state) => state.posts);
+  const postsBigObj = useSelector((state) => state.posts);
 
-  // const postsKey = Object.keys(postsBigObj.posts);
-  // const postsObj = postsBigObj.posts;
+  const postsKey = Object.keys(postsBigObj.posts);
+  const postsObj = postsBigObj.posts;
   // **********************************
 
   useEffect(() => {
@@ -71,14 +76,14 @@ function App() {
       <NewPost />
       {/* Comment this in for a test feed */}
       <div className="card_container">
-        {/* {postsKey.map((key) => (
-          <PostTest
+        {postsKey.map((key) => (
+          <LikesTest
             obj={postsObj[key]}
             id={postsObj[key].id}
             key={postsObj[key].id}
           />
-        ))} */}
-        {/* {usersKey.map((key) => (
+        ))}
+        {usersKey.map((key) => (
           <TestUsers
             obj={usersObj[key]}
             id={usersObj[key].id}

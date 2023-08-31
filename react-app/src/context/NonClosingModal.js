@@ -30,10 +30,10 @@ export function NonClosingModalProvider({ children }) {
 
   return (
     <>
+      <div className="non-closing-modal" ref={modalRef} />
       <NonClosingModalContext.Provider value={contextValue}>
         {children}
       </NonClosingModalContext.Provider>
-      <div ref={modalRef} />
     </>
   );
 }
@@ -42,6 +42,17 @@ export function NonClosingModal() {
   const { modalRef, modalContent, closeModal } = useContext(NonClosingModalContext);
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
+
+  useEffect(() => {
+    if (modalContent) {
+      document.querySelector("body").style.overflowY = "hidden"
+      document.querySelector("body").style.height = "100%"
+    } else {
+      document.querySelector("body").style.overflowY = "scroll"
+      document.querySelector("body").style.height = "auto"
+    }
+  }, [modalContent])
+
   if (!modalRef || !modalRef.current || !modalContent) return null;
 
   // Render the following component to the div referenced by the modalRef

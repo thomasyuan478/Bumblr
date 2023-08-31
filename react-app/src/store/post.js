@@ -5,6 +5,8 @@ const GET_POSTS = "GET /api/posts";
 const UPDATE_POST = "PUT /api/posts/:postId";
 const DELETE_POST = "DELETE /api/posts/:postId";
 // const DELETE_COMMENT = "DELETE comment";
+const ADD_LIKE = "POST /api/posts/:postId/likes/:userId";
+const REMOVE_LIKE = "DELETE /api/posts/:postId/likes/:userId";
 
 //Action Creators
 export function createPost(post) {
@@ -33,6 +35,18 @@ export function deletePost(postId) {
   return {
     type: DELETE_POST,
     postId,
+  };
+}
+
+export function addLike() {
+  return {
+    type: ADD_LIKE,
+  };
+}
+
+export function removeLike() {
+  return {
+    type: REMOVE_LIKE,
   };
 }
 
@@ -66,6 +80,10 @@ export const postPostThunk = (post) => async (dispatch) => {
   }
 };
 
+export const loadPostsThunk = (posts) => async (dispatch) => {
+  dispatch(loadPosts(posts));
+};
+
 export const getPostsThunk = () => async (dispatch) => {
   const response = await fetch("/api/posts");
 
@@ -91,6 +109,26 @@ export const updatePostThunk = (post, postId) => async (dispatch) => {
 // export const deletePostNoteThunk = (noteId, postId) => async (dispatch) => {
 //   dispatch(deleteNote(noteId, postId));
 // };
+export const deleteLikeThunk = (postId, userId) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${postId}/likes/${userId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const resPost = await response.json();
+    dispatch(updatePost(resPost, postId));
+  }
+};
+
+export const addLikeThunk = (postId, userId) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${postId}/likes/${userId}`, {
+    method: "POST",
+    body: JSON.stringify(postId, userId),
+  });
+  if (response.ok) {
+    const resPost = await response.json();
+    dispatch(updatePost(resPost, postId));
+  }
+};
 
 export const deletePostThunk = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {

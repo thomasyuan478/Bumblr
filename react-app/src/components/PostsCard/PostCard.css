@@ -117,8 +117,13 @@
   font-size: 1.1rem;
 }
 
+.post-content figure {
+  width: 100%;
+  margin: auto;
+}
+
 .post-content img {
-  width: 560px;
+  width: 100%;
 }
 
 .post-content a {
