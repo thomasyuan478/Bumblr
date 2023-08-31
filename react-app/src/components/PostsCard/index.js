@@ -5,9 +5,10 @@ import parse from "html-react-parser";
 import "./PostCard.css"
 import CommentBox from '../CommentBox';
 import { addFollowingThunk, removeFollowingThunk } from '../../store/user';
-import { deletePostThunk } from '../../store/post';
+import { addLikeThunk, deleteLikeThunk } from '../../store/post';
 import OpenModalButton from '../OpenModalButton';
 import DeletePostModal from '../DeletePostModal';
+import LoginFormModal from '../LoginFormModal';
 
 const PostCard = ({ obj, id }) => {
   const dispatch = useDispatch()
@@ -43,13 +44,34 @@ const PostCard = ({ obj, id }) => {
     }
   };
 
+  // FOLLOWING FUNCTIONS
   const startFollowing = (e) => {
     dispatch(addFollowingThunk(sessionUser, obj.user));
   };
 
   const stopFollowing = (e) => {
     dispatch(removeFollowingThunk(sessionUser, obj.user));
+
+    closeMenu();
   };
+
+  // LIKE FUNCTIONS
+  const likeCheck = (obj, user) => {
+    let userIds = [];
+    let tmp = obj.likes;
+    tmp.forEach((obj) => userIds.push(obj.userId));
+    if (userIds.includes(user.id)) return true;
+    else return false;
+  };
+
+  const removeLike = () => {
+    dispatch(deleteLikeThunk(obj.id, sessionUser.id));
+  };
+
+  const addLike = () => {
+    dispatch(addLikeThunk(obj.id, sessionUser.id));
+  };
+
 
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -113,7 +135,7 @@ const PostCard = ({ obj, id }) => {
                       className='post-delete-button'
                       buttonText="Delete"
                       onButtonClick={closeMenu}
-                      modalComponent={<DeletePostModal obj={obj}/>}
+                      modalComponent={<DeletePostModal obj={obj} />}
                     />
                   </li>
                 </>
@@ -147,14 +169,29 @@ const PostCard = ({ obj, id }) => {
               <button className='posts-comments-button'><i class="fa-regular fa-comment fa-lg"></i></button>
             </div>
             <div className='likes-icon'>
-              <button className='posts-likes-button'><i class="fa-regular fa-heart fa-lg"></i></button>
+              {sessionUser && likeCheck(obj, sessionUser) &&
+                <button onClick={removeLike} className='posts-likes-button'><i class="fa-solid fa-heart fa-lg" style={{ color: "red" }}></i></button>
+              }
+              {sessionUser && !likeCheck(obj, sessionUser) &&
+                <button onClick={addLike} className='posts-likes-button'><i class="fa-regular fa-heart fa-lg"></i></button>
+              }
+              {!sessionUser &&
+                <div className='no-user-like-button'>
+                  <OpenModalButton
+                    buttonText={<i class="fa-regular fa-heart fa-lg"></i>}
+                    onItemClick={closeMenu}
+                    modalComponent={<LoginFormModal />}
+                  />
+                  {/* <button onClick={addLike} className='posts-likes-button'><i class="fa-regular fa-heart fa-lg"></i></button> */}
+                </div>
+              }
             </div>
           </div>
           <div className='notes-comments-container'>
             <CommentBox
-            obj={obj}
-            id={id}
-            key={id}
+              obj={obj}
+              id={id}
+              key={id}
             />
           </div>
         </div>
