@@ -7,14 +7,14 @@ code {
   width: 600px;
   height: fit-content;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .post_editor-editor-buttons {
   display: flex;
   flex-wrap: wrap;
   position: absolute;
-  bottom: -10px;
+  bottom: 0px;
   right: 0px;
   background-color: white;
   gap: 20px;
@@ -30,7 +30,7 @@ code {
   background-color: transparent;
   cursor: pointer;
   font-size: 20px;
-  padding: 5px
+  padding: 5px;
 }
 
 .post_editor-editor-buttons button.enabled {
@@ -72,15 +72,15 @@ code {
 }
 
 .null .ck-editor__editable {
-  padding: 0px 20px 30px 20px !important;
+  padding: 0px 20px 35px 20px !important;
 }
 
 .box .ck-editor__editable {
-  padding: 0px 20px 170px 20px !important;
+  padding: 0px 20px 175px 20px !important;
 }
 
 .input .ck-editor__editable {
-  padding: 0px 20px 100px 20px !important;
+  padding: 0px 20px 105px 20px !important;
 }
 
 .ck-focused {
@@ -114,7 +114,7 @@ h6.ck-placeholder::before {
 
 .post_editor-inputs {
   position: absolute;
-  bottom: 30px;
+  bottom: 40px;
   width: 100%;
 }
 
@@ -306,6 +306,7 @@ h6.ck-placeholder::before {
   left: -100px;
   width: 64px;
   border-radius: 10px;
+  z-index: 1002 !important;
 }
 
 .post_editor_container-username {
