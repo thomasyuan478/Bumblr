@@ -8,18 +8,19 @@ import Navigation from "./components/Navigation";
 import {
   getUsersThunk,
   getCurrentUserDetailsThunk,
-  clearSingleUserThunk,
+  // clearSingleUserThunk,
 } from "./store/user";
-import { getPostsThunk, updatePostThunk } from "./store/post";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
-import { PostEditorContainer } from "./components/PostEditor";
+// import { getPostsThunk, updatePostThunk } from "./store/post";
+// import ProtectedRoute from "./components/auth/ProtectedRoute";
+// import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
 import { PostTest } from "./components/PostTest";
-import { getNotesThunk } from "./store/note";
+// import { getNotesThunk } from "./store/note";
 import { MainPageNavigation } from "./components/MainPageNavigation";
-import { LeftSideNavigation } from "./components/LeftSideNavigation";
+// import { LeftSideNavigation } from "./components/LeftSideNavigation";
 import { AccountSetting } from "./components/AccountSetting";
-import { TestUsers } from "./components/TestUsers";
+// import { TestUsers } from "./components/TestUsers";
+// import RightSideNavigation from "./components/RightSideNavigation";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function App() {
 
   const user = useSelector((state) => state.session.user);
   const post = useSelector((state) => state.posts);
-  
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -77,13 +78,13 @@ function App() {
             key={postsObj[key].id}
           />
         ))} */}
-        {usersKey.map((key) => (
+        {/* {usersKey.map((key) => (
           <TestUsers
             obj={usersObj[key]}
             id={usersObj[key].id}
             key={usersObj[key].id}
           />
-        ))}
+        ))} */}
       </div>
       {isLoaded && (
         <Switch>

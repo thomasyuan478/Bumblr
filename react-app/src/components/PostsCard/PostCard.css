@@ -1,3 +1,8 @@
+.entire-page {
+  display: flex;
+  justify-content: center;
+}
+
 .post-card-container {
   display: flex;
   flex-direction: column;
@@ -81,8 +86,15 @@
   border-bottom: 1px solid white;
 }
 
+.modal-button-li > button {
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  background-color: rgb(24 51 82);
+  cursor: pointer;
+}
+
 .post-edit-button,
-.post-delete-button,
 .close-post-settings-button {
   color: white;
   font-size: 1.1rem;
@@ -96,7 +108,7 @@
   color: #74ff1b;
 }
 
-.post-delete-button:hover {
+.modal-button-li > button:hover {
   color: red;
 }
 
@@ -157,3 +169,6 @@ figure.image {
 figure.image img {
   width: 100%;
 }
+
+
+/* RIGHT SIDE NAVIATION CSS */

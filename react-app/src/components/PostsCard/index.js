@@ -5,6 +5,9 @@ import parse from "html-react-parser";
 import "./PostCard.css"
 import CommentBox from '../CommentBox';
 import { addFollowingThunk, removeFollowingThunk } from '../../store/user';
+import { deletePostThunk } from '../../store/post';
+import OpenModalButton from '../OpenModalButton';
+import DeletePostModal from '../DeletePostModal';
 
 const PostCard = ({ obj, id }) => {
   const dispatch = useDispatch()
@@ -84,7 +87,7 @@ const PostCard = ({ obj, id }) => {
           <div className='user-username'>
             {obj.user.username}
           </div>
-          {sessionUser && followCheck(obj.user.id, sessionUser) &&
+          {sessionUser && followCheck(obj.user.id, sessionUser) && obj.user.id !== sessionUser.id &&
             <div className='user-follow-button'>
               <button className='posts-follow-button' onClick={startFollowing}>Follow</button>
             </div>
@@ -105,8 +108,13 @@ const PostCard = ({ obj, id }) => {
                   <li>
                     <button className='post-edit-button'>Edit</button>
                   </li>
-                  <li>
-                    <button className='post-delete-button'>Delete</button>
+                  <li className='modal-button-li'>
+                    <OpenModalButton
+                      className='post-delete-button'
+                      buttonText="Delete"
+                      onButtonClick={closeMenu}
+                      modalComponent={<DeletePostModal obj={obj}/>}
+                    />
                   </li>
                 </>
               }
