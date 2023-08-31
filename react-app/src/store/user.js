@@ -1,3 +1,5 @@
+import { loadPostsThunk } from "./post";
+
 //ACTION
 const GET_USERS = "GET /users";
 const GET_CURRENT = "GET /users/current";
@@ -51,6 +53,25 @@ export function removeFollowing(currentUser, targetUser) {
   };
 }
 //ACTION THUNK
+export const getInitialStateThunk = (userId) => async (dispatch) => {
+  if (userId) {
+    const response = await fetch(`/api/posts/initialState/${userId}`);
+    const data = await response.json();
+    // console.log(data.Response.users);
+    dispatch(loadUsers(data.Response.users));
+    dispatch(loadPostsThunk(data.Response.posts));
+    dispatch(loadSingleUser(data.Response.singleUser));
+    return { Message: "Data loaded" };
+  } else {
+    const response = await fetch(`/api/posts/initialState/${0}`);
+    const data = await response.json();
+    dispatch(loadUsers(data.Response.users));
+    dispatch(loadPostsThunk(data.Response.posts));
+    dispatch(clearSingleUser());
+    return { Message: "Data loaded" };
+  }
+};
+
 export const clearSingleUserThunk = () => async (dispatch) => {
   dispatch(clearSingleUser());
 };
