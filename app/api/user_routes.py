@@ -3,17 +3,40 @@ from flask_login import login_required, current_user, logout_user, login_user
 from app.models import User, Post, Note, db
 from app.forms import ProfileUpdateForm, PasswordUpdateForm
 
+from app import db
+
 user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('')
-@login_required
+# @login_required
 def users():
     """
     Query for all users and returns them in a list of user dictionaries
     """
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+
+# FOLLOW FEATURE
+@user_routes.route('/<int:userId>/following/<int:targetId>', methods=["POST"])
+@login_required
+def add_follower(userId, targetId):
+    print(userId, targetId)
+    user = User.query.get(userId)
+    target = User.query.get(targetId)
+    target.following.append(user)
+    db.session.commit()
+    return {"user": user.to_dict_current()}
+
+@user_routes.route('/<int:userId>/following/<int:targetId>', methods=["DELETE"])
+@login_required
+def remove_follower(userId, targetId):
+    user = User.query.get(userId)
+    target = User.query.get(targetId)
+    target.following.remove(user)
+    db.session.commit()
+    return {"user": user.to_dict_current()}
 
 @user_routes.route('/details/<int:id>')
 @login_required

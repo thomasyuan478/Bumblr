@@ -64,8 +64,6 @@ export const postPostThunk = (post) => async (dispatch) => {
   } else {
     return ["An error occurred. Please try again."];
   }
-
-
 };
 
 export const getPostsThunk = () => async (dispatch) => {
@@ -110,7 +108,7 @@ const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_POST: {
       const newState = { ...state };
-      newState[action.post.id] = action.post;
+      newState.posts[action.post.id] = action.post;
       return newState;
     }
     case GET_POSTS: {

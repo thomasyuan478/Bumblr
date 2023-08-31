@@ -1,0 +1,9 @@
+.post_card {
+  background-color: white;
+}
+
+.card_container {
+  margin: 0px auto;
+  width: 600px;
+  padding: 0px 5px;
+}
