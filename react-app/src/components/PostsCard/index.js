@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import parse from "html-react-parser";
 import "./PostCard.css"
 import CommentBox from '../CommentBox';
+import { addFollowingThunk, removeFollowingThunk } from '../../store/user';
 
 const PostCard = ({ obj, id }) => {
-  console.log('obj here ------', obj)
+  const dispatch = useDispatch()
+  // console.log('obj here ------', obj)
+  // console.log('id -----', id)
 
   // console.log('tags here -----', obj.tags)
   // const addHashTag = (str) => {
@@ -17,7 +20,34 @@ const PostCard = ({ obj, id }) => {
   //   else return
   // }
   const sessionUser = useSelector(state => state.session.user)
-  console.log('session use rhere-----', sessionUser)
+  const userInfo = useSelector(state => state.users.singleUser)
+  // console.log('session use rhere-----', sessionUser)
+  // console.log('single user info-----', userInfo)
+
+  let normalizedData = {};
+  let followingIds;
+  if (sessionUser && Object.keys(userInfo).length != 0) {
+    let followingArray = userInfo.userFollowing;
+    followingArray.forEach((obj) => (normalizedData[obj.id] = obj));
+    // console.log(userCheck(), normalizedData);
+    followingIds = Object.keys(normalizedData);
+    // console.log(followingIds, typeof String(state.id));
+  }
+  const followCheck = (id, user) => {
+    if (user && Object.keys(userInfo).length != 0) {
+      if (followingIds.includes(String(id))) return false;
+      else return true;
+    }
+  };
+
+  const startFollowing = (e) => {
+    dispatch(addFollowingThunk(sessionUser, obj.user));
+  };
+
+  const stopFollowing = (e) => {
+    dispatch(removeFollowingThunk(sessionUser, obj.user));
+  };
+
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const openMenu = () => {
@@ -54,9 +84,9 @@ const PostCard = ({ obj, id }) => {
           <div className='user-username'>
             {obj.user.username}
           </div>
-          {sessionUser &&
+          {sessionUser && followCheck(obj.user.id, sessionUser) &&
             <div className='user-follow-button'>
-              <button className='posts-follow-button'>Follow</button>
+              <button className='posts-follow-button' onClick={startFollowing}>Follow</button>
             </div>
           }
         </div>
@@ -79,6 +109,11 @@ const PostCard = ({ obj, id }) => {
                     <button className='post-delete-button'>Delete</button>
                   </li>
                 </>
+              }
+              {sessionUser && !followCheck(obj.user.id, sessionUser) &&
+                <li>
+                  <button className='post-edit-button' onClick={stopFollowing}>Unfollow</button>
+                </li>
               }
               <li>
                 <button className='close-post-settings-button' onClick={closeMenu}>Close</button>

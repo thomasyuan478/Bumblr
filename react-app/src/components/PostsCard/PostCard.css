@@ -50,11 +50,18 @@
   font-size: 1.3rem;
 }
 
+.post-settings-dropdown {
+  position: relative;
+}
+
 .settings-dropdown {
   display: flex;
   list-style-type: none;
-  position: static;
-  right: 80px;
+  position: absolute;
+  top: 100%;
+  right: -75px;
+  border: 1px solid white;
+  width: 200px;
   background-color: rgb(24 51 82);
   flex-direction: column;
   align-items: center;
