@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from app.models import User, Post, Note
 from app import db
-from app.forms import PostForm
+from app.forms import PostForm, NoteForm
 from datetime import datetime
 
 import random
@@ -58,6 +58,31 @@ def create_post():
     db.session.commit()
     return {'post': post.post_to_dict_notes()}
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+@post_routes.route("/<int:id>/notes", methods=["POST"])
+@login_required
+def add_comment(id):
+  """
+  add comment to a post
+  """
+  form = NoteForm()
+
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    note = Note(
+      user_id = form.data["user_id"],
+      post_id = form.data["post_id"],
+      comment = form.data["comment"],
+      created_at = datetime.today()
+    )
+    db.session.add(note)
+    db.session.commit()
+    post = Post.query.get(id)
+    return {
+      'post': post.post_to_dict_notes()
+      }
+  return {"errors": form.errors}
 
 @post_routes.route("/<int:id>", methods=["PUT"])
 @login_required
