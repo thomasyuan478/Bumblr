@@ -6,7 +6,8 @@ import './index.css'
 
 function CommentBox({ obj, id }) {
     const commentOwners = useSelector((state) => state.users.users)
-    // console.log('commentowners', commentOwners)
+    console.log('commentowners', commentOwners)
+    console.log('likes', obj.likes)
     const user = useSelector((state) => state.session.user);
     const [isCommentsOpen, setIsCommentsOpen] = useState(true);
     const [isLikesOpen, setIsLikesOpen] = useState(false);
@@ -37,6 +38,23 @@ function CommentBox({ obj, id }) {
         }
     }
 
+    const likeChecks = (obj) => {
+        let userIds = [];
+        let tmp = obj.likes;
+        tmp.forEach((obj) => userIds.push(obj.userId));
+        return userIds
+      };
+
+    const likesArr = likeChecks(obj);
+    console.log('likes array', likesArr)
+    const usersLikes = []
+    Object.values(commentOwners).forEach((user) => {
+        if (likesArr.includes(user.id)) {
+            usersLikes.push(user)
+        }
+    })
+    console.log('usersLikes', usersLikes)
+
     return (
         <div className="comments-drop-down">
             <div className="comment-drop-down-nav">
@@ -56,7 +74,7 @@ function CommentBox({ obj, id }) {
                             <textarea onChange={(e) => {
                                 const textarea = e.target
                                 const scrollHeight = textarea.scrollHeight
-                                if(scrollHeight < 200) {
+                                if(scrollHeight < 49) {
                                     textarea.style.height = `${scrollHeight}px`
                                 } else {
                                     textarea.style.overflowY = 'scroll'
@@ -71,7 +89,12 @@ function CommentBox({ obj, id }) {
                     {obj.comments.map(ele => (
                                 <div className="comments-list-div">
                                 <img className="comments-list-pfp" src={commentOwners[ele.userId]?.profilePic} alt="avatar" />
-                                <li key={ele.id}>{ele.comment}</li>
+                                <div className="comments-list-username">
+                                <li key={ele.id}>
+                                <p style={{fontWeight: 'bolder'}}>{commentOwners[ele.userId]?.username}</p>
+                                <p>{ele.comment}</p>
+                                </li>
+                                </div>
                                 </div>
                             )
                         )}
@@ -79,8 +102,14 @@ function CommentBox({ obj, id }) {
                 </div>
             </div>)}
             {isLikesOpen && (
-                <div>
-                    Hello this is likes
+                <div className="likes-list">
+                    {usersLikes.map(ele => (
+                                <div className="likes-list-div">
+                                <img className="comments-list-pfp" src={ele?.profilePic} alt="avatar" />
+                                <div>{ele.username}</div>
+                                </div>
+                            )
+                        )}
                 </div>
             )}
         </div>
