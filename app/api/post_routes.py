@@ -64,3 +64,23 @@ def delete_post(id):
   db.session.delete(post)
   db.session.commit()
   return {"message": "post deleted"}
+
+@post_routes.route("/<int:postId>/likes/<int:userId>", methods=["POST"])
+def add_like(postId, userId):
+  post = Post.query.get(postId)
+  user = User.query.get(userId)
+  print(post.likes)
+  post.likes.append(user)
+  print(post.likes)
+  db.session.commit()
+  return {"post": post.post_to_dict_notes()}
+
+@post_routes.route("/<int:postId>/likes/<int:userId>", methods=["DELETE"])
+def remove_like(postId, userId):
+  post = Post.query.get(postId)
+  user = User.query.get(userId)
+  print(post.likes)
+  post.likes.remove(user)
+  print(post.likes)
+  db.session.commit()
+  return {"post": post.post_to_dict_notes()}

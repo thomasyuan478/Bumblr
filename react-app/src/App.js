@@ -14,9 +14,10 @@ import { getPostsThunk, updatePostThunk } from "./store/post";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
-import { PostTest } from "./components/PostTest";
+import { PostTest } from "./components/LikesTest";
 import { getNotesThunk } from "./store/note";
 import { TestUsers } from "./components/TestUsers";
+import { LikesTest } from "./components/LikesTest";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,14 +46,14 @@ function App() {
   // }, [dispatch]);
 
   // TEST FEED OBJECT ***********
-  // useEffect(() => {
-  //   dispatch(getPostsThunk());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPostsThunk());
+  }, [dispatch]);
 
-  // const postsBigObj = useSelector((state) => state.posts);
+  const postsBigObj = useSelector((state) => state.posts);
 
-  // const postsKey = Object.keys(postsBigObj.posts);
-  // const postsObj = postsBigObj.posts;
+  const postsKey = Object.keys(postsBigObj.posts);
+  const postsObj = postsBigObj.posts;
   // **********************************
 
   return (
@@ -61,13 +62,13 @@ function App() {
       <NewPost />
       {/* Comment this in for a test feed */}
       <div className="card_container">
-        {/* {postsKey.map((key) => (
-          <PostTest
+        {postsKey.map((key) => (
+          <LikesTest
             obj={postsObj[key]}
             id={postsObj[key].id}
             key={postsObj[key].id}
           />
-        ))} */}
+        ))}
         {usersKey.map((key) => (
           <TestUsers
             obj={usersObj[key]}
