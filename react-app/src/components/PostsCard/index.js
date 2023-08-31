@@ -9,6 +9,9 @@ import { addLikeThunk, deleteLikeThunk } from '../../store/post';
 import OpenModalButton from '../OpenModalButton';
 import DeletePostModal from '../DeletePostModal';
 import LoginFormModal from '../LoginFormModal';
+import { useNonClosingModal } from '../../context/NonClosingModal';
+import { PostEditorContainer } from '../PostEditor';
+
 
 const PostCard = ({ obj, id }) => {
   const dispatch = useDispatch()
@@ -27,6 +30,7 @@ const PostCard = ({ obj, id }) => {
   const userInfo = useSelector(state => state.users.singleUser)
   // console.log('session use rhere-----', sessionUser)
   // console.log('single user info-----', userInfo)
+  const { setModalContent } = useNonClosingModal()
 
   let normalizedData = {};
   let followingIds;
@@ -98,6 +102,9 @@ const PostCard = ({ obj, id }) => {
 
   const ulClassName = "settings-dropdown" + (showMenu ? "" : " hidden");
 
+  if (!obj) {
+    return null
+  }
 
   return (
     <div className='postcards'>
@@ -128,7 +135,12 @@ const PostCard = ({ obj, id }) => {
               {sessionUser && sessionUser.id === obj.user.id &&
                 <>
                   <li>
-                    <button className='post-edit-button'>Edit</button>
+                    <button
+                      className='post-edit-button'
+                      onClick={() => setModalContent(<PostEditorContainer type="edit" user={sessionUser} post={obj} />)}
+                    >
+                        Edit
+                    </button>
                   </li>
                   <li className='modal-button-li'>
                     <OpenModalButton
