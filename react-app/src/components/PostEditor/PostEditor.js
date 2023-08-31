@@ -3,7 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import parse from "html-react-parser";
 import { useNonClosingModal } from '../../context/NonClosingModal';
-import { postPostThunk } from '../../store/post';
+import { postPostThunk, updatePostThunk } from '../../store/post';
 import { useDispatch } from 'react-redux';
 
 export const PostEditor = ({ type, user, post }) => {
@@ -60,7 +60,7 @@ export const PostEditor = ({ type, user, post }) => {
     }
 
     const dispatch = useDispatch();
-    const [showTitle, setShowTitle] = useState(type === "text" ? true : false)
+    const [showTitle, setShowTitle] = useState(type === "text" || (post && post.content.includes("<h1>")) ? true : false)
     const [showImage, setShowImage] = useState(type === "image" ? true : false)
     const [showImageInput, setShowImageInput] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
@@ -130,28 +130,30 @@ export const PostEditor = ({ type, user, post }) => {
                 const src = imageNode.split(" ")[1]
                 const temp_url = src.split("\"")[1]
                 const image = images[temp_url]
-                const formData = new FormData()
-                formData.append("image", image)
-                const res = await fetch("api/images/new", {
-                    method: "POST",
-                    body: formData
-                })
-                if (res.ok) {
-                    const resData = await res.json()
-                    const url = resData.url
-                    html = html.replace(temp_url, url)
-                } else if (res.status < 500) {
-                    const resData = await res.json()
-                    if (resData.errors) {
-                        setServerErrors((prev) => {
-                            prev = resData.errors
-                            return [...prev]
-                        })
+                if (image) {
+                    const formData = new FormData()
+                    formData.append("image", image)
+                    const res = await fetch("api/images/new", {
+                        method: "POST",
+                        body: formData
+                    })
+                    if (res.ok) {
+                        const resData = await res.json()
+                        const url = resData.url
+                        html = html.replace(temp_url, url)
+                    } else if (res.status < 500) {
+                        const resData = await res.json()
+                        if (resData.errors) {
+                            setServerErrors((prev) => {
+                                prev = resData.errors
+                                return [...prev]
+                            })
+                        }
+                        return
+                    } else {
+                        setServerErrors(["An error occurred. Please try again."])
+                        return
                     }
-                    return
-                } else {
-                    setServerErrors(["An error occurred. Please try again."])
-                    return
                 }
                 i = endIdx
             } else {
@@ -163,7 +165,14 @@ export const PostEditor = ({ type, user, post }) => {
             content: html,
             tags: tags.join(", ")
         }
-        const data = await dispatch(postPostThunk(new_post))
+
+        let data
+        if (type !== "edit") {
+            data = await dispatch(postPostThunk(new_post))
+        } else {
+            data = await dispatch(updatePostThunk(new_post, post.id))
+        }
+
         if (data) {
             setServerErrors(data)
         } else {
@@ -173,6 +182,7 @@ export const PostEditor = ({ type, user, post }) => {
 
     const handleHeight = () => {
         const modal = document.querySelector("#non-closing-modal_content")
+        console.log(modal.offsetHeight, window.innerHeight)
         if (modal.offsetHeight >= window.innerHeight) {
             modal.style.top = "0px"
         }
@@ -254,9 +264,10 @@ export const PostEditor = ({ type, user, post }) => {
                         editor={Editor}
                         config={textConfiguration}
                         data={content}
-                        onReady={editor => {
+                        onReady={async (editor) => {
                             // trigger event when the editor completed loading
                             setEditorObj(editor)
+                            setTimeout(() => handleHeight(), 500)
                         }}
                         onChange={(event, editor) => {
                             setContent(editor.getData());
@@ -266,15 +277,17 @@ export const PostEditor = ({ type, user, post }) => {
                             setContentEdited(true)
                         }}
                         onFocus={(event, editor) => {
-                            // trigger event when the editor is focused
+                            handleHeight();
                         }}
                     /> :
                     <CKEditor
                         editor={Editor}
                         config={normalConfiguration}
                         data={content}
-                        onReady={editor => {
+                        onReady={async (editor) => {
+                            // trigger event when the editor completed loading
                             setEditorObj(editor)
+                            setTimeout(() => handleHeight(), 500)
                         }}
                         onChange={(event, editor) => {
                             setContent(editor.getData());
@@ -284,7 +297,7 @@ export const PostEditor = ({ type, user, post }) => {
                             setContentEdited(true)
                         }}
                         onFocus={(event, editor) => {
-                            // trigger event when the editor is focused
+                            handleHeight();
                         }}
                     />
                 }
@@ -403,6 +416,7 @@ export const PostEditor = ({ type, user, post }) => {
                                         source: imageUrl
                                     });
                                     setImageUrl("")
+                                    setUrlErrors({})
                                 } else {
                                     setUrlErrors({ imageUrl: "Image URL is invalid" })
                                 }
@@ -439,6 +453,7 @@ export const PostEditor = ({ type, user, post }) => {
                                     } else {
                                         editorObj.execute("mediaEmbed", videoUrl);
                                         setVideoUrl("")
+                                        setUrlErrors({})
                                     }
                                 } else {
                                     setUrlErrors({ videoUrl: "Media URL is invalid" })
@@ -472,6 +487,7 @@ export const PostEditor = ({ type, user, post }) => {
                                 if (isValidUrl(link)) {
                                     editorObj.execute('link', link);
                                     setLink("")
+                                    setUrlErrors({})
                                 } else {
                                     setUrlErrors({ link: "Link is invalid" })
                                 }

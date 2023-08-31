@@ -96,13 +96,21 @@ export const getPostsThunk = () => async (dispatch) => {
 export const updatePostThunk = (post, postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "PUT",
-    body: JSON.stringify(post),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(post)
   });
 
   if (response.ok) {
-    const resPost = await response.json();
-    dispatch(updatePost(resPost, postId));
-    return response;
+    const data = await response.json();
+    dispatch(updatePost(data.post, postId));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
   }
 };
 
@@ -157,7 +165,7 @@ const postsReducer = (state = initialState, action) => {
     }
     case UPDATE_POST: {
       const newState = { ...state };
-      newState.posts[action.postId] = action.post.post;
+      newState.posts[action.postId] = action.post;
       return newState;
     }
     //this is an attempt to delete comment from posts without a secondary request
