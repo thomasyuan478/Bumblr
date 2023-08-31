@@ -97,7 +97,7 @@ export const updatePostThunk = (post, postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(post)
+    body: JSON.stringify(post),
   });
 
   if (response.ok) {
@@ -135,6 +135,19 @@ export const addLikeThunk = (postId, userId) => async (dispatch) => {
   if (response.ok) {
     const resPost = await response.json();
     dispatch(updatePost(resPost.post, postId));
+  }
+};
+
+export const addCommentThunk = (comment) => async (dispatch) => {
+  console.log(comment, comment.post_id);
+  const response = await fetch(`/api/posts/${comment.post_id}/notes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(comment),
+  });
+  if (response.ok) {
+    const resPost = await response.json();
+    dispatch(updatePost(resPost.post, comment.post_id));
   }
 };
 

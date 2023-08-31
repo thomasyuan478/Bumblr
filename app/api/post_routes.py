@@ -69,10 +69,12 @@ def add_comment(id):
 
   form['csrf_token'].data = request.cookies['csrf_token']
 
+  print(form.data)
+
   if form.validate_on_submit():
     note = Note(
       user_id = form.data["user_id"],
-      post_id = form.data["post_id"],
+      post_id = id,
       comment = form.data["comment"],
       created_at = datetime.today()
     )

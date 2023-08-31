@@ -6,13 +6,15 @@ import { FaRegHeart } from "react-icons/fa6";
 import { addFollowingThunk } from "../../store/user";
 import { removeFollowingThunk } from "../../store/user";
 import './index.css'
+import { addCommentThunk } from "../../store/post";
 
 function CommentBox({ obj, id }) {
     const dispatch = useDispatch();
     const commentOwners = useSelector((state) => state.users.users)
-    console.log('commentowners', commentOwners)
-    console.log('likes', obj.likes)
+    // console.log('commentowners', commentOwners)
+    // console.log('likes', obj.likes)
     const user = useSelector((state) => state.session.user);
+    const [comment, setComment] = useState("")
     const [isCommentsOpen, setIsCommentsOpen] = useState(true);
     const [isLikesOpen, setIsLikesOpen] = useState(false);
     // console.log('comments array', obj)
@@ -20,7 +22,7 @@ function CommentBox({ obj, id }) {
     const userInfo = useSelector(state => state.users.singleUser)
     // console.log('session use rhere-----', user)
     // console.log('single user info-----', userInfo)
-  
+
     let normalizedData = {};
     let followingIds;
     if (user && Object.keys(userInfo).length != 0) {
@@ -40,11 +42,11 @@ function CommentBox({ obj, id }) {
     const startFollowing = (e) => {
         dispatch(addFollowingThunk(user, obj.user));
       };
-    
+
     const stopFollowing = (e) => {
         dispatch(removeFollowingThunk(user, obj.user));
       };
-  
+
 
     const commentsBoxDisplay = () => {
         if(isCommentsOpen === true) {
@@ -78,14 +80,28 @@ function CommentBox({ obj, id }) {
       };
 
     const likesArr = likeChecks(obj);
-    console.log('likes array', likesArr)
+    // console.log('likes array', likesArr)
     const usersLikes = []
     Object.values(commentOwners).forEach((user) => {
         if (likesArr.includes(user.id)) {
             usersLikes.push(user)
         }
     })
-    console.log('usersLikes', usersLikes)
+    // console.log('usersLikes', usersLikes)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+    const createComment = {
+        user_id: user.id,
+        post_id: obj.id,
+        comment
+    }
+
+    dispatch(addCommentThunk(createComment, user.id))
+
+    setComment("")
+    }
 
     return (
         <div className="comments-drop-down">
@@ -103,7 +119,10 @@ function CommentBox({ obj, id }) {
                     <img className="left-side-nav-current-user-pfp-comments" src={user?.profilePic} alt="avatar" />
                     <div className="comments-box-and-submit">
                         <div className="comment-input-box-parent-div">
-                            <textarea onChange={(e) => {
+                            <textarea value={comment} onChange={(e) => {
+                                setComment(e.target.value);
+
+                                // console.log(obj)
                                 const textarea = e.target
                                 const scrollHeight = textarea.scrollHeight
                                 if(scrollHeight < 49) {
@@ -113,7 +132,7 @@ function CommentBox({ obj, id }) {
                                 }
                             }} className='comment-input-box' type='text' placeholder="Comment here" onKeyDown={textAreaEnterKey}></textarea>
                         </div>
-                        <button className="comment-submit-button"> Submit</button>
+                        <button className="comment-submit-button" onClick={handleSubmit}> Submit</button>
                     </div>
                 </div>
                 <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
