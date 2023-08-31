@@ -104,6 +104,11 @@ function CommentBox({ obj, id }) {
     setComment("")
     }
 
+    const lengthCheck = () => {
+        if(comment.length === 0) return true;
+        else return false;
+    }
+
     return (
         <div className="comments-drop-down">
             <div className="comment-drop-down-nav">
@@ -133,7 +138,7 @@ function CommentBox({ obj, id }) {
                                 }
                             }} className='comment-input-box' type='text' placeholder="Comment here" onKeyDown={textAreaEnterKey}></textarea>
                         </div>
-                        <button className="comment-submit-button" onClick={handleSubmit}> Submit</button>
+                        <button className="comment-submit-button" disabled={lengthCheck()} onClick={handleSubmit}> Submit</button>
                     </div>
                 </div>
                 <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
