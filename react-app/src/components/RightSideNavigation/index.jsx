@@ -67,7 +67,7 @@ export function RightSideNavigation() {
       <a href="https://github.com/tmarks98">
                 <FaGithub size={30} />
             </a>
-            <a href="https://www.linkedin.com/in/tyler-marks-9b189987/">
+            <a href="https://www.linkedin.com/in/tyler98">
                 <FaLinkedin size={30} />
             </a>
             <a href="#email" onClick={emailMenu}>
@@ -75,7 +75,7 @@ export function RightSideNavigation() {
             </a>
             {isEmailVisible && (
                 <p>
-                    <FaEnvelope /> tyleramarks@gmail.com
+                    <FaEnvelope /> tyler98@gmail.com
                 </p>
             )}
       </div>

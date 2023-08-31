@@ -1,0 +1,92 @@
+.comments-drop-down {
+    color: white;
+    width: 560px;
+}
+
+.comments-icon-dropdown {
+
+}
+
+.likes-icon-dropdown {
+
+}
+
+.comment-drop-down-nav {
+    border: 1px white solid;
+    display: flex;
+}
+
+.comments-new-post {
+    border: 1px white solid
+
+}
+
+.comments-posted-comments {
+    border: 1px white solid
+}
+
+.comments-submit-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comments-box-and-submit {
+    display: flex;
+    align-items: center;
+    border: grey 2px solid;
+    border-radius: 20px;
+    margin-left: 10px;
+    flex: 1;
+    padding: 0px 10px;
+    width: 100%;
+}
+
+.comment-input-box-parent-div {
+    flex: 1;
+    max-height: fit-content;
+    padding: 8px 0 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.left-side-nav-current-user-pfp-comments {
+    margin-left: 10px;
+    border-radius: 40px;
+    height: 32px;
+    width: 32px;
+}
+
+.comment-input-box {
+    white-space: pre-line;
+    font-weight: 400;
+    color: white;
+    word-break: break-word;
+    resize: none;
+    background: 0px 0px;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    overflow: hidden;
+    text-align: left;
+    line-height: inherit;
+    font-size: 1rem;
+}
+
+.comment-input-box::placeholder {
+    color: white;
+}
+
+.comment-submit-button {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}

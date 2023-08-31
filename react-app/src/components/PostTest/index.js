@@ -11,6 +11,7 @@ import { deleteNoteThunk } from "../../store/note";
 import parse from "html-react-parser";
 import "./PostTest.css";
 import PostCard from "../PostsCard";
+import CommentBox from "../CommentBox";
 
 // { obj, id }
 export const PostTest = () => {
@@ -50,8 +51,9 @@ export const PostTest = () => {
 
   return (
     <>
-      <div className="post-card-container">
-        {postsKey.map((key) => (
+    <CommentBox />
+      <div className='post-card-container'>
+        {postsKey.map(key => (
           <PostCard
             obj={postsObj[key]}
             id={postsObj[key].id}
