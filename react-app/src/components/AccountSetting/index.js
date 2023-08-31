@@ -1,34 +1,41 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./AccountSetting.css"
 import { useState, useRef, useEffect } from "react";
 import AvatarEditor from 'react-avatar-editor'
+import { updateProfile } from "../../store/session";
+import { ChangePassword } from "../ChangePassword";
+import { useNonClosingModal } from "../../context/NonClosingModal";
 
 export function AccountSetting() {
+  const { setModalContent } = useNonClosingModal()
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const [editMode, setEditMode] = useState(false)
-  const [bannerPicUrl, setBannerPicUrl] = useState(user.bannerPic)
-  const [currBannerPicUrl, setCurrBannerPicUrl] = useState(user.bannerPic)
+  const [bannerPicUrl, setBannerPicUrl] = useState(user ? user.bannerPic : "")
+  const [currBannerPicUrl, setCurrBannerPicUrl] = useState(user ? user.bannerPic : "")
   const [bannerPic, setBannerPic] = useState("")
   const [currBannerPic, setCurrBannerPic] = useState("")
-  const [profilePicUrl, setProfilePicUrl] = useState(user.profilePic)
-  const [currProfilePicUrl, setCurrProfilePicUrl] = useState(user.profilePic)
+  const [profilePicUrl, setProfilePicUrl] = useState(user ? user.profilePic : "")
+  const [currProfilePicUrl, setCurrProfilePicUrl] = useState(user ? user.profilePic : "")
   const [profilePic, setProfilePic] = useState("")
   const [currProfilePic, setCurrProfilePic] = useState("")
-  const [nickname, setNickname] = useState(user.nickname ? user.nickname : "")
-  const [currNickname, setCurrNickname] = useState(user.nickname ? user.nickname : "")
-  const [bio, setBio] = useState(user.bio ? user.bio : "")
-  const [currBio, setCurrBio] = useState(user.bio ? user.bio : "")
+  const [nickname, setNickname] = useState(user && user.nickname ? user.nickname : "")
+  const [currNickname, setCurrNickname] = useState(user && user.nickname ? user.nickname : "")
+  const [bio, setBio] = useState(user && user.bio ? user.bio : "")
+  const [currBio, setCurrBio] = useState(user && user.bio ? user.bio : "")
   const [bannerScale, setBannerScale] = useState(0)
   const [profileScale, setProfileScale] = useState(0)
-  const [username, setUsername] = useState(user.username)
-  const [currUsername, setCurrUsername] = useState(user.username)
-  const [email, setEmail] = useState(user.email)
-  const [currEmail, setCurrEmail] = useState(user.email)
+  const [username, setUsername] = useState(user ? user.username : "")
+  const [currUsername, setCurrUsername] = useState(user ? user.username : "")
+  const [email, setEmail] = useState(user ? user.email : "")
+  const [currEmail, setCurrEmail] = useState(user ? user.email : "")
   const [editUsername, setEditUsername] = useState(false)
   const [editEmail, setEditEmail] = useState(false)
   const [changePassword, setChangePassword] = useState(false)
+  const [validationErrors, setValidationErrors] = useState({})
+  const [serverErrors, setServerErrors] = useState([])
 
   const bannerRef = useRef()
   const profileRef = useRef()
@@ -38,16 +45,18 @@ export function AccountSetting() {
   const handleSave = async () => {
     if (bannerRef) {
       const bannerScaled = bannerRef.current.getImage()
-      bannerScaled.toBlob(image => {
+      bannerScaled.toBlob(blob => {
+        const image = new File([blob], "banner", { lastModified: new Date().getTime(), type: bannerPic ? bannerPic.type : "image/png" })
         setBannerPic(image)
         setCurrBannerPic(image)
         setBannerPicUrl(URL.createObjectURL(image))
         setCurrBannerPicUrl(URL.createObjectURL(image))
-      }, bannerPic.type)
+      })
     }
     if (profileRef) {
       const profileScaled = profileRef.current.getImage()
-      profileScaled.toBlob(image => {
+      profileScaled.toBlob(blob => {
+        const image = new File([blob], "profile", { lastModified: new Date().getTime(), type: bannerPic ? bannerPic.type : "image/png" })
         setProfilePic(image)
         setCurrProfilePic(image)
         setProfilePicUrl(URL.createObjectURL(image))
@@ -61,8 +70,101 @@ export function AccountSetting() {
     setProfileScale(0)
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let bannerUrl = user.bannerPic
+    let profileUrl = user.profilePic
+
+    if (currBannerPic) {
+      const bannerFormData = new FormData()
+      const ext = currBannerPic.type.split("/")[1]
+      bannerFormData.append("image", currBannerPic, "banner." + ext)
+      const bannerRes = await fetch("api/images/new", {
+        method: "POST",
+        body: bannerFormData
+      })
+      if (bannerRes.ok) {
+        const resData = await bannerRes.json()
+        bannerUrl = resData.url
+      } else if (bannerRes.status < 500) {
+        const resData = await bannerRes.json()
+        if (resData.errors) {
+          setServerErrors((prev) => {
+            prev = resData.errors
+            return [...prev]
+          })
+        }
+        return
+      } else {
+        setServerErrors(["An error occurred. Please try again."])
+        return
+      }
+    }
+
+    if (currProfilePic) {
+      const profileFormData = new FormData()
+      const ext = currProfilePic.type.split("/")[1]
+      profileFormData.append("image", currProfilePic, "profile." + ext)
+      const profileRes = await fetch("api/images/new", {
+        method: "POST",
+        body: profileFormData
+      })
+      if (profileRes.ok) {
+        const resData = await profileRes.json()
+        profileUrl = resData.url
+      } else if (profileRes.status < 500) {
+        const resData = await profileRes.json()
+        if (resData.errors) {
+          setServerErrors((prev) => {
+            prev = resData.errors
+            return [...prev]
+          })
+        }
+        return
+      } else {
+        setServerErrors((prev) => ["An error occurred. Please try again."])
+        return
+      }
+    }
+
+    const new_profile = {
+      username: currUsername,
+      email: currEmail,
+      nickname: currNickname,
+      bio: currBio,
+      banner_pic: bannerUrl,
+      profile_pic: profileUrl
+    }
+
+    const data = await dispatch(updateProfile(user.id, new_profile))
+    if (data) {
+      setServerErrors(data)
+    } else {
+      history.push("/")
+    }
+  }
+
+  useEffect(() => {
+    const errors = { username: [], email: [] }
+
+    if (username.length < 6 || username.length > 40) {
+      errors.username.push("Username must be at least 6 characters long and no longer than 40 characters")
+    }
+
+    if (!email) {
+      errors.email.push("Email is required")
+    }
+
+    if (!String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+      errors.email.push("Email is invalid")
+    }
+
+    setValidationErrors(errors)
+  }, [username, email])
+
   if (!user) {
-    return history.replace("/error/401");
+    return null;
   }
 
   return (
@@ -77,6 +179,7 @@ export function AccountSetting() {
               height={350}
               border={0}
               scale={1 + bannerScale / 100}
+              crossOrigin="anonymous"
             />
             :
             <img src={bannerPicUrl} />
@@ -159,6 +262,7 @@ export function AccountSetting() {
                 height={90}
                 border={0}
                 scale={1 + profileScale / 100}
+                crossOrigin="anonymous"
               />
               <input
                 ref={profileUploadRef}
@@ -225,9 +329,17 @@ export function AccountSetting() {
                     setCurrUsername(username)
                     setEditUsername(false)
                   }}
+                  disabled={validationErrors.username}
                 >
                   Done
                 </button>
+              </div>
+              <div className="account-setting-container_validation-error">
+                {validationErrors.username && validationErrors.username.map((error, i) => {
+                  return (
+                    <span key={i}><i className="fa-solid fa-triangle-exclamation" /> {error}</span>
+                  )
+                })}
               </div>
             </> :
             <>
@@ -261,9 +373,17 @@ export function AccountSetting() {
                     setCurrEmail(email)
                     setEditEmail(false)
                   }}
+                  disabled={validationErrors.email}
                 >
                   Done
                 </button>
+              </div>
+              <div className="account-setting-container_validation-error">
+                {validationErrors.email && validationErrors.email.map((error, i) => {
+                  return (
+                    <span key={i}><i className="fa-solid fa-triangle-exclamation" /> {error}</span>
+                  )
+                })}
               </div>
             </> :
             <>
@@ -280,7 +400,10 @@ export function AccountSetting() {
         <span><b>Password</b></span>
         <span>••••••••••</span>
         <button
-          onClick={(e) => setChangePassword(true)}
+          onClick={(e) => {
+            setChangePassword(true)
+            setModalContent(<ChangePassword user={user} setChangePassword={setChangePassword} />)
+          }}
         >
           <i class="fa-solid fa-pen" />
         </button>
@@ -293,9 +416,18 @@ export function AccountSetting() {
           Delete Account
         </button>
       </div>
+      <div className={`account-setting-container_server-error ${serverErrors.length ? "show" : "hide"}`}>
+        {serverErrors.map((error, i) => {
+          return (
+            <span key={i}><i className="fa-solid fa-triangle-exclamation" /> {error}</span>
+          )
+        })}
+      </div>
       <div className="account-setting-container_submit">
         <button
           className="account-setting-container_submit"
+          onClick={handleSubmit}
+          disabled={editMode || editEmail || editUsername || editUsername || changePassword}
         >
           Submit Changes
         </button>

@@ -94,6 +94,50 @@ export const signUp = (username, email, password) => async (dispatch) => {
 	}
 };
 
+export const updateProfile = (id, profile) => async (dispatch) => {
+	const response = await fetch(`/api/users/${id}/profile`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(profile),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data.user));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
+export const changePassword = (id, password) => async (dispatch) => {
+	const response = await fetch(`/api/users/${id}/password`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(password),
+	});
+
+	if (response.ok) {
+		dispatch(removeUser());
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:

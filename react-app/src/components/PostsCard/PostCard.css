@@ -98,8 +98,13 @@
   font-size: 1.1rem;
 }
 
-.post-content>img {
-  width: 560px;
+.post-content figure {
+  width: 100%;
+  margin: auto;
+}
+
+.post-content img {
+  width: 100%;
 }
 
 .notes-container {

@@ -15,6 +15,7 @@ s3 = boto3.client(
 
 
 def get_unique_filename(filename):
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", filename)
     ext = filename.rsplit(".", 1)[1].lower()
     unique_filename = uuid.uuid4().hex
     return f"{unique_filename}.{ext}"
