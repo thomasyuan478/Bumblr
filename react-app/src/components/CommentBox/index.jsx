@@ -6,11 +6,11 @@ import './index.css'
 
 function CommentBox({ obj, id }) {
     const commentOwners = useSelector((state) => state.users.users)
-    console.log('commentowners', commentOwners)
+    // console.log('commentowners', commentOwners)
     const user = useSelector((state) => state.session.user);
     const [isCommentsOpen, setIsCommentsOpen] = useState(true);
     const [isLikesOpen, setIsLikesOpen] = useState(false);
-    console.log('comments array', obj)
+    // console.log('comments array', obj)
 
 
     const commentsBoxDisplay = () => {
