@@ -80,6 +80,10 @@ export const postPostThunk = (post) => async (dispatch) => {
   }
 };
 
+export const loadPostsThunk = (posts) => async (dispatch) => {
+  dispatch(loadPosts(posts));
+};
+
 export const getPostsThunk = () => async (dispatch) => {
   const response = await fetch("/api/posts");
 

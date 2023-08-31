@@ -84,3 +84,22 @@ def remove_like(postId, userId):
   print(post.likes)
   db.session.commit()
   return {"post": post.post_to_dict_notes()}
+
+@post_routes.route("/initialState/<int:userId>")
+def initial_state(userId):
+  if userId:
+    response = {}
+    posts = Post.query.all()
+    response['posts'] = {"posts": [post.post_to_dict_notes() for post in posts]}
+    users = User.query.all()
+    response['users'] = {"users": [user.to_dict() for user in users]}
+    user = User.query.get(userId)
+    singleUser = user.to_dict_current()
+    response['singleUser'] = singleUser
+    return {"Response": response}
+  response = {}
+  posts = Post.query.all()
+  response['posts'] = {"posts": [post.post_to_dict_notes() for post in posts]}
+  users = User.query.all()
+  response['users'] = {"users": [user.to_dict() for user in users]}
+  return {"Response": response}

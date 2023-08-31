@@ -18,6 +18,7 @@ import { PostTest } from "./components/LikesTest";
 import { getNotesThunk } from "./store/note";
 import { TestUsers } from "./components/TestUsers";
 import { LikesTest } from "./components/LikesTest";
+import { getInitialStateThunk } from "./store/user";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,14 +29,18 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (user) dispatch(getCurrentUserDetailsThunk(user.id));
-    // if (!user) dispatch(clearSingleUserThunk());
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) dispatch(getCurrentUserDetailsThunk(user.id));
+  //   // if (!user) dispatch(clearSingleUserThunk());
+  // }, [user]);
 
   useEffect(() => {
-    dispatch(getUsersThunk());
-  }, [dispatch]);
+    if (isLoaded) dispatch(getInitialStateThunk(user?.id));
+  }, [dispatch, user, isLoaded]);
+
+  // useEffect(() => {
+  //   dispatch(getUsersThunk());
+  // }, [dispatch]);
 
   const usersBigObj = useSelector((state) => state.users);
   const usersKey = Object.keys(usersBigObj.users);
@@ -46,9 +51,9 @@ function App() {
   // }, [dispatch]);
 
   // TEST FEED OBJECT ***********
-  useEffect(() => {
-    dispatch(getPostsThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getPostsThunk());
+  // }, [dispatch]);
 
   const postsBigObj = useSelector((state) => state.posts);
 
