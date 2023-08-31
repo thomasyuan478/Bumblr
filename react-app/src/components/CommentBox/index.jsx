@@ -1,10 +1,14 @@
+import { useDispatch } from "react-redux";
 import React, { useState } from "react"
 import { useSelector } from "react-redux";
 import { FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
+import { addFollowingThunk } from "../../store/user";
+import { removeFollowingThunk } from "../../store/user";
 import './index.css'
 
 function CommentBox({ obj, id }) {
+    const dispatch = useDispatch();
     const commentOwners = useSelector((state) => state.users.users)
     console.log('commentowners', commentOwners)
     console.log('likes', obj.likes)
@@ -13,6 +17,34 @@ function CommentBox({ obj, id }) {
     const [isLikesOpen, setIsLikesOpen] = useState(false);
     // console.log('comments array', obj)
 
+    const userInfo = useSelector(state => state.users.singleUser)
+    // console.log('session use rhere-----', user)
+    // console.log('single user info-----', userInfo)
+  
+    let normalizedData = {};
+    let followingIds;
+    if (user && Object.keys(userInfo).length != 0) {
+      let followingArray = userInfo.userFollowing;
+      followingArray.forEach((obj) => (normalizedData[obj.id] = obj));
+      // console.log(userCheck(), normalizedData);
+      followingIds = Object.keys(normalizedData);
+      // console.log(followingIds, typeof String(state.id));
+    }
+    const followCheck = (id, user) => {
+      if (user && Object.keys(userInfo).length != 0) {
+        if (followingIds.includes(String(id))) return false;
+        else return true;
+      }
+    };
+
+    const startFollowing = (e) => {
+        dispatch(addFollowingThunk(user, obj.user));
+      };
+    
+    const stopFollowing = (e) => {
+        dispatch(removeFollowingThunk(user, obj.user));
+      };
+  
 
     const commentsBoxDisplay = () => {
         if(isCommentsOpen === true) {
@@ -106,7 +138,14 @@ function CommentBox({ obj, id }) {
                     {usersLikes.map(ele => (
                                 <div className="likes-list-div">
                                 <img className="comments-list-pfp" src={ele?.profilePic} alt="avatar" />
-                                <div>{ele.username}</div>
+                                <div>{ele.username}
+                                {user && !followCheck(ele.id, user) && ele.id !== user.id && (
+                                <button className='post-edit-button' onClick={(e) => dispatch(removeFollowingThunk(user, ele))}>Unfollow</button>
+                                )}
+                                {user && followCheck(ele.id, user) && ele.id !== user.id && (
+                                <button className='post-edit-button' onClick={(e) => dispatch(addFollowingThunk(user, ele))}>Follow</button>
+                                )}
+                                </div>
                                 </div>
                             )
                         )}
