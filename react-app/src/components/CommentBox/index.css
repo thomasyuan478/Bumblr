@@ -135,6 +135,39 @@
 
 .likes-list-div {
     display: flex;
-    border: red 1px solid;
-    ;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.likes-list-pfp-username {
+    display: flex;
+}
+
+.likes-list-pfp-username img {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.likes-list-follow {
+    cursor: pointer;
+}
+
+.likes-list-button {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: rgb(38, 139, 255);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.likes-list-button:hover {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: rgb(47, 203, 250);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: underline;
 }

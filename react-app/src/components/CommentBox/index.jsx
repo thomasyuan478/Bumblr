@@ -137,14 +137,17 @@ function CommentBox({ obj, id }) {
                 <div className="likes-list">
                     {usersLikes.map(ele => (
                                 <div className="likes-list-div">
-                                <img className="comments-list-pfp" src={ele?.profilePic} alt="avatar" />
-                                <div>{ele.username}
-                                {user && !followCheck(ele.id, user) && ele.id !== user.id && (
-                                <button className='post-edit-button' onClick={(e) => dispatch(removeFollowingThunk(user, ele))}>Unfollow</button>
-                                )}
-                                {user && followCheck(ele.id, user) && ele.id !== user.id && (
-                                <button className='post-edit-button' onClick={(e) => dispatch(addFollowingThunk(user, ele))}>Follow</button>
-                                )}
+                                <div className='likes-list-pfp-username'>
+                                    <img className="comments-list-pfp" src={ele?.profilePic} alt="avatar" />
+                                    <p>{ele.username}</p>
+                                </div>
+                                <div className="likes-list-follow">
+                                    {user && !followCheck(ele.id, user) && ele.id !== user.id && (
+                                        <button className='likes-list-button' onClick={(e) => dispatch(removeFollowingThunk(user, ele))}>Unfollow</button>
+                                    )}
+                                    {user && followCheck(ele.id, user) && ele.id !== user.id && (
+                                        <button className='likes-list-button' onClick={(e) => dispatch(addFollowingThunk(user, ele))}>Follow</button>
+                                    )}
                                 </div>
                                 </div>
                             )
