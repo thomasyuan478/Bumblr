@@ -5,5 +5,5 @@ from wtforms.validators import DataRequired
 from ..api.aws_helper import ALLOWED_EXTENSIONS
 
 class ImageForm(FlaskForm):
-    image = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    image = FileField("Image File", validators=[FileRequired()])
     submit = SubmitField("Create Post")

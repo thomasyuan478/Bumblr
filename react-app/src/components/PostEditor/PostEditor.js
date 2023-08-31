@@ -78,7 +78,7 @@ export const PostEditor = ({ type, user, post }) => {
     const [isEmpty, setIsEmpty] = useState(true)
     const imageRef = React.useRef(null);
     const [validationErrors, setValidationErrors] = useState({});
-    const [serverErrors, setServerErrors] = useState({})
+    const [serverErrors, setServerErrors] = useState([])
     const [urlErrors, setUrlErrors] = useState({})
     const { closeModal } = useNonClosingModal()
 
@@ -144,15 +144,14 @@ export const PostEditor = ({ type, user, post }) => {
                     const resData = await res.json()
                     if (resData.errors) {
                         setServerErrors((prev) => {
-                            prev.aws = resData.errors
-                            return { ...prev }
+                            prev = resData.errors
+                            return [...prev]
                         })
                     }
+                    return
                 } else {
-                    setServerErrors((prev) => {
-                        prev.aws = "An error occurred. Please try again."
-                        return { ...prev }
-                    })
+                    setServerErrors(["An error occurred. Please try again."])
+                    return
                 }
                 i = endIdx
             } else {
@@ -166,10 +165,7 @@ export const PostEditor = ({ type, user, post }) => {
         }
         const data = await dispatch(postPostThunk(new_post))
         if (data) {
-            setServerErrors((prev) => {
-                prev.server = data
-                return { ...prev }
-            })
+            setServerErrors(data)
         } else {
             closeModal()
         }
@@ -497,6 +493,13 @@ export const PostEditor = ({ type, user, post }) => {
             </div>
             <div className={`post_editor-validation_error ${Object.values(validationErrors).length ? "show" : "hide"}`}>
                 <span><i className="fa-solid fa-triangle-exclamation" /> {validationErrors.content}</span>
+            </div>
+            <div className={`post_editor-server_error ${serverErrors.length ? "show" : "hide"}`}>
+                {serverErrors.map((error, i) => {
+                    return (
+                        <span key={i}><i className="fa-solid fa-triangle-exclamation" /> {error}</span>
+                    )
+                })}
             </div>
             <div className='post_editor-tags'>
                 {tags.map((tag, i) => {

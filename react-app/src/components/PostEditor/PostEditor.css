@@ -266,6 +266,16 @@ h6.ck-placeholder::before {
   font-size: 12px;
 }
 
+.post_editor-server_error {
+  padding: 10px 20px 0px 20px;
+  width: 600px;
+  box-sizing: border-box;
+  display: flex;
+  color: red;
+  font-size: 12px;
+  flex-direction: column;
+}
+
 .post_editor-submit_button {
   padding: 20px 20px 20px 20px;
   display: flex;

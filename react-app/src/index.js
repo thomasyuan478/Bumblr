@@ -27,9 +27,9 @@ function Root() {
 			<ModalProvider>
 				<Provider store={store}>
 					<BrowserRouter>
+						<NonClosingModal />
 						<App />
 						<Modal />
-						<NonClosingModal />
 					</BrowserRouter>
 				</Provider>
 			</ModalProvider>
@@ -38,6 +38,6 @@ function Root() {
 }
 
 ReactDOM.render(
-		<Root />,
+	<Root />,
 	document.getElementById("root")
 );

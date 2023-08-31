@@ -27,5 +27,5 @@ class ProfileUpdateForm(FlaskForm):
     nickname = StringField("nickname", validators=[Optional(), Length(max=40)])
     email = StringField('email', validators=[DataRequired(), Email(), user_exists])
     bio = StringField("bio", validators=[Optional(), Length(max=255)])
-    banner_pic = StringField("banner pic", validators=[DataRequired(), URL()])
-    profile_pic = StringField("profile pic", validators=[DataRequired(), URL()])
+    banner_pic = StringField("banner pic", validators=[DataRequired()])
+    profile_pic = StringField("profile pic", validators=[DataRequired()])
