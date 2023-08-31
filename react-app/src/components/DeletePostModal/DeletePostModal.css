@@ -1,0 +1,40 @@
+#confirm-delete-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+#confirm-delete-container > h2 {
+  text-align: center;
+}
+
+#confirm-delete-buttons-container {
+  display: flex;
+  flex-direction: row;
+  row-gap: 10px;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+#confirm-delete-buttons-container > button {
+  height: 40px;
+}
+
+#yes-button {
+  text-align: center;
+  cursor: pointer;
+  background-color: rgb(238, 77, 77);
+  color: white;
+  width: 60px;
+  cursor: pointer;
+}
+
+#no-button {
+  text-align: center;
+  cursor: pointer;
+  background-color: #565555;
+  color: white;
+  width: 60px;
+  cursor: pointer;
+}
