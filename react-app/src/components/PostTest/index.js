@@ -1,22 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import {
-  deletePostThunk,
+  // deletePostThunk,
   getPostsThunk,
-  updatePostThunk,
+  // updatePostThunk,
 } from "../../store/post";
-import { deleteNoteThunk } from "../../store/note";
-import parse from "html-react-parser";
+// import { deleteNoteThunk } from "../../store/note";
+// import parse from "html-react-parser";
 import "./PostTest.css";
 import PostCard from "../PostsCard";
-import CommentBox from "../CommentBox";
+// import CommentBox from "../CommentBox";
 
 // { obj, id }
 export const PostTest = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     dispatch(getPostsThunk());
@@ -27,9 +27,9 @@ export const PostTest = () => {
   const postsKey = Object.keys(postsBigObj.posts);
   const postsObj = postsBigObj.posts;
 
-  const allPosts = useSelector((state) => state.posts.posts);
+  // const allPosts = useSelector((state) => state.posts.posts);
   // console.log('all posts here', allPosts)
-  const posts = Object.values(allPosts);
+  // const posts = Object.values(allPosts);
   // console.log('all posts keys array', posts)
 
   // const state = useSelector((state) => state.posts.posts[id]);
