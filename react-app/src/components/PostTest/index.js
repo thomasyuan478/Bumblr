@@ -9,7 +9,6 @@ import {
 } from "../../store/post";
 // import { deleteNoteThunk } from "../../store/note";
 // import parse from "html-react-parser";
-import "./PostTest.css";
 import PostCard from "../PostsCard";
 // import CommentBox from "../CommentBox";
 

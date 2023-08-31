@@ -42,7 +42,7 @@ function CommentBox({ obj, id }) {
             <div className="comment-drop-down-nav">
                 <div className="comments-icon-dropdown">
                     <FaRegComment size={26} onClick={commentsBoxDisplay}/>
-                </div> 
+                </div>
                 <div className="likes-icon-dropdown">
                     <FaRegHeart size={26} onClick={likesBoxDisplay}/>
                 </div>
@@ -70,7 +70,7 @@ function CommentBox({ obj, id }) {
                     <div className="comments-list">
                     {obj.comments.map(ele => (
                                 <div className="comments-list-div">
-                                <img className="comments-list-pfp" src={commentOwners[ele.userId].profilePic} alt="avatar" />
+                                <img className="comments-list-pfp" src={commentOwners[ele.userId]?.profilePic} alt="avatar" />
                                 <li key={ele.id}>{ele.comment}</li>
                                 </div>
                             )

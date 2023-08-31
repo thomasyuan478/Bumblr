@@ -14,13 +14,13 @@ import {
 // import ProtectedRoute from "./components/auth/ProtectedRoute";
 // import { PostEditorContainer } from "./components/PostEditor";
 import { NewPost } from "./components/NewPost";
-import { PostTest } from "./components/LikesTest";
 import { getNotesThunk } from "./store/note";
 import { MainPageNavigation } from "./components/MainPageNavigation";
 // import { LeftSideNavigation } from "./components/LeftSideNavigation";
 import { AccountSetting } from "./components/AccountSetting";
 import { TestUsers } from "./components/TestUsers";
 import { LikesTest } from "./components/LikesTest";
+import { PostTest } from "./components/PostTest";
 import { getInitialStateThunk } from "./store/user";
 
 function App() {
@@ -66,16 +66,16 @@ function App() {
   const postsObj = postsBigObj.posts;
   // **********************************
 
-  useEffect(() => {
-    dispatch(getUsersThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUsersThunk());
+  // }, [dispatch]);
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       <NewPost />
       {/* Comment this in for a test feed */}
-      <div className="card_container">
+      {/* <div className="card_container">
         {postsKey.map((key) => (
           <LikesTest
             obj={postsObj[key]}
@@ -89,8 +89,8 @@ function App() {
             id={usersObj[key].id}
             key={usersObj[key].id}
           />
-        ))} */}
-      </div>
+        ))}
+      </div> */}
       {isLoaded && (
         <Switch>
           <Route path="/test">
