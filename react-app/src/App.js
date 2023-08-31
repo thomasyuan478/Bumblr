@@ -73,7 +73,6 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <NewPost />
       {/* Comment this in for a test feed */}
       {/* <div className="card_container">
         {postsKey.map((key) => (
@@ -97,6 +96,7 @@ function App() {
             <AccountSetting />
           </Route>
           <Route exact path="/">
+            <NewPost />
             <PostTest />
           </Route>
           <Route path="/login">
