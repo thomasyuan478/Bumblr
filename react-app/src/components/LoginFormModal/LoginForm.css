@@ -17,7 +17,7 @@
 .login-modal-form {
     display: flex;
     flex-direction: column;
-    gap: 6px; 
+    gap: 6px;
 }
 
 .login-modal-button {
@@ -32,6 +32,7 @@
 }
 
 .login-modal-demoUser {
+    cursor: pointer;
     align-items: center;
     flex-direction: column;
     display: flex;
@@ -51,7 +52,7 @@
     height: 34px;
     border: solid 3px rgb(150, 125, 255);
     background-color: rgb(white);
-    
+
 }
 
 .login-modal-password {
