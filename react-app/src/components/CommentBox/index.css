@@ -15,7 +15,7 @@
     display: flex;
     gap: 15px;
     cursor: pointer;
-    
+
 }
 
 /* .comments-new-post {
@@ -53,7 +53,7 @@
     font-weight: 400;
     line-height: 1;
     overflow-x: hidden;
-    overflow-y: auto;    
+    overflow-y: auto;
 }
 
 .comments-list-pfp {
@@ -127,7 +127,7 @@
     border-radius: 40px;
     height: 32px;
     width: 32px;
-    
+
 }
 
 .likes-list {
@@ -171,4 +171,24 @@
     font-weight: 600;
     font-size: 15px;
     text-decoration: underline;
+}
+
+.comment-input-area {
+    white-space: pre-line;
+    font-weight: 400;
+    color: white;
+    word-break: break-word;
+    resize: none;
+    background: 0px 0px;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0px;
+    display: flex;
+    overflow: hidden;
+    text-align: left;
+    line-height: inherit;
+    font-size: 1rem;
+    overflow-y: auto;
 }

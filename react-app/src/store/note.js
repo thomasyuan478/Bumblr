@@ -57,12 +57,13 @@ export const getNotesThunk = () => async (dispatch) => {
 export const updateNotesThunk = (note, noteId) => async (dispatch) => {
   const response = await fetch(`/api/notes/${noteId}`, {
     method: "PUT",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(note),
   });
 
   if (response.ok) {
     const resNote = await response.json();
-    dispatch(updateNote(resNote, noteId));
+    // dispatch(getPostsThunk());
     return response;
   }
 };
