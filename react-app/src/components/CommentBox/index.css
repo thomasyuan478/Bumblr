@@ -194,3 +194,51 @@
     font-size: 1rem;
     overflow-y: auto;
 }
+
+.comments-list-owner-delete {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: rgb(110, 133, 169);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.comments-list-owner-edit {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: rgb(110, 133, 169);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.comments-list-owner-delete:hover {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: rgb(255, 0, 0);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.comments-list-owner-edit:hover {
+    border: none;
+    background-color: rgb(24 51 82);
+    color: rgb(0, 255, 4);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.edit-comment-submit {
+    color: rgb(0, 102, 0);
+}
+
+.edit-comment-submit:hover {
+    color: rgb(14, 247, 29);
+}
+
+.edit-comment-cancel {
+    color: rgb(120, 0, 0);
+}
+
+.edit-comment-cancel:hover {
+    color: rgb(255, 0, 0);
+}
