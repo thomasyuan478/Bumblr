@@ -22,6 +22,8 @@ import { TestUsers } from "./components/TestUsers";
 import { LikesTest } from "./components/LikesTest";
 import { PostTest } from "./components/PostTest";
 import { getInitialStateThunk } from "./store/user";
+import LeftSideNavigation from "./components/LeftSideNavigation";
+import RightSideNavigation from "./components/RightSideNavigation";
 import { Follow } from "./components/Follow";
 
 function App() {
@@ -97,8 +99,12 @@ function App() {
             <AccountSetting />
           </Route>
           <Route exact path="/">
-            <NewPost />
-            <PostTest />
+            <div id="main-page-layout-container">
+              <NewPost />
+              <LeftSideNavigation />
+              <RightSideNavigation />
+              <PostTest />
+            </div>
           </Route>
           <Route path="/login">
             <LoginFormPage />

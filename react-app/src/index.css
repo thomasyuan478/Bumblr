@@ -23,3 +23,7 @@ button {
 p {
   overflow-wrap: break-word;
 }
+
+#main-page-layout-container {
+  position: relative;
+}
