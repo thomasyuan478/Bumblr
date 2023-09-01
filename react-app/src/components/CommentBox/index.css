@@ -15,7 +15,7 @@
     display: flex;
     gap: 15px;
     cursor: pointer;
-    
+
 }
 
 /* .comments-new-post {
@@ -53,7 +53,7 @@
     font-weight: 400;
     line-height: 1;
     overflow-x: hidden;
-    overflow-y: auto;    
+    overflow-y: auto;
 }
 
 .comments-list-pfp {
@@ -104,6 +104,7 @@
 
 .comments-list-div {
     display: flex;
+    width: 90%;
 }
 
 .comments-list {
@@ -127,7 +128,7 @@
     border-radius: 40px;
     height: 32px;
     width: 32px;
-    
+
 }
 
 .likes-list {
