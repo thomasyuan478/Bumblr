@@ -8,6 +8,7 @@ import { removeFollowingThunk } from "../../store/user";
 import { deleteNoteThunk } from "../../store/note";
 import './index.css'
 import { addCommentThunk } from "../../store/post";
+import { updateNotesThunk} from "../../store/note"
 
 function CommentBox({ obj, id }) {
     const dispatch = useDispatch();
@@ -109,6 +110,19 @@ function CommentBox({ obj, id }) {
         else return false;
     }
 
+    //Dynamic Update Comment
+
+    // const [updateComment, setUpdateComment] = useState(false);
+
+    // const updateComments = "comment-p" + (updateComment ? "" : " hidden")
+
+
+
+
+
+
+
+
     return (
         <div className="comments-drop-down">
             <div className="comment-drop-down-nav">
@@ -126,7 +140,7 @@ function CommentBox({ obj, id }) {
                     <img className="left-side-nav-current-user-pfp-comments" src={user?.profilePic} alt="avatar" />
                     <div className="comments-box-and-submit">
                         <div className="comment-input-box-parent-div">
-                            <textarea value={comment} onChange={(e) => {
+                            <textarea value={comment} maxLength="255" onChange={(e) => {
                                 setComment(e.target.value);
 
                                 // console.log(obj)
@@ -145,14 +159,72 @@ function CommentBox({ obj, id }) {
                 <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
                     <div className="comments-list">
                     {obj.comments.map(ele => (
-                                <div className="comments-list-div">
+                                <div id={ele.id + "container"} className="comments-list-div">
                                 <img className="comments-list-pfp" src={commentOwners[ele.userId]?.profilePic} alt="avatar" />
                                 <div className="comments-list-username">
-                                <li key={ele.id}>
+                                <div className="comments-input-box-parent-div">
+                                <li id={"li" + ele.id} key={ele.id}>
                                 <p style={{fontWeight: 'bolder'}}>{commentOwners[ele.userId]?.username}</p>
-                                <p>{ele.comment}</p>
-                                {user && ele.userId === user.id && (<button onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>)}
+                                <p id={ele.id}>{ele.comment}</p>
+                                {user && ele.userId === user.id && (<button id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>)}
+                                {user && ele.userId === user.id && (<button id={"ebutton" + ele.id} onClick={e => {
+                                    let comment = document.getElementById(ele.id)
+                                    comment.className = "hidden"
+                                    let dbutton = document.getElementById("dbutton" + ele.id)
+                                    dbutton.className = "hidden"
+                                    let ebutton = document.getElementById("ebutton" + ele.id)
+                                    ebutton.className = "hidden"
+                                    let cbutton = document.getElementById("cbutton" + ele.id)
+                                    cbutton.className = ""
+                                    let sbutton = document.getElementById("sbutton" + ele.id)
+                                    sbutton.className = ""
+                                    let updatearea = document.createElement("textarea")
+                                    updatearea.setAttribute("id", "ta" + ele.id)
+                                    updatearea.setAttribute("cols", "50")
+                                    updatearea.setAttribute("rows", "10")
+                                    updatearea.setAttribute("autocus", "true")
+                                    updatearea.setAttribute("class", "comment-input-area")
+
+                                    updatearea.innerText = comment.innerText
+                                    let list = document.getElementById("li" + ele.id)
+                                    list.insertBefore(updatearea, comment)
+                                    // console.log(comment.innerText)
+                                }}>edit</button>)}
+
+                                    {user && ele.userId === user.id && (<button className="hidden" id={"cbutton" + ele.id} onClick={e => {
+                                        let comment = document.getElementById(ele.id)
+                                        comment.className = ""
+                                        let dbutton = document.getElementById("dbutton" + ele.id)
+                                        dbutton.className = ""
+                                        let ebutton = document.getElementById("ebutton" + ele.id)
+                                        ebutton.className = ""
+                                        let sbutton = document.getElementById("sbutton" + ele.id)
+                                        sbutton.className = "hidden"
+                                        let cbutton = document.getElementById("cbutton" + ele.id)
+                                        cbutton.className = "hidden"
+                                    let updatearea = document.getElementById("ta" + ele.id)
+                                    updatearea.remove()
+                                }}>cancel</button>)}
+
+                                    {user && ele.userId === user.id && (<button className="hidden" id={"sbutton" + ele.id} onClick={e => {
+                                    let textarea = document.getElementById("ta" + ele.id)
+                                    dispatch(updateNotesThunk({"user_id": ele.userId, "post_id": ele.postId, "comment": textarea.value}, ele.id))
+                                    let comment = document.getElementById(ele.id)
+                                    comment.className = ""
+                                    comment.innerText = textarea.value
+                                    let dbutton = document.getElementById("dbutton" + ele.id)
+                                    dbutton.className = ""
+                                    let ebutton = document.getElementById("ebutton" + ele.id)
+                                    ebutton.className = ""
+                                    let sbutton = document.getElementById("sbutton" + ele.id)
+                                    sbutton.className = "hidden"
+                                    let cbutton = document.getElementById("cbutton" + ele.id)
+                                    cbutton.className = "hidden"
+                                    let updatearea = document.getElementById("ta" + ele.id)
+                                    updatearea.remove()
+                                }}>submit</button>)}
                                 </li>
+                                </div>
                                 </div>
                                 </div>
                             )
