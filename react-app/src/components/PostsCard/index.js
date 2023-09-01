@@ -78,14 +78,24 @@ const PostCard = ({ obj, id }) => {
 
 
   const [showMenu, setShowMenu] = useState(false);
+  const [showCommentsMenu, setShowCommentsMenu] = useState(false);
   const ulRef = useRef();
+
+  // Opens Post Settings DropDown
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
 
+  // Opens Comments Box DropDown
+  const openCommentsMenu = () => {
+    if (showCommentsMenu) return;
+    setShowCommentsMenu(true);
+  }
+
   useEffect(() => {
     if (!showMenu) return;
+    if (!showCommentsMenu) return;
 
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
@@ -93,14 +103,28 @@ const PostCard = ({ obj, id }) => {
       }
     };
 
-    document.addEventListener('click', closeMenu);
+    const closeCommentsMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowCommentsMenu(false)
+      }
+    }
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+    document.addEventListener('click', closeMenu);
+    document.addEventListener('click', closeCommentsMenu)
+
+    return () => {
+      document.removeEventListener("click", closeMenu);
+      document.removeEventListener("click", closeCommentsMenu);
+    };
+  }, [showMenu,
+    showCommentsMenu
+  ]);
 
   const closeMenu = () => setShowMenu(false);
+  const closeCommentsMenu = () => setShowCommentsMenu(false);
 
   const ulClassName = "settings-dropdown" + (showMenu ? "" : " hidden");
+  const commentsDropDown = "comments-box-dropdown" + (showCommentsMenu ? "" : " hidden");
 
   if (!obj) {
     return null
@@ -139,7 +163,7 @@ const PostCard = ({ obj, id }) => {
                       className='post-edit-button'
                       onClick={() => setModalContent(<PostEditorContainer type="edit" user={sessionUser} post={obj} />)}
                     >
-                        Edit
+                      Edit
                     </button>
                   </li>
                   <li className='modal-button-li'>
@@ -172,13 +196,23 @@ const PostCard = ({ obj, id }) => {
       </div>
       <div className='notes-container'>
         <div className='notes-dropdown-menu'>
-          <button className='notes-button'><span style={{ fontWeight: "bolder" }}>{obj.comments.length + obj.likes.length}</span> notes</button>
+          {!showCommentsMenu &&
+            <button className='notes-button' onClick={openCommentsMenu}><span style={{ fontWeight: "bolder" }}>{obj.comments.length + obj.likes.length}</span> notes</button>
+          }
+          {showCommentsMenu &&
+            <button className='close-notes-button' onClick={closeCommentsMenu}><span><i class="fa-solid fa-x"></i></span>Close</button>
+          }
         </div>
         {/* most likely the if conditional here for if dropdown menu is closed */}
         <div className='comments-favorites-container'>
           <div className='comments-favorite-icons-container'>
             <div className='comments-icon'>
-              <button className='posts-comments-button'><i class="fa-regular fa-comment fa-lg"></i></button>
+              {!showCommentsMenu &&
+              <button className='posts-comments-button' onClick={openCommentsMenu}><i class="fa-regular fa-comment fa-lg"></i></button>
+              }
+              {showCommentsMenu &&
+              <button className='posts-comments-button' onClick={closeCommentsMenu}><i class="fa-regular fa-comment fa-lg"></i></button>
+              }
             </div>
             <div className='likes-icon'>
               {sessionUser && likeCheck(obj, sessionUser) &&
@@ -199,14 +233,16 @@ const PostCard = ({ obj, id }) => {
               }
             </div>
           </div>
-          <div className='notes-comments-container'>
-            <CommentBox
-              obj={obj}
-              id={id}
-              key={id}
-            />
-          </div>
         </div>
+      </div>
+      <div className='notes-comments-container'>
+        <ul className={commentsDropDown} ref={ulRef}>
+          <CommentBox
+            obj={obj}
+            id={id}
+            key={id}
+          />
+        </ul>
       </div>
     </div>
   )
