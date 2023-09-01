@@ -1,0 +1,168 @@
+.user-detail_banner {
+  height: 340px;
+  width: 640px;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.user-detail_avatar {
+  height: 100px;
+  width: 100px;
+  border-radius: 200px;
+  border: 5px solid black;
+  position: absolute;
+  top: 280px;
+  left: 290px
+}
+
+.user-detail_container {
+  padding: 20px 20px 20px 20px;
+  background-color: #1A1A1A;;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.user-detail_info {
+  height: fit-content;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.user-detail_profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  color: white;
+  row-gap: 15px;
+  padding-bottom: 30px;
+}
+
+.user-detail_nickname {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.user-detail_username {
+  font-size: 14px;
+}
+
+.user-detail_bio {
+  font-size: 14px;
+}
+
+.user-detail_profile button {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.user-detail_selection {
+  color: white;
+  width: 100%;
+}
+
+.user-detail_selection > div {
+  padding-bottom: 10px;
+  margin: 0px 20px 20px 20px;
+  color: white;
+  align-self: flex-start;
+  border-bottom: 1px solid white;
+  display: flex;
+  column-gap: 20px;
+}
+
+.user-detail_selection > div span {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.user-detail_selection > div span.selected {
+  border-bottom: 3px solid white;
+  height: 30px
+}
+
+.user-detail_posts {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding-bottom: 10px;
+}
+
+.user-detail_follow {
+  color: white;
+  width: 100%;
+  padding: 0px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.user-detail_follow-number {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+.user-detail_follow-single-user {
+  width: 100%;
+  display: grid;
+  font-size: 14px;
+  grid-template-columns: 8% 30% 30% 1fr;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 15px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.user-detail_follow-single-user:hover {
+  background-color: lightgray;
+}
+
+.user-detail_follow-single-user > div {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.user-detail_follow-single-user img {
+  width: 40px;
+}
+
+.user-detail_follow-username {
+  justify-self: start;
+}
+
+.user-detail_follow-single-user button {
+  background-color: #00b8ff;
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+.user-detail_exit {
+  position: absolute;
+  background-color: white;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: -70px;
+  cursor: pointer;
+}

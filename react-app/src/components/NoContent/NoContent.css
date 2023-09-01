@@ -1,0 +1,21 @@
+.textBox {
+  background-color: transparent;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 50px 0px;
+  color: white;
+}
+
+.noResult {
+  height: 30px;
+  filter: invert(100%) sepia(7%) saturate(7484%) hue-rotate(176deg) brightness(110%) contrast(100%);
+}
+
+.textBox p {
+  margin: 0px;
+}
