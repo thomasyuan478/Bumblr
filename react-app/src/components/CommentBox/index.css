@@ -31,6 +31,7 @@
     display: flex;
     justify-content: space-between;
     height: 80px;
+    margin-top: 5px;
 }
 
 .comments-box-and-submit {

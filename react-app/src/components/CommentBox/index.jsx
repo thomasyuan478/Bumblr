@@ -121,6 +121,7 @@ function CommentBox({ obj, id }) {
             </div>
             {isCommentsOpen && (
             <div className="comments-new-post">
+                {user && (
                 <div className="comments-submit-container">
                     <img className="left-side-nav-current-user-pfp-comments" src={user?.profilePic} alt="avatar" />
                     <div className="comments-box-and-submit">
@@ -140,7 +141,7 @@ function CommentBox({ obj, id }) {
                         </div>
                         <button className="comment-submit-button" disabled={lengthCheck()} onClick={handleSubmit}> Submit</button>
                     </div>
-                </div>
+                </div>)}
                 <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
                     <div className="comments-list">
                     {obj.comments.map(ele => (
