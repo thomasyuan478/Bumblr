@@ -117,11 +117,27 @@ function CommentBox({ obj, id }) {
         else return false;
     }
 
-    //Dynamic Update Comment
+    // Chronological Comments
+    let comments = obj.comments;
+    let normalizedComments = {};
+    comments.forEach((comment) => (normalizedComments[comment.id] = comment));
 
-    // const [updateComment, setUpdateComment] = useState(false);
+    // console.log("Normalized Comments", normalizedComments)
 
-    // const updateComments = "comment-p" + (updateComment ? "" : " hidden")
+    let test = Object.values(normalizedComments);
+    test.sort((a, b) => {
+    let da = new Date(a.createdAt);
+    let db = new Date(b.createdAt);
+    return da - db;
+    });
+
+    test.reverse();
+
+    // console.log("SORTED ARRAY", obj.id, test);
+    // const chronologicalComments = [];
+    // test.forEach((comment) => {
+    // chronologicalComments.push(obj.comments);
+    // });
 
 
     return (
@@ -161,7 +177,7 @@ function CommentBox({ obj, id }) {
                 </div>)}
                 <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
                     <div className="comments-list">
-                    {obj.comments.map(ele => (
+                    {test.map(ele => (
                                 <div id={ele.id + "container"} className="comments-list-div">
                                 <img className="comments-list-pfp" src={commentOwners[ele.userId]?.profilePic} alt="avatar" />
                                 <div className="comments-list-username">
