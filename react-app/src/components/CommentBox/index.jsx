@@ -13,6 +13,9 @@ import { deleteNoteThunk } from "../../store/note";
 import './index.css'
 import { addCommentThunk } from "../../store/post";
 import { updateNotesThunk} from "../../store/note"
+import OpenModalButton from "../OpenModalButton";
+import DeleteNoteModal from "../DeleteNoteModal";
+
 
 function CommentBox({ obj, id }) {
     const dispatch = useDispatch();
@@ -121,12 +124,6 @@ function CommentBox({ obj, id }) {
     // const updateComments = "comment-p" + (updateComment ? "" : " hidden")
 
 
-
-
-
-
-
-
     return (
         <div className="comments-drop-down">
             <hr style={{marginBottom: '10px'}}/>
@@ -172,7 +169,18 @@ function CommentBox({ obj, id }) {
                                 <li id={"li" + ele.id} key={ele.id}>
                                 <p style={{fontWeight: 'bolder'}}>{commentOwners[ele.userId]?.username}</p>
                                 <p id={ele.id}>{ele.comment}</p>
-                                {user && ele.userId === user.id && (<button className='comments-list-owner-delete' id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}><FaRegTrashAlt /></button>)}
+                                {user && ele.userId === user.id && (
+                                // <button id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>
+
+                                <OpenModalButton
+                                id={"dbutton" + ele.id}
+                                className='comments-list-owner-delete'
+                                buttonText={<FaRegTrashAlt />}
+                                modalComponent={<DeleteNoteModal obj={ele} />}
+                              />
+
+                                )}
+                                {/* {user && ele.userId === user.id && (<button className='comments-list-owner-delete' id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}><FaRegTrashAlt /></button>)} */}
                                 {user && ele.userId === user.id && (<button className='comments-list-owner-edit' id={"ebutton" + ele.id} onClick={e => {
                                     let comment = document.getElementById(ele.id)
                                     comment.className = "hidden"
