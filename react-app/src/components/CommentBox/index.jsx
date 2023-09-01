@@ -3,6 +3,10 @@ import React, { useState } from "react"
 import { useSelector } from "react-redux";
 import { FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
+import { VscSend } from "react-icons/vsc";
+import { TiCancel } from "react-icons/ti";
 import { addFollowingThunk } from "../../store/user";
 import { removeFollowingThunk } from "../../store/user";
 import { deleteNoteThunk } from "../../store/note";
@@ -122,6 +126,7 @@ function CommentBox({ obj, id }) {
 
     return (
         <div className="comments-drop-down">
+            <hr style={{marginBottom: '10px'}}/>
             <div className="comment-drop-down-nav">
                 <div className="comments-icon-dropdown">
                     <FaRegComment size={26} onClick={commentsBoxDisplay}/>
@@ -130,6 +135,7 @@ function CommentBox({ obj, id }) {
                     <FaRegHeart size={26} onClick={likesBoxDisplay}/>
                 </div>
             </div>
+            <hr style={{marginBottom: '15px'}}/>
             {isCommentsOpen && (
             <div className="comments-new-post">
                 {user && (
@@ -175,16 +181,18 @@ function CommentBox({ obj, id }) {
 
                                 )}
                                 {user && ele.userId === user.id && (<button id={"ebutton" + ele.id} onClick={e => {
+                                {user && ele.userId === user.id && (<button className='comments-list-owner-delete' id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}><FaRegTrashAlt /></button>)}
+                                {user && ele.userId === user.id && (<button className='comments-list-owner-edit' id={"ebutton" + ele.id} onClick={e => {
                                     let comment = document.getElementById(ele.id)
                                     comment.className = "hidden"
                                     let dbutton = document.getElementById("dbutton" + ele.id)
-                                    dbutton.className = "hidden"
+                                    dbutton.className = "hidden comments-list-owner-delete"
                                     let ebutton = document.getElementById("ebutton" + ele.id)
-                                    ebutton.className = "hidden"
+                                    ebutton.className = "hidden comments-list-owner-edit"
                                     let cbutton = document.getElementById("cbutton" + ele.id)
-                                    cbutton.className = ""
+                                    cbutton.className = "edit-comment-cancel"
                                     let sbutton = document.getElementById("sbutton" + ele.id)
-                                    sbutton.className = ""
+                                    sbutton.className = "edit-comment-submit"
                                     let updatearea = document.createElement("textarea")
                                     updatearea.setAttribute("id", "ta" + ele.id)
                                     updatearea.setAttribute("cols", "50")
@@ -196,40 +204,40 @@ function CommentBox({ obj, id }) {
                                     let list = document.getElementById("li" + ele.id)
                                     list.insertBefore(updatearea, comment)
                                     // console.log(comment.innerText)
-                                }}>edit</button>)}
+                                }}><FaRegEdit /></button>)}
 
-                                    {user && ele.userId === user.id && (<button className="hidden" id={"cbutton" + ele.id} onClick={e => {
+                                    {user && ele.userId === user.id && (<button style={{border: 'none', backgroundColor: 'rgb(24 51 82)'}} className="hidden" id={"cbutton" + ele.id} onClick={e => {
                                         let comment = document.getElementById(ele.id)
                                         comment.className = ""
                                         let dbutton = document.getElementById("dbutton" + ele.id)
-                                        dbutton.className = ""
+                                        dbutton.className = "comments-list-owner-delete"
                                         let ebutton = document.getElementById("ebutton" + ele.id)
-                                        ebutton.className = ""
+                                        ebutton.className = "comments-list-owner-edit"
                                         let sbutton = document.getElementById("sbutton" + ele.id)
-                                        sbutton.className = "hidden"
+                                        sbutton.className = "hidden edit-comment-submit"
                                         let cbutton = document.getElementById("cbutton" + ele.id)
-                                        cbutton.className = "hidden"
+                                        cbutton.className = "hidden edit-comment-cancel"
                                     let updatearea = document.getElementById("ta" + ele.id)
                                     updatearea.remove()
-                                }}>cancel</button>)}
+                                }}><TiCancel className="edit-comment-cancel" size={27}/></button>)}
 
-                                    {user && ele.userId === user.id && (<button className="hidden" id={"sbutton" + ele.id} onClick={e => {
+                                    {user && ele.userId === user.id && (<button style={{border: 'none', backgroundColor: 'rgb(24 51 82)'}} className="hidden" id={"sbutton" + ele.id} onClick={e => {
                                     let textarea = document.getElementById("ta" + ele.id)
                                     dispatch(updateNotesThunk({"user_id": ele.userId, "post_id": ele.postId, "comment": textarea.value}, ele.id))
                                     let comment = document.getElementById(ele.id)
                                     comment.className = ""
                                     comment.innerText = textarea.value
                                     let dbutton = document.getElementById("dbutton" + ele.id)
-                                    dbutton.className = ""
+                                    dbutton.className = "comments-list-owner-delete"
                                     let ebutton = document.getElementById("ebutton" + ele.id)
-                                    ebutton.className = ""
+                                    ebutton.className = "comments-list-owner-edit"
                                     let sbutton = document.getElementById("sbutton" + ele.id)
-                                    sbutton.className = "hidden"
+                                    sbutton.className = "hidden edit-comment-submit"
                                     let cbutton = document.getElementById("cbutton" + ele.id)
-                                    cbutton.className = "hidden"
+                                    cbutton.className = "hidden edit-comment-cancel"
                                     let updatearea = document.getElementById("ta" + ele.id)
                                     updatearea.remove()
-                                }}>submit</button>)}
+                                }}><VscSend className="edit-comment-submit" size={25}/></button>)}
                                 </li>
                                 </div>
                                 </div>

@@ -1,9 +1,9 @@
 #left-side-nav-container {
-    position: absolute;
-    left: 15px;
+    position: relative;
     top: 155px;
     width: 300px;
     border-right: 1px solid gray;
+    justify-self: flex-end;
 }
 
 .left-side-nav-title-hover {

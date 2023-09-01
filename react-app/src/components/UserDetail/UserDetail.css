@@ -166,3 +166,8 @@
   left: -70px;
   cursor: pointer;
 }
+
+.user-detail_container .postcards {
+  color: white;
+  border-radius: 5px;
+}
