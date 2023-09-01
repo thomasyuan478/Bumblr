@@ -26,6 +26,31 @@ export const PostTest = () => {
   const postsKey = Object.keys(postsBigObj.posts);
   const postsObj = postsBigObj.posts;
 
+  //Render Posts in Order
+
+  let test = Object.values(postsObj);
+  test.sort((a, b) => {
+    let da = new Date(a.createdAt);
+    let db = new Date(b.createdAt);
+    return da - db;
+  });
+
+  test.reverse();
+
+  // console.log("SORTED ARRAY", test);
+  const finalSort = [];
+  test.forEach((post) => {
+    finalSort.push(post.id);
+  });
+
+  // const finalSort = [];
+  // test.forEach((post) => {
+  //   const date = new Date();
+  //   const checkdate = new Date(post.createAt);
+  //   if (checkdate < date) finalSort.push(post);
+  //   else finalSort.unshift(post);
+  // });
+
   // const allPosts = useSelector((state) => state.posts.posts);
   // console.log('all posts here', allPosts)
   // const posts = Object.values(allPosts);
@@ -50,8 +75,8 @@ export const PostTest = () => {
 
   return (
     <>
-      <div className='post-card-container'>
-        {postsKey.map(key => (
+      <div className="post-card-container">
+        {finalSort.map((key) => (
           <PostCard
             obj={postsObj[key]}
             id={postsObj[key].id}
