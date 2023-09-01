@@ -242,3 +242,12 @@
 .edit-comment-cancel:hover {
     color: rgb(255, 0, 0);
 }
+
+.comments-posted-none {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(106, 134, 165);
+}

@@ -49,7 +49,7 @@ const demoUser = async (e) => {
         <label className="login-modal-labels">
           <input
             className="login-modal-username"
-            placeHolder=' Username or Email'
+            placeHolder='Email'
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
