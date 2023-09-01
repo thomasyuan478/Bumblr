@@ -9,6 +9,9 @@ import { deleteNoteThunk } from "../../store/note";
 import './index.css'
 import { addCommentThunk } from "../../store/post";
 import { updateNotesThunk} from "../../store/note"
+import OpenModalButton from "../OpenModalButton";
+import DeleteNoteModal from "../DeleteNoteModal";
+
 
 function CommentBox({ obj, id }) {
     const dispatch = useDispatch();
@@ -117,12 +120,6 @@ function CommentBox({ obj, id }) {
     // const updateComments = "comment-p" + (updateComment ? "" : " hidden")
 
 
-
-
-
-
-
-
     return (
         <div className="comments-drop-down">
             <div className="comment-drop-down-nav">
@@ -166,7 +163,17 @@ function CommentBox({ obj, id }) {
                                 <li id={"li" + ele.id} key={ele.id}>
                                 <p style={{fontWeight: 'bolder'}}>{commentOwners[ele.userId]?.username}</p>
                                 <p id={ele.id}>{ele.comment}</p>
-                                {user && ele.userId === user.id && (<button id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>)}
+                                {user && ele.userId === user.id && (
+                                // <button id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>
+
+                                <OpenModalButton
+                                id={"dbutton" + ele.id}
+                                className="post-delete-button"
+                                buttonText="delete"
+                                modalComponent={<DeleteNoteModal obj={ele} />}
+                              />
+
+                                )}
                                 {user && ele.userId === user.id && (<button id={"ebutton" + ele.id} onClick={e => {
                                     let comment = document.getElementById(ele.id)
                                     comment.className = "hidden"
