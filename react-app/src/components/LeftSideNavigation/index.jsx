@@ -32,7 +32,7 @@ export function LeftSideNavigation() {
   }
 
   return (
-    <div>
+    <div id='left-side-nav-container'>
       {user && (
       <div className="left-side-nav">
         <div className="left-side-nav-title">

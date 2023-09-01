@@ -1,3 +1,11 @@
+#left-side-nav-container {
+    position: absolute;
+    left: 15px;
+    top: 155px;
+    width: 300px;
+    border-right: 1px solid gray;
+}
+
 .left-side-nav-title-hover {
     display: inline-block;
     font-size: 40px;
@@ -16,7 +24,7 @@
     display: flex;
     margin-left: 5%;
     align-items: center;
-    width: 240px;
+    width: 270px;
     height: 40px;
     gap: 8px;
     color: white;
@@ -52,7 +60,7 @@
     justify-content: space-between;
     margin-left: 5%;
     align-items: center;
-    width: 240px;
+    width: 270px;
     height: 40px;
     gap: 8px;
     color: white;
@@ -60,7 +68,7 @@
 
 .left-side-nav-drop-down {
     margin-left: 5%;
-    width: 240px;
+    width: 270px;
     height: 240px;
 }
 
@@ -72,7 +80,7 @@
     display: flex;
     margin-left: 5%;
     align-items: center;
-    width: 240px;
+    width: 270px;
     height: 40px;
     gap: 8px;
     color: white;
@@ -102,18 +110,17 @@
     vertical-align: middle;
     transition: 0.5s ease;
   }
-  
+
   .up {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-bottom: 6px solid white;
     transform: rotate(180deg);
   }
-  
+
   .down {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid white;
     transform: rotate(180deg);
   }
-
