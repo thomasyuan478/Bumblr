@@ -1,6 +1,6 @@
 #right-side-container {
-    position: absolute;
-    right: 75px;
+    position: relative;
+    justify-self: flex-start;
     top: 175px;
     background-color: rgb(24 51 82);
     border-radius: 10px;

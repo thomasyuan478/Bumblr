@@ -89,7 +89,8 @@ export function UserDetail({ user }) {
           selection === "posts" &&
           <div className="user-detail_posts">
             {user.posts.length ?
-              user.posts.map((post, i) => {
+              user.posts.map((el, i) => {
+                const post = allPosts[el.id]
                 return (
                   <PostCard obj={post} id={post.id} />
                 )

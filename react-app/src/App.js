@@ -100,10 +100,12 @@ function App() {
           </Route>
           <Route exact path="/">
             <div id="main-page-layout-container">
-              <NewPost />
               <LeftSideNavigation />
+              <div>
+                <NewPost />
+                <PostTest />
+              </div>
               <RightSideNavigation />
-              <PostTest />
             </div>
           </Route>
           <Route path="/login">
@@ -116,7 +118,7 @@ function App() {
             <MainPageNavigation />
           </Route>
           <Route path="/follow">
-            <Follow type="following"/>
+            <Follow type="following" />
           </Route>
         </Switch>
       )}
