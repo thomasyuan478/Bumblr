@@ -16,6 +16,7 @@
     gap: 15px;
     cursor: pointer;
 
+
 }
 
 /* .comments-new-post {
@@ -172,4 +173,24 @@
     font-weight: 600;
     font-size: 15px;
     text-decoration: underline;
+}
+
+.comment-input-area {
+    white-space: pre-line;
+    font-weight: 400;
+    color: white;
+    word-break: break-word;
+    resize: none;
+    background: 0px 0px;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0px;
+    display: flex;
+    overflow: hidden;
+    text-align: left;
+    line-height: inherit;
+    font-size: 1rem;
+    overflow-y: auto;
 }
