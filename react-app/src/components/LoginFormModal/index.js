@@ -39,14 +39,14 @@ const demoUser = async (e) => {
     <div className="login-modal">
     <img className="login-modal-gif" src="https://assets.tumblr.com/pop/src/assets/images/login-wall/art_v2-3f0f7a0b.gif" alt="" />
       <h1 style={{color: 'white', fontSize: '43px', fontFamily: 'trebuchet ms'}}>bumblr</h1>
-      <p style={{color: 'white'}}>Welcome to your corner of the internet. You'll never be bored again.</p>
+      <p style={{color: 'white', margin: "0px"}}>Welcome to your corner of the internet. You'll never be bored again.</p>
       <form className='login-modal-form' onSubmit={handleSubmit}>
-        <ul>
+        <ul className="errors-list">
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li className="errors" key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label className="login-modal-labels">
           <input
             className="login-modal-username"
             placeHolder=' Username or Email'
@@ -56,7 +56,7 @@ const demoUser = async (e) => {
             required
           />
         </label>
-        <label>
+        <label className="login-modal-labels">
           <input
             className="login-modal-password"
             placeHolder=' Password'
