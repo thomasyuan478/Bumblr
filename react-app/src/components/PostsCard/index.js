@@ -93,32 +93,32 @@ const PostCard = ({ obj, id }) => {
     setShowCommentsMenu(true);
   }
 
-  useEffect(() => {
-    if (!showMenu) return;
-    // if (!showCommentsMenu) return;
+  // useEffect(() => {
+  //   if (!showMenu) return;
+  //   // if (!showCommentsMenu) return;
 
-    const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
+  //   const closeMenu = (e) => {
+  //     if (!ulRef.current.contains(e.target)) {
+  //       setShowMenu(false);
+  //     }
+  //   };
 
-    // const closeCommentsMenu = (e) => {
-    //   if (!ulRef.current.contains(e.target)) {
-    //     setShowCommentsMenu(false)
-    //   }
-    // }
+  //   // const closeCommentsMenu = (e) => {
+  //   //   if (!ulRef.current.contains(e.target)) {
+  //   //     setShowCommentsMenu(false)
+  //   //   }
+  //   // }
 
-    document.addEventListener('click', closeMenu);
-    // document.addEventListener('click', closeCommentsMenu)
+  //   document.addEventListener('click', closeMenu);
+  //   // document.addEventListener('click', closeCommentsMenu)
 
-    return () => {
-      document.removeEventListener("click", closeMenu);
-      // document.removeEventListener("click", closeCommentsMenu);
-    };
-  }, [showMenu
-    // showCommentsMenu
-  ]);
+  //   return () => {
+  //     document.removeEventListener("click", closeMenu);
+  //     // document.removeEventListener("click", closeCommentsMenu);
+  //   };
+  // }, [showMenu
+  //   // showCommentsMenu
+  // ]);
 
   const closeMenu = () => setShowMenu(false);
   const closeCommentsMenu = () => setShowCommentsMenu(false);

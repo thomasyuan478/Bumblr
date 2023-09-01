@@ -26,4 +26,7 @@ p {
 
 #main-page-layout-container {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr !important;
+  column-gap: 50px;
 }
