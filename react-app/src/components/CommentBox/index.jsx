@@ -174,14 +174,13 @@ function CommentBox({ obj, id }) {
 
                                 <OpenModalButton
                                 id={"dbutton" + ele.id}
-                                className="post-delete-button"
-                                buttonText="delete"
+                                className='comments-list-owner-delete'
+                                buttonText={<FaRegTrashAlt />}
                                 modalComponent={<DeleteNoteModal obj={ele} />}
                               />
 
                                 )}
-                                {user && ele.userId === user.id && (<button id={"ebutton" + ele.id} onClick={e => {
-                                {user && ele.userId === user.id && (<button className='comments-list-owner-delete' id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}><FaRegTrashAlt /></button>)}
+                                {/* {user && ele.userId === user.id && (<button className='comments-list-owner-delete' id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}><FaRegTrashAlt /></button>)} */}
                                 {user && ele.userId === user.id && (<button className='comments-list-owner-edit' id={"ebutton" + ele.id} onClick={e => {
                                     let comment = document.getElementById(ele.id)
                                     comment.className = "hidden"
