@@ -1,18 +1,24 @@
 #right-side-container {
-    position: relative;
+    position: sticky;
+    top: 30px;
     justify-self: flex-start;
-    top: 175px;
     background-color: rgb(24 51 82);
-    border-radius: 10px;
+    border-radius: 5px;
+    height: fit-content;
+    padding: 20px;
+}
+
+#right-side-container h2 {
+    margin: 0px
+}
+
+#right-side-container img {
+    width: 50px;
+    border-radius: 50px;
 }
 
 #right-side-dev-container {
-    /* position: absolute; */
-    /* right: 1px; */
-    /* border: 1px solid white; */
-    /* top: 175px; */
-    width: 350px;
-    /* border: 1px solid white; */
+    width: fit-content;
     border-radius: 10px;
 }
 
@@ -20,17 +26,26 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    row-gap: 5px;
+    row-gap: 10px;
+}
+
+.author-names-div span {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 20px;
 }
 
 .Andrew,
 .Jeffery,
 .Thomas,
-.Tyler,
-.aws-message-container {
+.Tyler {
     gap: 5px;
     color: white;
     position: relative;
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .Andrew a,
@@ -39,4 +54,13 @@
 .Tyler a,
 .aws-message-container a {
     color: white;
+    padding-right: 10px;
+}
+
+.aws-message-container {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
 }

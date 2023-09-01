@@ -192,7 +192,9 @@ const PostCard = ({ obj, id }) => {
         {parse(obj.content)}
       </div>
       <div className='post-tags-container'>
-        {obj.tags !== "" && obj.tags.split(", ").map(string => "#" + string).join(' ')}
+        {obj.tags !== "" && obj.tags.split(", ").map((tag, i) => {
+          return <span key={i}>#{tag}</span>
+        })}
       </div>
       <div className='notes-container'>
         <div className='notes-dropdown-menu'>

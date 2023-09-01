@@ -14,7 +14,7 @@
   width: 600px;
   padding: 15px 20px;
   background-color: rgb(24 51 82);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .user-profile-image {
@@ -32,7 +32,7 @@
 .user-header-details {
   display: flex;
   align-items: center;
-  column-gap: 5px;
+  column-gap: 10px;
 }
 
 .posts-follow-button {
@@ -40,11 +40,12 @@
   background-color: rgb(24 51 82);
   color: #74ff1b;
   cursor: pointer;
+  padding: 0px;
 }
 
 .post-settings-button {
   border: none;
-  background-color: rgb(24 51 82);
+  background-color: transparent;
   color: white;
   cursor: pointer;
   font-size: 1.3rem;
@@ -110,8 +111,8 @@
 }
 
 
-.post-content>p {
-  font-size: 1.1rem;
+.post-content > p {
+  font-size: 1rem;
 }
 
 .post-content figure {
@@ -146,7 +147,7 @@
   padding: 6px 16px;
   background-color: rgb(24 51 82);
   color: white;
-  border-color: white;
+  border: 1px solid white;
   cursor: pointer;
 }
 
@@ -158,7 +159,7 @@
   padding: 6px 16px;
   background-color: rgb(64, 119, 182);
   color: white;
-  border-color: white;
+  border: 1px solid lightgray;
   cursor: pointer;
 }
 
@@ -182,6 +183,9 @@
 .post-tags-container {
   margin-top: 10px;
   color: lightgray;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
 }
 
 .comments-favorite-icons-container {
