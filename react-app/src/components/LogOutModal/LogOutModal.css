@@ -1,0 +1,39 @@
+#logout-confirm-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+#logout-confirm-container > h2 {
+  text-align: center;
+}
+
+#confirm-logout-buttons-container {
+  display: flex;
+  flex-direction: row;
+  row-gap: 10px;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+
+#yes-button {
+  text-align: center;
+  cursor: pointer;
+  background-color: rgb(238, 77, 77);
+  color: white;
+  width: 60px;
+  cursor: pointer;
+  height: 40px;
+}
+
+#no-button {
+  text-align: center;
+  cursor: pointer;
+  background-color: #565555;
+  color: white;
+  width: 60px;
+  cursor: pointer;
+  height: 40px;
+}

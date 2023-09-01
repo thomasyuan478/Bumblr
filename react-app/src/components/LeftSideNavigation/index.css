@@ -7,14 +7,14 @@
 }
 
 .left-side-nav-title-hover {
-    display: inline-block;
+    text-align: center;
     font-size: 40px;
     margin-left: 16%;
     color: white;
 }
 
 .left-side-nav-title-hover:hover {
-    display: inline-block;
+    text-align: center;
     font-size: 40px;
     animation: colorChange 3s infinite;
     margin-left: 16%;
@@ -28,10 +28,26 @@
     height: 40px;
     gap: 8px;
     color: white;
+    cursor: pointer;
+}
+
+.left-side-nav-settings {
+    display: flex;
+    margin-left: 0px;
+    align-items: center;
+    width: 270px;
+    height: 40px;
+    gap: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.left-side-nav-settings:hover {
+    background-color: rgb(24 51 82);
 }
 
 .left-side-nav-home:hover {
-    background-color: rgb(222, 222, 222);
+    background-color: rgb(24 51 82);
 }
 
 @keyframes colorChange {
@@ -64,6 +80,7 @@
     height: 40px;
     gap: 8px;
     color: white;
+    cursor: pointer;
 }
 
 .left-side-nav-drop-down {
@@ -72,8 +89,61 @@
     height: 240px;
 }
 
+.follow-info-container,
+.likes-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.follow-info-container:hover
+.likes-info-container:hover {
+    background-color: rgb(24 51 82);
+}
+
+.follow-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.follow-counter {
+    font-weight: bolder;
+    color: white;
+}
+
+.dropdown-navlinks {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.dropdown-navlinks a {
+    text-decoration: none;
+    padding: 10px 0px;
+}
+
+.dropdown-navlinks a:hover {
+    background-color: rgb(24 51 82);
+}
+
+#dropdown-logout {
+    text-align: center;
+    color: white;
+    margin-top: 0px;
+    cursor: pointer;
+    padding: 10px 0px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: rgb(24 51 82);
+  }
+
+#dropdown-logout:hover {
+    background-color: #00b8ff;
+    color: black;
+}
+
 .left-side-nav-account:hover {
-    background-color: rgb(222, 222, 222);
+    background-color: rgb(24 51 82);
 }
 
 .left-side-nav-coming-soon {
@@ -84,6 +154,7 @@
     height: 40px;
     gap: 8px;
     color: white;
+    cursor: pointer;
 }
 
 .left-side-nav-current-user-pfp {
@@ -92,7 +163,7 @@
 }
 
 .left-side-nav-coming-soon:hover {
-    background-color: rgb(222, 222, 222);
+    background-color: rgb(24 51 82);
 }
 
 .left-side-nav-account-arrow-seperator {
