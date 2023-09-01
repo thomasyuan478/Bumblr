@@ -88,15 +88,15 @@ export function LeftSideNavigation() {
               <div className='dropdown-navlinks'>
                 <div className='likes-info-container'>
                   <p style={{ color: 'white', margin: "0px", padding: "10px 0px" }}>Likes</p>
-                  <span>{userInfo.likes.length}</span>
+                  <span>{userInfo.likes?.length}</span>
                 </div>
                 <NavLink to="/following" className='follow-info-container'>
                   <p style={{ color: 'white', margin: "0px" }}><span>Following</span></p>
-                  <span className='follow-counter'>{userInfo.userFollowing.length}</span>
+                  <span className='follow-counter'>{userInfo.userFollowing?.length}</span>
                 </NavLink>
                 <NavLink to="/follower" className='follow-info-container'>
                   <p style={{ color: 'white', margin: "0px" }}><span>Followers</span></p>
-                  <span className='follow-counter'>{userInfo.userFollowers.length}</span>
+                  <span className='follow-counter'>{userInfo.userFollowers?.length}</span>
                 </NavLink>
 
                 <NavLink
