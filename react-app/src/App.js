@@ -22,6 +22,7 @@ import { TestUsers } from "./components/TestUsers";
 import { LikesTest } from "./components/LikesTest";
 import { PostTest } from "./components/PostTest";
 import { getInitialStateThunk } from "./store/user";
+import { Follow } from "./components/Follow";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,6 +108,9 @@ function App() {
           </Route>
           <Route path="/testnavigation">
             <MainPageNavigation />
+          </Route>
+          <Route path="/follow">
+            <Follow type="following"/>
           </Route>
         </Switch>
       )}

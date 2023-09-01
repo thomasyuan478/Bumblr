@@ -78,7 +78,7 @@ export const clearSingleUserThunk = () => async (dispatch) => {
 
 export const addFollowingThunk =
   (currentUser, targetUser) => async (dispatch) => {
-    delete targetUser.posts;
+    // delete targetUser.posts;
     const response = await fetch(
       `/api/users/${currentUser.id}/following/${targetUser.id}`,
       {
@@ -97,7 +97,7 @@ export const addFollowingThunk =
 
 export const removeFollowingThunk =
   (currentUser, targetUser) => async (dispatch) => {
-    delete targetUser.posts;
+    // delete targetUser.posts;
     const response = await fetch(
       `/api/users/${currentUser.id}/following/${targetUser.id}`,
       { method: "DELETE" }

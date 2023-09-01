@@ -70,6 +70,21 @@ class User(db.Model, UserMixin):
             "userFollowing": [user.to_dict_no_post() for user in self.followers]
         }
 
+    def to_dict_current_summary(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'nickname': self.nickname,
+            'bio': self.bio,
+            'profilePic': self.profile_pic,
+            'bannerPic': self.banner_pic,
+            'email': self.email,
+            'likes': [like.to_dict_likes() for like in self.likes],
+            'posts': [post.post_to_dict_notes() for post in self.posts],
+            'userFollowers': [user.id for user in self.following],
+            "userFollowing": [user.id for user in self.followers]
+        }
+
     def to_dict(self):
         return {
             'id': self.id,

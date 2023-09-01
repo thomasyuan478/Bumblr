@@ -174,7 +174,7 @@ export function AccountSetting() {
           editMode ?
             <AvatarEditor
               ref={bannerRef}
-              image={bannerPicUrl}
+              image={bannerPicUrl.startsWith("blob") ? bannerPicUrl : bannerPicUrl + "?dummy=" + String(new Date().getTime())}
               width={620}
               height={350}
               border={0}
@@ -257,7 +257,7 @@ export function AccountSetting() {
             <>
               <AvatarEditor
                 ref={profileRef}
-                image={profilePicUrl}
+                image={profilePicUrl.startsWith("blob") ? profilePicUrl : profilePicUrl + "?dummy=" + String(new Date().getTime())}
                 width={90}
                 height={90}
                 border={0}
