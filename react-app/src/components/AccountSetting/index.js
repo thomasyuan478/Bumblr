@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import "./AccountSetting.css"
 import { useState, useRef, useEffect } from "react";
 import AvatarEditor from 'react-avatar-editor'
@@ -164,7 +164,7 @@ export function AccountSetting() {
   }, [username, email])
 
   if (!user) {
-    return null;
+    return <Redirect to="/" />;
   }
 
   return (
