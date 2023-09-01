@@ -95,7 +95,7 @@ const PostCard = ({ obj, id }) => {
 
   useEffect(() => {
     if (!showMenu) return;
-    if (!showCommentsMenu) return;
+    // if (!showCommentsMenu) return;
 
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
@@ -103,21 +103,21 @@ const PostCard = ({ obj, id }) => {
       }
     };
 
-    const closeCommentsMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
-        setShowCommentsMenu(false)
-      }
-    }
+    // const closeCommentsMenu = (e) => {
+    //   if (!ulRef.current.contains(e.target)) {
+    //     setShowCommentsMenu(false)
+    //   }
+    // }
 
     document.addEventListener('click', closeMenu);
-    document.addEventListener('click', closeCommentsMenu)
+    // document.addEventListener('click', closeCommentsMenu)
 
     return () => {
       document.removeEventListener("click", closeMenu);
-      document.removeEventListener("click", closeCommentsMenu);
+      // document.removeEventListener("click", closeCommentsMenu);
     };
-  }, [showMenu,
-    showCommentsMenu
+  }, [showMenu
+    // showCommentsMenu
   ]);
 
   const closeMenu = () => setShowMenu(false);
