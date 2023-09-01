@@ -117,8 +117,11 @@ function App() {
           <Route path="/testnavigation">
             <MainPageNavigation />
           </Route>
-          <Route path="/follow">
+          <Route path="/following">
             <Follow type="following" />
+          </Route>
+          <Route path="/follower">
+            <Follow type="follower" />
           </Route>
         </Switch>
       )}
