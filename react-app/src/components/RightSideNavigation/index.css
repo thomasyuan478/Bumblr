@@ -1,19 +1,42 @@
+#right-side-container {
+    position: absolute;
+    right: 75px;
+    top: 175px;
+    background-color: rgb(24 51 82);
+    border-radius: 10px;
+}
+
+#right-side-dev-container {
+    /* position: absolute; */
+    /* right: 1px; */
+    /* border: 1px solid white; */
+    /* top: 175px; */
+    width: 350px;
+    /* border: 1px solid white; */
+    border-radius: 10px;
+}
+
 .author-names-div {
-    gap: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
 }
 
-.Andrew {
+.Andrew,
+.Jeffery,
+.Thomas,
+.Tyler,
+.aws-message-container {
     gap: 5px;
+    color: white;
+    position: relative;
 }
 
-.Jeffery {
-    gap: 5px;
-}
-
-.Thomas {
-    gap: 5px;
-}
-
-.Tyler {
-    gap: 5px;
+.Andrew a,
+.Jeffery a,
+.Thomas a,
+.Tyler a,
+.aws-message-container a {
+    color: white;
 }
