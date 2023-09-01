@@ -26,7 +26,7 @@ function CommentBox({ obj, id }) {
     const [comment, setComment] = useState("")
     const [isCommentsOpen, setIsCommentsOpen] = useState(true);
     const [isLikesOpen, setIsLikesOpen] = useState(false);
-    // console.log('comments array', obj)
+    console.log('comments array', obj)
 
     const userInfo = useSelector(state => state.users.singleUser)
     // console.log('session use rhere-----', user)
@@ -175,7 +175,7 @@ function CommentBox({ obj, id }) {
                         <button className="comment-submit-button" disabled={lengthCheck()} onClick={handleSubmit}> Submit</button>
                     </div>
                 </div>)}
-                <div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
+                {obj.comments.length ? (<div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
                     <div className="comments-list">
                     {test.map(ele => (
                                 <div id={ele.id + "container"} className="comments-list-div">
@@ -260,10 +260,15 @@ function CommentBox({ obj, id }) {
                             )
                         )}
                     </div>
-                </div>
+                </div>) : (
+                    <div className="comments-posted-none">
+                        <FaRegComment size={50}/>
+                        <p>Be the first to reply!</p>
+                    </div>
+                )}
             </div>)}
-            {isLikesOpen && (
-                <div className="likes-list">
+            {isLikesOpen && obj.likes.length && !isCommentsOpen ? (
+            <div className="likes-list">
                     {usersLikes.map(ele => (
                                 <div className="likes-list-div">
                                 <div className='likes-list-pfp-username'>
@@ -281,8 +286,13 @@ function CommentBox({ obj, id }) {
                                 </div>
                             )
                         )}
-                </div>
-            )}
+                </div> ) : (
+                    <div className={`comments-posted-none ${isCommentsOpen ? 'hide' : 'active'}`}>
+                        <FaRegHeart size={50}/>
+                        <p>Be the first to like!</p>
+                    </div>
+                )}
+            
         </div>
     )
 }
