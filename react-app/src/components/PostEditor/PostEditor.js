@@ -71,7 +71,7 @@ export const PostEditor = ({ type, user, post }) => {
     const [link, setLink] = useState("")
     const [content, setContent] = useState(type === "edit" && post.content ? post.content : (type === "quote" ? "<h6><br></h6>" : "<p><br></p>"))
     const [contentEdited, setContentEdited] = useState(type === "edit" ? true : false)
-    const [tags, setTags] = useState(post ? post.tags.split(", ") : [])
+    const [tags, setTags] = useState(post && post.tags ? post.tags.split(", ") : [])
     const [showTagInput, setShowTagInput] = useState(false)
     const [newTag, setNewTag] = useState("")
     const [editorObj, setEditorObj] = useState("")
@@ -122,12 +122,14 @@ export const PostEditor = ({ type, user, post }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let html = content
+        console.log(html)
         for (let i = 0; i < content.length; i += 1) {
             let startIdx = content.indexOf("<img", i)
             let endIdx = content.indexOf(">", startIdx)
             if (startIdx !== -1 && endIdx !== -1) {
                 const imageNode = content.slice(startIdx, endIdx + 1)
-                const src = imageNode.split(" ")[1]
+                const nodeElement = imageNode.split(" ")
+                const src = nodeElement.find(el => el.startsWith("src"))
                 const temp_url = src.split("\"")[1]
                 const image = images[temp_url]
                 if (image) {
@@ -540,10 +542,15 @@ export const PostEditor = ({ type, user, post }) => {
                 <input
                     type='text'
                     className={showTagInput ? "post_editor-tag_input" : "hide"}
+                    placeholder='Put tag here'
                     value={newTag}
                     onChange={(e) => {
                         setNewTag(e.target.value)
-                        e.target.style.width = "30px"
+                        if (!e.target.value) {
+                            e.target.style.width = "110px"
+                        } else {
+                            e.target.style.width = "30px"
+                        }
                         e.target.style.width = `${e.target.scrollWidth}px`
                     }}
                     onBlur={(e) => {
@@ -559,7 +566,7 @@ export const PostEditor = ({ type, user, post }) => {
                             setShowTagInput(false)
                         }
                     }}
-                    style={{ width: "30px" }}
+                    style={{ width: "110px" }}
                 />
                 <button
                     className='post_editor-tag_button'
