@@ -1,0 +1,73 @@
+.follow {
+  width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding-top: 20px;
+}
+
+.follow_number {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.follow_container {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.follow_single-user {
+  width: 100%;
+  display: grid;
+  font-size: 14px;
+  grid-template-columns: 8% 30% 30% 1fr;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.follow_single-user:nth-child(1) {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.follow_single-user:last-child {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.follow_single-user:hover {
+  background-color: lightgray;
+}
+
+.follow_single-user > div {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.follow_single-user img {
+  width: 40px
+}
+
+.follow_single-user_username {
+  justify-self: start;
+}
+
+.follow_single-user button {
+  background-color: #00b8ff;
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}

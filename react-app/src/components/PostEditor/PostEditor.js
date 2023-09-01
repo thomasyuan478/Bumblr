@@ -71,7 +71,7 @@ export const PostEditor = ({ type, user, post }) => {
     const [link, setLink] = useState("")
     const [content, setContent] = useState(type === "edit" && post.content ? post.content : (type === "quote" ? "<h6><br></h6>" : "<p><br></p>"))
     const [contentEdited, setContentEdited] = useState(type === "edit" ? true : false)
-    const [tags, setTags] = useState(type === "quote" && post ? post.tags.split(", ") : [])
+    const [tags, setTags] = useState(post ? post.tags.split(", ") : [])
     const [showTagInput, setShowTagInput] = useState(false)
     const [newTag, setNewTag] = useState("")
     const [editorObj, setEditorObj] = useState("")
@@ -182,7 +182,6 @@ export const PostEditor = ({ type, user, post }) => {
 
     const handleHeight = () => {
         const modal = document.querySelector("#non-closing-modal_content")
-        console.log(modal.offsetHeight, window.innerHeight)
         if (modal.offsetHeight >= window.innerHeight) {
             modal.style.top = "0px"
         }
