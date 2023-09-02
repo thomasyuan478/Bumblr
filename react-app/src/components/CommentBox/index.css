@@ -103,6 +103,12 @@
     cursor: pointer;
 }
 
+.comment-submit-button:disabled {
+    background-color: rgb(24 51 82) !important;
+    color: rgb(113, 113, 113) !important;
+    cursor: not-allowed;
+}
+
 .comments-list-div {
     display: flex;
     width: 90%;

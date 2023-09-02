@@ -95,7 +95,7 @@ function App() {
       </div> */}
       {isLoaded && (
         <Switch>
-          <Route path="/test">
+          <Route path="/settings">
             <AccountSetting />
           </Route>
           <Route exact path="/">

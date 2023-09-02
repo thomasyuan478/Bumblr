@@ -100,7 +100,7 @@ export function LeftSideNavigation() {
                 </NavLink>
 
                 <NavLink
-                  to="/test"
+                  to="/settings"
                   className="left-side-nav-settings"
                 >
                   <img style={{ filter: 'brightness(0) invert(1)' }} src={settings} alt="" /> <p>Settings</p>
