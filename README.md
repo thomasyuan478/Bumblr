@@ -4,11 +4,11 @@ Welcome to our React/Flask Project, a Tumblr clone. This project required us to 
 site link: https://bumblr.onrender.com
 
 ### Table of Contents
-[Introduction] (#intro)
+[Introduction](#intro)
 
-[Technologies] (#technologies)
+[Technologies](#technologies)
 
-[Future Features] (#comingsoon)
+[Future Features](#comingsoon)
 
 
 ### <a name="intro"></a> Introduction
