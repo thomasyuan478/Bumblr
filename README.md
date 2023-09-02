@@ -1,5 +1,5 @@
 # Bumblr
-Welcome to our React/Flask Project, a Tumblr clone. This project required us to use both backend and frontend knowledge to deploy a full stack application.
+Welcome to our React/Flask Project, a Tumblr clone. This project required us to use both backend and frontend knowledge to deploy a full stack application. For routes, check out our Wiki!
 
 site link: https://bumblr.onrender.com
 
