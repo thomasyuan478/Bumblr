@@ -25,7 +25,7 @@ function DeletePostModal ({ obj }) {
         <button
         id="yes-button"
         onClick={handleDelete}
-        >Ok</button>
+        >Confirm</button>
       </div>
     </div>
   )

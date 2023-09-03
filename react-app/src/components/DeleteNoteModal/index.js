@@ -22,7 +22,7 @@ function DeleteNoteModal({ obj }) {
           Cancel
         </button>
         <button id="yes-button" onClick={handleDelete}>
-          Ok
+          Confirm
         </button>
       </div>
     </div>
