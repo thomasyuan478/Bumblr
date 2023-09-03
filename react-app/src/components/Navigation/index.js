@@ -21,10 +21,10 @@ function Navigation({ isLoaded }) {
 						<>
 							<NavLink exact to="/">b</NavLink>
 							<div id='navigation-search'>
-								<img src={search} alt="" />
+							<i class="fa-solid fa-magnifying-glass"></i>
 								<input
 									type='text'
-									placeholder='Search Bumblr'
+									placeholder='Search bumblr'
 									disabled={true}
 								/>
 							</div>

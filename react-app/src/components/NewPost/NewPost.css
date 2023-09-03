@@ -1,6 +1,6 @@
 .create_post_container-buttons {
   width: 600px;
-  padding: 20px;
+  padding: 20px 20px 20px 20px;
   background-color: rgb(24 51 82);
   height: fit-content;
   position: relative;
@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 .create_post_container-button {
