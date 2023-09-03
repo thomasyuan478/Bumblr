@@ -14,6 +14,7 @@ import account from "../../nav-icons/account.png";
 import "./index.css";
 import { useNonClosingModal } from '../../context/NonClosingModal';
 import LogOutModal from '../LogOutModal';
+import { UserDetail } from '../UserDetail';
 
 export function LeftSideNavigation() {
   const dispatch = useDispatch();
@@ -106,7 +107,12 @@ export function LeftSideNavigation() {
                 </NavLink>
                 <p id='dropdown-logout' onClick={() => setModalContent(<LogOutModal />)}>Logout</p>
               </div>
-              <div className="left-side-nav-account-user">
+              <div className="left-side-nav-account-user"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setModalContent(<UserDetail user={user} />)
+                }}
+              >
                 <img className="left-side-nav-current-user-pfp" src={user.profilePic} alt="avatar" />
                 <div>
                   <div>{user.username}</div>
