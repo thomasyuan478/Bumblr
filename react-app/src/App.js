@@ -25,6 +25,8 @@ import { getInitialStateThunk } from "./store/user";
 import LeftSideNavigation from "./components/LeftSideNavigation";
 import RightSideNavigation from "./components/RightSideNavigation";
 import { Follow } from "./components/Follow";
+import Footer from "./components/Footer";
+import NotFound from "./components/404Page";
 
 function App() {
   const dispatch = useDispatch();
@@ -110,9 +112,11 @@ function App() {
           </Route>
           <Route path="/login">
             <LoginFormPage />
+            <Footer />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+            <Footer />
           </Route>
           <Route path="/testnavigation">
             <MainPageNavigation />
@@ -122,6 +126,9 @@ function App() {
           </Route>
           <Route path="/follower">
             <Follow type="follower" />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       )}

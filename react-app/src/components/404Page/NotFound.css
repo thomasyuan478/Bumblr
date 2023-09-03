@@ -1,0 +1,47 @@
+#not-found-div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+  width: 700px;
+  justify-content: center;
+  align-items: center;
+  margin: 0px auto;
+}
+
+#not-found {
+  color: white;
+  animation: gradientColor 5s linear infinite;
+}
+
+#redirecting-text {
+  color: white;
+  animation: gradientColor 5s linear infinite;
+}
+
+@keyframes gradientColor {
+  0% {
+    color: #FFB6C1; /* Light Pink */
+  }
+  14% {
+    color: #FF69B4; /* Hot Pink */
+  }
+  28% {
+    color: #FF1493; /* Deep Pink */
+  }
+  42% {
+    color: #FF4500; /* Orange Red */
+  }
+  57% {
+    color: #FF8C00; /* Dark Orange */
+  }
+  71% {
+    color: #FFD700; /* Gold */
+  }
+  85% {
+    color: #FFFF00; /* Yellow */
+  }
+  100% {
+    color: #FFB6C1; /* Light Pink (Back to the start) */
+  }
+}
