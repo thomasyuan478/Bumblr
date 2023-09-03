@@ -12,12 +12,12 @@
     border-top: grey 1px solid;
 }
 
-.left-side-nav {
+/* .left-side-nav {
     color: white;
     max-width: 260px;
     min-width: 250px;
     flex: 1;
-}
+} */
 
 .feed-page {
     color: white;

@@ -3,7 +3,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { logout } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import { RiUserFollowFill } from "react-icons/ri";
 import home from "../../nav-icons/home.png";
 import settings from "../../nav-icons/settings.png";
 import bolt from "../../nav-icons/bolt.png";
@@ -41,7 +41,7 @@ export function LeftSideNavigation() {
       {user && (
         <div className="left-side-nav">
           <div className="left-side-nav-title">
-            <h1 className="left-side-nav-title-hover">Bumblr</h1>
+            <h1 className="left-side-nav-title-hover">bumblr</h1>
           </div>
           <div className="left-side-nav-home" onClick={() => history.push("/")}>
             <img style={{ filter: 'brightness(0) invert(1)' }} src={home} alt="" /> Home
@@ -84,18 +84,17 @@ export function LeftSideNavigation() {
           </div>
           {isOpen && (
             <div className='left-side-nav-drop-down'>
-              <hr />
               <div className='dropdown-navlinks'>
                 <div className='likes-info-container'>
-                  <p style={{ color: 'white', margin: "0px", padding: "10px 0px" }}>Likes</p>
-                  <span>{userInfo.likes?.length}</span>
+                  <p style={{ color: 'white', margin: "0px", padding: "10px 0px" }}><i class="fa-solid fa-heart"></i>Likes</p>
+                  <span><b>{userInfo.likes?.length}</b></span>
                 </div>
                 <NavLink to="/following" className='follow-info-container'>
-                  <p style={{ color: 'white', margin: "0px" }}><span>Following</span></p>
+                  <p style={{ color: 'white', margin: "0px" }}><RiUserFollowFill size={20} /><span>Following</span></p>
                   <span className='follow-counter'>{userInfo.userFollowing?.length}</span>
                 </NavLink>
                 <NavLink to="/follower" className='follow-info-container'>
-                  <p style={{ color: 'white', margin: "0px" }}><span>Followers</span></p>
+                  <p style={{ color: 'white', margin: "0px" }}><i class="fa-solid fa-user-group"></i> <span>Followers</span></p>
                   <span className='follow-counter'>{userInfo.userFollowers?.length}</span>
                 </NavLink>
 
@@ -107,11 +106,12 @@ export function LeftSideNavigation() {
                 </NavLink>
                 <p id='dropdown-logout' onClick={() => setModalContent(<LogOutModal />)}>Logout</p>
               </div>
-              <hr />
-              <div className="left-side-nav-account-user" style={{ display: 'flex', gap: '6px' }}>
+              <div className="left-side-nav-account-user">
                 <img className="left-side-nav-current-user-pfp" src={user.profilePic} alt="avatar" />
-                <div style={{ fontSize: '25px', paddingTop: '0', color: 'white' }}>{user.username}</div>
-                <div style={{ fontSize: '25px', paddingTop: '0', color: 'white' }}>{user.nickname}</div>
+                <div>
+                  <div>{user.username}</div>
+                  <div>{user.nickname}</div>
+                </div>
               </div>
             </div>)}
 

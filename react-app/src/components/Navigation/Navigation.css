@@ -28,23 +28,24 @@
   color: white;
   text-decoration: none;
   font-size: 3em;
+  font-family: 'bookman_old_stylebold';
 }
 
 #navigation-search {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   height: 30px;
  }
 
 #navigation-search>input {
   height: 30px;
   width: 250px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 20px;
   border: none;
   background: rgb(228, 228, 228);
+  padding-left: 30px;
 }
 
 #navigation-search>img {
@@ -74,4 +75,9 @@
   border: none;
   border-radius: 3px;
   cursor: pointer;
+}
+
+#navigation-logo-search i {
+  position: absolute;
+  left: 63px
 }

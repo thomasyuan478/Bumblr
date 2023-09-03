@@ -139,7 +139,7 @@ export const addLikeThunk = (postId, userId) => async (dispatch) => {
 };
 
 export const addCommentThunk = (comment) => async (dispatch) => {
-  console.log(comment, comment.post_id);
+  // console.log(comment, comment.post_id);
   const response = await fetch(`/api/posts/${comment.post_id}/notes`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
