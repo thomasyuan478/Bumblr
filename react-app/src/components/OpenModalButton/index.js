@@ -18,7 +18,10 @@ function OpenModalButton({
   };
 
   return (
-    <button id={id} className={className} onClick={onClick}>
+    <button id={id} className={className} onClick={(e) => {
+      e.stopPropagation();
+      onClick()
+    }}>
       {buttonText}
     </button>
   );

@@ -1,12 +1,19 @@
 #confirm-delete-container {
-  padding: 10px;
+  padding: 30px !important;
   display: flex;
   flex-direction: column;
+  row-gap: 30px;
   width: 300px;
+  font-size: 14px;
+  background-color: rgb(24 51 82);
+  border-radius: 10px;
+  color: white;
+  line-height: 30px;
 }
 
 #confirm-delete-container > h2 {
   text-align: center;
+  margin: 0px;
 }
 
 #confirm-delete-buttons-container {
@@ -14,27 +21,31 @@
   flex-direction: row;
   row-gap: 10px;
   justify-content: center;
-  column-gap: 10px;
+  column-gap: 30px !important;
 }
 
 #confirm-delete-buttons-container > button {
-  height: 40px;
+  height: 30px !important;
 }
 
 #yes-button {
   text-align: center;
   cursor: pointer;
-  background-color: rgb(238, 77, 77);
+  background-color: rgb(64, 119, 182) !important;
   color: white;
-  width: 60px;
+  width: 80px !important;
   cursor: pointer;
+  border: none;
+  border-radius: 50px;
 }
 
 #no-button {
   text-align: center;
   cursor: pointer;
-  background-color: #565555;
-  color: white;
-  width: 60px;
+  background-color: lightgray !important;
+  color: black !important;
+  border: none;
+  width: 80px !important;
   cursor: pointer;
+  border-radius: 50px;
 }

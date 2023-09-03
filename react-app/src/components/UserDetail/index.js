@@ -2,7 +2,7 @@ import PostCard from "../PostsCard";
 import "./UserDetail.css"
 import { removeFollowingThunk, addFollowingThunk } from "../../store/user";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NoContent } from "../NoContent";
 import { useNonClosingModal } from "../../context/NonClosingModal";
 
@@ -27,6 +27,13 @@ export function UserDetail({ user }) {
       modal.style.top = "0px"
     }
   }
+
+  useEffect(() => {
+    const setHeight = async () => {
+      setTimeout(handleHeight, 500)
+    }
+    setHeight()
+  }, [])
 
   return (
     <div className="user-detail_container">
@@ -115,7 +122,7 @@ export function UserDetail({ user }) {
           <div className="user-detail_follow">
             <span className="user-detail_follow-number">{selection === "follower" ? userFollowers && userFollowers.length : userFollowing && userFollowing.length} {selection === "following" ? "Following" : "Follower"}</span>
             {(selection === "following" ? userFollowing.length : userFollowers.length) && (selection === "following" ? userFollowing : userFollowers).map((userId, i) => {
-              console.log(userFollowing)
+              // console.log(userFollowing)
               const user = allUsers[userId]
               const posts = user.posts ? user.posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : []
               const latestPost = posts[0]

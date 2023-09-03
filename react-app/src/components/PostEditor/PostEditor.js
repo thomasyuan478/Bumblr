@@ -122,7 +122,7 @@ export const PostEditor = ({ type, user, post }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let html = content
-        console.log(html)
+        // console.log(html)
         for (let i = 0; i < content.length; i += 1) {
             let startIdx = content.indexOf("<img", i)
             let endIdx = content.indexOf(">", startIdx)
@@ -542,12 +542,13 @@ export const PostEditor = ({ type, user, post }) => {
                 <input
                     type='text'
                     className={showTagInput ? "post_editor-tag_input" : "hide"}
-                    placeholder='Put tag here'
+                    placeholder=' # Put tag here'
                     value={newTag}
                     onChange={(e) => {
                         setNewTag(e.target.value)
                         if (!e.target.value) {
-                            e.target.style.width = "110px"
+                            e.target.style.width = "130px"
+
                         } else {
                             e.target.style.width = "30px"
                         }
@@ -561,12 +562,12 @@ export const PostEditor = ({ type, user, post }) => {
                                 return [...prev]
                             })
                             setNewTag("")
-                            e.target.style.width = "30px"
+                            e.target.style.width = "130px"
                         } else {
                             setShowTagInput(false)
                         }
                     }}
-                    style={{ width: "110px" }}
+                    style={{ width: "130px" }}
                 />
                 <button
                     className='post_editor-tag_button'

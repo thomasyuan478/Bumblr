@@ -89,7 +89,7 @@ export const addFollowingThunk =
         }),
       }
     );
-    console.log(response);
+    // console.log(response);
     if (response.ok) {
       dispatch(addFollowing(currentUser, targetUser));
     }

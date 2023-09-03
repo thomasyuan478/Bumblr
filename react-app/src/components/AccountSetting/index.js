@@ -329,7 +329,7 @@ export function AccountSetting() {
                     setCurrUsername(username)
                     setEditUsername(false)
                   }}
-                  disabled={validationErrors.username}
+                  disabled={validationErrors.username.length}
                 >
                   Done
                 </button>
@@ -373,7 +373,7 @@ export function AccountSetting() {
                     setCurrEmail(email)
                     setEditEmail(false)
                   }}
-                  disabled={validationErrors.email}
+                  disabled={validationErrors.email.length}
                 >
                   Done
                 </button>
