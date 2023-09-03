@@ -4,11 +4,14 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useNonClosingModal } from "../../context/NonClosingModal";
+import LogOutModal from "../LogOutModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const { setModalContent } = useNonClosingModal()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -50,7 +53,9 @@ function ProfileButton({ user }) {
                 placeholder='Search Bumblr'
                 disabled={true}
               ></input>
-              <button onClick={handleLogout}>Log Out</button>
+              <button
+              onClick={() => setModalContent(<LogOutModal />)}
+              >Log Out</button>
             </div>
           </>
         ) : (

@@ -63,7 +63,11 @@
 
 #user-nav-search-container>input {
   height: 30px;
-  width: 200px;
+  width: 250px;
+  border-radius: 20px;
+  border: none;
+  background: rgb(228, 228, 228);
+  padding-left: 30px;
 }
 
 #user-nav-search-container>button {
