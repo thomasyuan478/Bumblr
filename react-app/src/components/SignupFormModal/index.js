@@ -30,7 +30,7 @@ function SignupFormModal() {
 	};
 
 	return (
-		<div style={{backgroundColor: 'rgb(76, 76, 76)'}}>
+		<div >
 		<div className="signup-modal">
 		<img className="signup-modal-gif" src="https://assets.tumblr.com/pop/src/assets/images/login-wall/art_v2-3f0f7a0b.gif" alt="" />
 		<h1 style={{color: 'white', fontSize: '43px', fontFamily: 'trebuchet ms'}}>bumblr</h1>
