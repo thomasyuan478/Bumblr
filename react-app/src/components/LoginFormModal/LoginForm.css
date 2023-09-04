@@ -6,7 +6,7 @@
     background-color: rgb(124, 92, 255);
     align-items: center;
     flex-direction: column;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif */
 }
 
 .login-modal-gif {
@@ -27,13 +27,18 @@
 
 .login-modal-button {
     width: 310px;
-    height: 35px;
     border-radius: 20px;
     background-color: rgb(150, 125, 255);
     border: solid 1px rgb(150, 125, 255);
-    color: rgb(188, 172, 255);
-    margin-top: 2px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    font-size: 14px;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .login-modal-demoUser {
@@ -41,33 +46,39 @@
     align-items: center;
     flex-direction: column;
     display: flex;
+    background-color: rgb(150, 125, 255);
+    border: solid 1px rgb(150, 125, 255);
+    width: 310px;
     border-radius: 20px;
-    height: 26px;
+    height: fit-content;
     color: white;
     font-weight: 800;
-    font-size: large;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 10px
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
 }
 
-.login-modal-demoUser:hover {
+/* .login-modal-demoUser:hover {
     text-decoration: underline;
-}
+} */
 
 .login-modal-username {
-    width: 95%;
+    width: 100%;
     border-radius: 10px;
     height: 45px;
     border: solid 3px rgb(150, 125, 255);
     background-color: rgb(white);
-
+    padding: 10px
 }
 
 .login-modal-password {
-    width: 95%;
+    width: 100%;
     border-radius: 10px;
     height: 45px;
     border: solid 3px rgb(150, 125, 255);
     background-color: rgb(white);
+    padding: 10px
 }
 
 input.login-modal-username::placeholder {

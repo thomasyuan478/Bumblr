@@ -15,7 +15,7 @@ export function UserDetail({ user }) {
   const allUsers = userState.users;
   const allPosts = postState.posts;
   const currentUser = userState.singleUser;
-  const followings = currentUser.userFollowing.map(following => following.id)
+  const followings = currentUser.userFollowing ? currentUser.userFollowing.map(following => following.id) : null
   const [selection, setSelection] = useState("posts")
   const userFollowing = user.userFollowing
   const userFollowers = user.userFollowers
@@ -51,17 +51,19 @@ export function UserDetail({ user }) {
           <span className="user-detail_username">@{user.username}</span>
           <span className="user-detail_bio">{user.bio ? user.bio : "No description yet"}</span>
           {
-            followings.includes(user.id) ?
-              <button
-                onClick={() => dispatch(removeFollowingThunk(currentUser, allUsers[user.id]))}
-              >
-                Following
-              </button> :
-              <button
-                onClick={() => dispatch(addFollowingThunk(currentUser, allUsers[user.id]))}
-              >
-                Follow
-              </button>
+            followings && user.id !== currentUser.id ?
+              followings.includes(user.id) ?
+                <button
+                  onClick={() => dispatch(removeFollowingThunk(currentUser, allUsers[user.id]))}
+                >
+                  Following
+                </button> :
+                <button
+                  onClick={() => dispatch(addFollowingThunk(currentUser, allUsers[user.id]))}
+                >
+                  Follow
+                </button> :
+              null
           }
         </div>
         <div className="user-detail_selection">
