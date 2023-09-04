@@ -166,6 +166,9 @@
 .dropdown-navlinks {
     display: flex;
     flex-direction: column;
+    border-top: 0.5px solid white;
+    border-bottom: 0.5px solid white;
+    padding-bottom: 10px;
 }
 
 .dropdown-navlinks a {
@@ -256,6 +259,7 @@
     width: 100%;
     padding-top: 20px;
     margin-left: 40px;
+    cursor: pointer;
 }
 
 .left-side-nav-account-user>div>div:nth-child(2) {
