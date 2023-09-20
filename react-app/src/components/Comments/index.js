@@ -11,6 +11,7 @@ export default function Comments({ comment }) {
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false);
   const [newComment, setNewComment] = useState(comment.comment);
+  const [displayComment, setDisplayComment] = useState(comment.comment);
   const [validationErrors, setValidationErrors] = useState({});
 
   const onDelete = () => {
@@ -35,6 +36,8 @@ export default function Comments({ comment }) {
         post_id: comment.postId,
         comment: newComment,
       };
+    //   setDisplayComment(comment.comment =)
+    comment.comment = newComment
       dispatch(updateNotesThunk(updateNote, comment.id));
       toggleUpdate();
     }
