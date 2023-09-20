@@ -1,4 +1,4 @@
-import { getPostsThunk, updatePost } from "./post";
+import { refreshPostThunk } from "./post";
 
 //TYPES
 const CREATE_NOTE = "POST /api/notes";
@@ -63,7 +63,7 @@ export const updateNotesThunk = (note, noteId) => async (dispatch) => {
 
   if (response.ok) {
     const resNote = await response.json();
-    // dispatch(getPostsThunk());
+    dispatch(refreshPostThunk(resNote.post));
     return response;
   }
 };
@@ -72,10 +72,12 @@ export const deleteNoteThunk = (noteId, postId) => async (dispatch) => {
   const response = await fetch(`/api/notes/${noteId}`, {
     method: "DELETE",
   });
-  dispatch(deleteNote(noteId));
-  //This sends a second request for every comment we delete, we can refactor later for efficiency
-  dispatch(getPostsThunk());
-  return response;
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteNote(noteId));
+    dispatch(refreshPostThunk(data.post));
+    return response;
+  }
 };
 
 const initialState = {
