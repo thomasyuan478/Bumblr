@@ -29,7 +29,7 @@ export function RightSideNavigation() {
               </a>
               {isEmailVisible && (
                 <p>
-                  <FaEnvelope /> andrew-khai@gmail.com
+                  <FaEnvelope /> 1andrew.khai@gmail.com
                 </p>
               )}
             </div>
@@ -89,7 +89,7 @@ export function RightSideNavigation() {
               </a>
               {isEmailVisible && (
                 <p>
-                  <FaEnvelope /> tyler98@gmail.com
+                  <FaEnvelope /> tyleramarks@gmail.com
                 </p>
               )}
             </div>
