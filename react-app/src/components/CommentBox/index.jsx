@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import React, { useState } from "react"
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
@@ -11,333 +11,279 @@ import { TiCancel } from "react-icons/ti";
 import { addFollowingThunk } from "../../store/user";
 import { removeFollowingThunk } from "../../store/user";
 import { deleteNoteThunk } from "../../store/note";
-import './index.css'
+import "./index.css";
 import { addCommentThunk } from "../../store/post";
-import { updateNotesThunk } from "../../store/note"
+import { updateNotesThunk } from "../../store/note";
 import OpenModalButton from "../OpenModalButton";
 import DeleteNoteModal from "../DeleteNoteModal";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { IoHeartOutline } from "react-icons/io5";
-
+import Comments from "../Comments";
 
 function CommentBox({ obj, id }) {
-    const dispatch = useDispatch();
-    const commentOwners = useSelector((state) => state.users.users)
-    // console.log('commentowners', commentOwners)
-    // console.log('likes', obj.likes)
-    const user = useSelector((state) => state.session.user);
-    const [comment, setComment] = useState("")
-    const [isCommentsOpen, setIsCommentsOpen] = useState(true);
-    const [isLikesOpen, setIsLikesOpen] = useState(false);
-    const [editComment, setEditComment] = useState("")
-    // console.log('comments array', obj)
+  const dispatch = useDispatch();
+  const commentOwners = useSelector((state) => state.users.users);
+  // console.log('commentowners', commentOwners)
+  // console.log('likes', obj.likes)
+  const user = useSelector((state) => state.session.user);
+  const [comment, setComment] = useState("");
+  const [isCommentsOpen, setIsCommentsOpen] = useState(true);
+  const [isLikesOpen, setIsLikesOpen] = useState(false);
+  const [editComment, setEditComment] = useState("");
+  // console.log('comments array', obj)
 
-    const userInfo = useSelector(state => state.users.singleUser)
-    // console.log('session use rhere-----', user)
-    // console.log('single user info-----', userInfo)
+  const userInfo = useSelector((state) => state.users.singleUser);
+  // console.log('session use rhere-----', user)
+  // console.log('single user info-----', userInfo)
 
-    let normalizedData = {};
-    let followingIds;
+  let normalizedData = {};
+  let followingIds;
+  if (user && Object.keys(userInfo).length != 0) {
+    let followingArray = userInfo.userFollowing;
+    followingArray.forEach((obj) => (normalizedData[obj.id] = obj));
+    // console.log(userCheck(), normalizedData);
+    followingIds = Object.keys(normalizedData);
+    // console.log(followingIds, typeof String(state.id));
+  }
+  const followCheck = (id, user) => {
     if (user && Object.keys(userInfo).length != 0) {
-        let followingArray = userInfo.userFollowing;
-        followingArray.forEach((obj) => (normalizedData[obj.id] = obj));
-        // console.log(userCheck(), normalizedData);
-        followingIds = Object.keys(normalizedData);
-        // console.log(followingIds, typeof String(state.id));
+      if (followingIds.includes(String(id))) return false;
+      else return true;
     }
-    const followCheck = (id, user) => {
-        if (user && Object.keys(userInfo).length != 0) {
-            if (followingIds.includes(String(id))) return false;
-            else return true;
-        }
+  };
+
+  const startFollowing = (e) => {
+    dispatch(addFollowingThunk(user, obj.user));
+  };
+
+  const stopFollowing = (e) => {
+    dispatch(removeFollowingThunk(user, obj.user));
+  };
+
+  const commentsBoxDisplay = () => {
+    if (isCommentsOpen === true) {
+      return;
+    }
+    setIsCommentsOpen(!isCommentsOpen);
+    setIsLikesOpen(!setIsLikesOpen);
+  };
+
+  const likesBoxDisplay = () => {
+    if (isLikesOpen === true) {
+      return;
+    }
+    setIsLikesOpen(!isLikesOpen);
+    setIsCommentsOpen(!isCommentsOpen);
+  };
+
+  //preventing using Enter button func
+
+  const textAreaEnterKey = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  };
+
+  const likeChecks = (obj) => {
+    let userIds = [];
+    let tmp = obj.likes;
+    tmp.forEach((obj) => userIds.push(obj.userId));
+    return userIds;
+  };
+
+  const likesArr = likeChecks(obj);
+  // console.log('likes array', likesArr)
+  const usersLikes = [];
+  Object.values(commentOwners).forEach((user) => {
+    if (likesArr.includes(user.id)) {
+      usersLikes.push(user);
+    }
+  });
+  // console.log('usersLikes', usersLikes)
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const createComment = {
+      user_id: user.id,
+      post_id: obj.id,
+      comment,
     };
 
-    const startFollowing = (e) => {
-        dispatch(addFollowingThunk(user, obj.user));
-    };
+    dispatch(addCommentThunk(createComment, user.id));
 
-    const stopFollowing = (e) => {
-        dispatch(removeFollowingThunk(user, obj.user));
-    };
+    setComment("");
+  };
 
+  const lengthCheck = () => {
+    if (comment.length === 0) return true;
+    else return false;
+  };
 
-    const commentsBoxDisplay = () => {
-        if (isCommentsOpen === true) {
-            return;
-        }
-        setIsCommentsOpen(!isCommentsOpen)
-        setIsLikesOpen(!setIsLikesOpen)
-    }
+  // Chronological Comments
+  let comments = obj.comments;
+  let normalizedComments = {};
+  comments.forEach((comment) => (normalizedComments[comment.id] = comment));
 
-    const likesBoxDisplay = () => {
-        if (isLikesOpen === true) {
-            return;
-        }
-        setIsLikesOpen(!isLikesOpen)
-        setIsCommentsOpen(!isCommentsOpen)
-    }
+  // console.log("Normalized Comments", normalizedComments)
 
-    //preventing using Enter button func
+  let test = Object.values(normalizedComments);
+  test.sort((a, b) => {
+    let da = new Date(a.createdAt);
+    let db = new Date(b.createdAt);
+    return da - db;
+  });
 
-    const textAreaEnterKey = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    }
+  test.reverse();
 
-    const likeChecks = (obj) => {
-        let userIds = [];
-        let tmp = obj.likes;
-        tmp.forEach((obj) => userIds.push(obj.userId));
-        return userIds
-    };
+  // console.log("SORTED ARRAY", obj.id, test);
+  // const chronologicalComments = [];
+  // test.forEach((comment) => {
+  // chronologicalComments.push(obj.comments);
+  // });
 
-    const likesArr = likeChecks(obj);
-    // console.log('likes array', likesArr)
-    const usersLikes = []
-    Object.values(commentOwners).forEach((user) => {
-        if (likesArr.includes(user.id)) {
-            usersLikes.push(user)
-        }
-    })
-    // console.log('usersLikes', usersLikes)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        const createComment = {
-            user_id: user.id,
-            post_id: obj.id,
-            comment
-        }
-
-        dispatch(addCommentThunk(createComment, user.id))
-
-        setComment("")
-    }
-
-    const lengthCheck = () => {
-        if (comment.length === 0) return true;
-        else return false;
-    }
-
-    // Chronological Comments
-    let comments = obj.comments;
-    let normalizedComments = {};
-    comments.forEach((comment) => (normalizedComments[comment.id] = comment));
-
-    // console.log("Normalized Comments", normalizedComments)
-
-    let test = Object.values(normalizedComments);
-    test.sort((a, b) => {
-        let da = new Date(a.createdAt);
-        let db = new Date(b.createdAt);
-        return da - db;
-    });
-
-    test.reverse();
-
-    // console.log("SORTED ARRAY", obj.id, test);
-    // const chronologicalComments = [];
-    // test.forEach((comment) => {
-    // chronologicalComments.push(obj.comments);
-    // });
-
-
-    return (
-        <div className="comments-drop-down">
-            <div className="comment-drop-down-nav">
-                <div className={`comments-icon-dropdown ${isCommentsOpen ? "activated" : ""}`} onClick={commentsBoxDisplay}>
-                    <IoChatbubbleOutline size={18} /> {test.length}
-                </div>
-                <div className={`likes-icon-dropdown ${isLikesOpen ? "activated" : ""}`} onClick={likesBoxDisplay}>
-                    <IoHeartOutline size={20} /> {usersLikes.length}
-                </div>
-            </div>
-            {isCommentsOpen && (
-                <div className="comments-new-post">
-                    {user && (
-                        <div className="comments-submit-container">
-                            <img className="left-side-nav-current-user-pfp-comments" src={user?.profilePic} alt="avatar" />
-                            <div className="comments-box-and-submit">
-                                <div className="comment-input-box-parent-div">
-                                    <textarea
-                                        value={comment}
-                                        maxLength="255"
-                                        onChange={(e) => {
-                                            e.stopPropagation()
-                                            setComment(e.target.value);
-
-                                            // console.log(obj)
-                                            const textarea = e.target
-                                            const scrollHeight = textarea.scrollHeight
-                                            if (scrollHeight < 150) {
-                                                textarea.style.height = `${scrollHeight}px`
-                                            } else {
-                                                textarea.style.overflowY = 'scroll'
-                                            }
-                                            if (!e.target.value) {
-                                                textarea.style.height = "30px"
-                                            }
-                                        }}
-                                        onFocus={() => {
-                                            const parent = document.querySelector(".comments-box-and-submit")
-                                            parent.style.borderColor = "white"
-                                        }}
-                                        onBlur={() => {
-                                            const parent = document.querySelector(".comments-box-and-submit")
-                                            parent.style.borderColor = "grey"
-                                        }}
-                                        className='comment-input-box'
-                                        type='text'
-                                        placeholder="Have something to say?"
-                                        onKeyDown={textAreaEnterKey}
-                                    >
-                                    </textarea>
-                                </div>
-                                <button className="comment-submit-button" disabled={lengthCheck()} onClick={handleSubmit}>Reply</button>
-                            </div>
-                        </div>)}
-                    {obj.comments.length ? (<div className={`comments-posted-comments ${isCommentsOpen ? 'active' : 'hidden'}`}>
-                        <div className="comments-list">
-                            {test.map(ele => (
-                                <div id={ele.id + "container"} className="comments-list-div">
-                                    <img className="comments-list-pfp" src={commentOwners[ele.userId]?.profilePic} alt="avatar" />
-                                    <div className="comments-list-username">
-                                        <div className="comments-input-box-parent-div">
-                                            <li id={"li" + ele.id} key={ele.id}>
-                                                <p style={{ fontWeight: 'bolder' }}>{commentOwners[ele.userId]?.username}</p>
-                                                <p id={ele.id}>{ele.comment}</p>
-
-                                                {/* {user && ele.userId === user.id && (<button className='comments-list-owner-delete' id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}><FaRegTrashAlt /></button>)} */}
-                                                {user && ele.userId === user.id && (<button className='comments-list-owner-edit' id={"ebutton" + ele.id} onClick={e => {
-                                                    let comment = document.getElementById(ele.id)
-                                                    comment.className = "hidden"
-                                                    let dbutton = document.getElementById("dbutton" + ele.id)
-                                                    dbutton.className = "hidden comments-list-owner-delete"
-                                                    let ebutton = document.getElementById("ebutton" + ele.id)
-                                                    ebutton.className = "hidden comments-list-owner-edit"
-                                                    let cbutton = document.getElementById("cbutton" + ele.id)
-                                                    cbutton.className = "edit-comment-cancel"
-                                                    let sbutton = document.getElementById("sbutton" + ele.id)
-                                                    sbutton.className = "edit-comment-submit"
-                                                    let updatearea = document.createElement("textarea")
-                                                    updatearea.setAttribute("id", "ta" + ele.id)
-                                                    updatearea.setAttribute("cols", "80")
-                                                    updatearea.style.height = "100px"
-                                                    // updatearea.setAttribute("rows", "10")
-                                                    updatearea.setAttribute("maxLength", "255")
-                                                    updatearea.setAttribute("autofocus", "true")
-                                                    updatearea.setAttribute("class", "comment-input-area")
-                                                    updatearea.innerText = comment.innerText
-                                                    const container = document.querySelector(`#li${ele.id}`);
-                                                    updatearea.onfocus = () => {
-                                                        container.style.borderColor = "white"
-                                                    }
-                                                    updatearea.onblur = () => {
-                                                        container.style.borderColor = "rgb(106, 134, 165)"
-                                                    }
-                                                    setEditComment(comment.innerText)
-                                                    const handleChange = (e) => {
-                                                        setEditComment(e.target.value)
-                                                    }
-                                                    updatearea.addEventListener("input", handleChange)
-                                                    let list = document.getElementById("li" + ele.id)
-                                                    list.insertBefore(updatearea, comment)
-
-                                                    // console.log(comment.innerText)
-                                                }}><FaPen /></button>)}
-
-                                                {user && ele.userId === user.id && (
-                                                    // <button id={"dbutton" + ele.id} onClick={e => dispatch(deleteNoteThunk(ele.id))}>delete</button>
-
-                                                    <OpenModalButton
-                                                        id={"dbutton" + ele.id}
-                                                        className='comments-list-owner-delete'
-                                                        buttonText={<FaRegTrashAlt />}
-                                                        modalComponent={<DeleteNoteModal obj={ele} />}
-                                                    />
-
-                                                )}
-
-                                                {user && ele.userId === user.id && (<button disabled={!editComment} style={{ border: 'none', backgroundColor: 'rgb(24 51 82)' }} className="hidden" id={"sbutton" + ele.id} onClick={e => {
-                                                    let textarea = document.getElementById("ta" + ele.id)
-                                                    dispatch(updateNotesThunk({ "user_id": ele.userId, "post_id": ele.postId, "comment": textarea.value }, ele.id))
-                                                    let comment = document.getElementById(ele.id)
-                                                    comment.className = ""
-                                                    comment.innerText = textarea.value
-                                                    let dbutton = document.getElementById("dbutton" + ele.id)
-                                                    dbutton.className = "comments-list-owner-delete"
-                                                    let ebutton = document.getElementById("ebutton" + ele.id)
-                                                    ebutton.className = "comments-list-owner-edit"
-                                                    let sbutton = document.getElementById("sbutton" + ele.id)
-                                                    sbutton.className = "hidden edit-comment-submit"
-                                                    let cbutton = document.getElementById("cbutton" + ele.id)
-                                                    cbutton.className = "hidden edit-comment-cancel"
-                                                    let updatearea = document.getElementById("ta" + ele.id)
-                                                    setEditComment("")
-                                                    updatearea.remove()
-                                                }}><i className="fa-solid fa-check" /></button>)}
-
-                                                {user && ele.userId === user.id && (<button style={{ border: 'none', backgroundColor: 'rgb(24 51 82)' }} className="hidden" id={"cbutton" + ele.id} onClick={e => {
-                                                    let comment = document.getElementById(ele.id)
-                                                    comment.className = ""
-                                                    let dbutton = document.getElementById("dbutton" + ele.id)
-                                                    dbutton.className = "comments-list-owner-delete"
-                                                    let ebutton = document.getElementById("ebutton" + ele.id)
-                                                    ebutton.className = "comments-list-owner-edit"
-                                                    let sbutton = document.getElementById("sbutton" + ele.id)
-                                                    sbutton.className = "hidden edit-comment-submit"
-                                                    let cbutton = document.getElementById("cbutton" + ele.id)
-                                                    cbutton.className = "hidden edit-comment-cancel"
-                                                    let updatearea = document.getElementById("ta" + ele.id)
-                                                    setEditComment("")
-                                                    updatearea.remove()
-                                                }}><i className="fa-solid fa-x" /></button>)}
-
-
-                                            </li>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                            )}
-                        </div>
-                    </div>) : (
-                        <div className="comments-posted-none">
-                            <IoChatbubbleOutline size={50} />
-                            <p>Be the first to reply!</p>
-                        </div>
-                    )}
-                </div>)}
-            {isLikesOpen && obj.likes.length && !isCommentsOpen ? (
-                <div className="likes-list">
-                    {usersLikes.map(ele => (
-                        <div className="likes-list-div">
-                            <div className='likes-list-pfp-username'>
-                                <img className="comments-list-pfp" src={ele?.profilePic} alt="avatar" />
-                                <p>{ele.username}</p>
-                            </div>
-                            <div className="likes-list-follow">
-                                {user && !followCheck(ele.id, user) && ele.id !== user.id && (
-                                    <button className='likes-list-button' onClick={(e) => dispatch(removeFollowingThunk(user, ele))}>Unfollow</button>
-                                )}
-                                {user && followCheck(ele.id, user) && ele.id !== user.id && (
-                                    <button className='likes-list-button' onClick={(e) => dispatch(addFollowingThunk(user, ele))}>Follow</button>
-                                )}
-                            </div>
-                        </div>
-                    )
-                    )}
-                </div>) : (
-                <div className={`comments-posted-none ${isCommentsOpen ? 'hide' : 'active'}`}>
-                    <IoHeartOutline size={60} />
-                    <p>Be the first to like!</p>
-                </div>
-            )}
-
+  return (
+    <div className="comments-drop-down">
+      <div className="comment-drop-down-nav">
+        <div
+          className={`comments-icon-dropdown ${
+            isCommentsOpen ? "activated" : ""
+          }`}
+          onClick={commentsBoxDisplay}
+        >
+          <IoChatbubbleOutline size={18} /> {test.length}
         </div>
-    )
+        <div
+          className={`likes-icon-dropdown ${isLikesOpen ? "activated" : ""}`}
+          onClick={likesBoxDisplay}
+        >
+          <IoHeartOutline size={20} /> {usersLikes.length}
+        </div>
+      </div>
+      {isCommentsOpen && (
+        <div className="comments-new-post">
+          {user && (
+            <div className="comments-submit-container">
+              <img
+                className="left-side-nav-current-user-pfp-comments"
+                src={user?.profilePic}
+                alt="avatar"
+              />
+              <div className="comments-box-and-submit">
+                <div className="comment-input-box-parent-div">
+                  <textarea
+                    value={comment}
+                    maxLength="255"
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      setComment(e.target.value);
+
+                      // console.log(obj)
+                      const textarea = e.target;
+                      const scrollHeight = textarea.scrollHeight;
+                      if (scrollHeight < 150) {
+                        textarea.style.height = `${scrollHeight}px`;
+                      } else {
+                        textarea.style.overflowY = "scroll";
+                      }
+                      if (!e.target.value) {
+                        textarea.style.height = "30px";
+                      }
+                    }}
+                    onFocus={() => {
+                      const parent = document.querySelector(
+                        ".comments-box-and-submit"
+                      );
+                      parent.style.borderColor = "white";
+                    }}
+                    onBlur={() => {
+                      const parent = document.querySelector(
+                        ".comments-box-and-submit"
+                      );
+                      parent.style.borderColor = "grey";
+                    }}
+                    className="comment-input-box"
+                    type="text"
+                    placeholder="Have something to say?"
+                    onKeyDown={textAreaEnterKey}
+                  ></textarea>
+                </div>
+                <button
+                  className="comment-submit-button"
+                  disabled={lengthCheck()}
+                  onClick={handleSubmit}
+                >
+                  Reply
+                </button>
+              </div>
+            </div>
+          )}
+
+          {obj.comments.length ? (
+            <div
+              className={`comments-posted-comments ${
+                isCommentsOpen ? "active" : "hidden"
+              }`}
+            >
+              <div className="comments-list">
+                {test.map((ele) => (
+                  <Comments comment={ele} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="comments-posted-none">
+              <IoChatbubbleOutline size={50} />
+              <p>Be the first to reply!</p>
+            </div>
+          )}
+        </div>
+      )}
+      {isLikesOpen && obj.likes.length && !isCommentsOpen ? (
+        <div className="likes-list">
+          {usersLikes.map((ele) => (
+            <div className="likes-list-div">
+              <div className="likes-list-pfp-username">
+                <img
+                  className="comments-list-pfp"
+                  src={ele?.profilePic}
+                  alt="avatar"
+                />
+                <p>{ele.username}</p>
+              </div>
+              <div className="likes-list-follow">
+                {user && !followCheck(ele.id, user) && ele.id !== user.id && (
+                  <button
+                    className="likes-list-button"
+                    onClick={(e) => dispatch(removeFollowingThunk(user, ele))}
+                  >
+                    Unfollow
+                  </button>
+                )}
+                {user && followCheck(ele.id, user) && ele.id !== user.id && (
+                  <button
+                    className="likes-list-button"
+                    onClick={(e) => dispatch(addFollowingThunk(user, ele))}
+                  >
+                    Follow
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div
+          className={`comments-posted-none ${
+            isCommentsOpen ? "hide" : "active"
+          }`}
+        >
+          <IoHeartOutline size={60} />
+          <p>Be the first to like!</p>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default CommentBox;
