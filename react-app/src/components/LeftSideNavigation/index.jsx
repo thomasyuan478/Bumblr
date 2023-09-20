@@ -72,12 +72,12 @@ export function LeftSideNavigation() {
           >
             <img style={{ filter: 'brightness(0) invert(1)' }} src={chat} alt="" /> <p>Messages</p>
           </div>
-          <div
+{/*           <div
             className="left-side-nav-coming-soon"
             onClick={() => alert("Feature coming soon!")}
           >
             <img style={{ filter: 'brightness(0) invert(1)' }} src={mail} alt="" /> <p>Inbox</p>
-          </div>
+          </div> */}
           <div className="left-side-nav-account" onClick={accountDropdown}>
             <div className="left-side-nav-account-arrow-seperator">
               <img style={{ filter: 'brightness(0) invert(1)' }} src={account} alt="" /> <p>Account</p>
