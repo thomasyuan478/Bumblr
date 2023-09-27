@@ -21,7 +21,7 @@ export function RightSideNavigation() {
               <a href="https://github.com/andrew-khai">
                 <FaGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/andrew-khai/">
+              <a href="https://www.linkedin.com/in/andrew-khai-chan/">
                 <FaLinkedin size={20} />
               </a>
               <a href="#email" onClick={emailMenu}>
@@ -41,7 +41,7 @@ export function RightSideNavigation() {
               <a href="https://github.com/Jeffrey940421">
                 <FaGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/Jeffrey940421/">
+              <a href="https://www.linkedin.com/in/jeffrey-zhang-usc/">
                 <FaLinkedin size={20} />
               </a>
               <a href="#email" onClick={emailMenu}>
@@ -61,7 +61,7 @@ export function RightSideNavigation() {
               <a href="https://github.com/ThomasYuan478">
                 <FaGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/ThomasYuan478/">
+              <a href="https://www.linkedin.com/in/thomas-yuan-3b1581293/">
                 <FaLinkedin size={20} />
               </a>
               <a href="#email" onClick={emailMenu}>
@@ -81,7 +81,7 @@ export function RightSideNavigation() {
               <a href="https://github.com/tmarks98">
                 <FaGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/tyler98">
+              <a href="https://www.linkedin.com/in/tyler-marks-9b189987/">
                 <FaLinkedin size={20} />
               </a>
               <a href="#email" onClick={emailMenu}>
